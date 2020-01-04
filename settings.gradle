@@ -1,0 +1,2 @@
+include ':app', ':mvvm_yggd'
+rootProject.name='mvvm- yggd'
