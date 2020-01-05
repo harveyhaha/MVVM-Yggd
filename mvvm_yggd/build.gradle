@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -14,6 +15,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    dataBinding {
+        enabled true
     }
 
     buildTypes {
@@ -33,4 +38,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    api rootProject.ext.dependencies["gson"]
+
+    api rootProject.ext.dependencies["dagger2"]
+    api rootProject.ext.dependencies["dagger2-android"]
+    api rootProject.ext.dependencies["dagger2-android-support"]
+
 }
