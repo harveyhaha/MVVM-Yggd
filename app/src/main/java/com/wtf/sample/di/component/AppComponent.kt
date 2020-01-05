@@ -17,6 +17,7 @@
 package com.wtf.sample.di.component
 
 import android.app.Application
+import com.wtf.sample.app.MyApplication
 import com.wtf.yggd.di.module.AppModule
 import dagger.BindsInstance
 import dagger.Component
@@ -39,5 +40,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(app: Application)
+    fun inject(app: MyApplication)
 }
