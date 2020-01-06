@@ -6,7 +6,10 @@ import androidx.databinding.ViewDataBinding
 import dagger.android.AndroidInjection
 
 /**
- * Created by wtf on 1/5/20 10:10 PM.
+ *
+ * @Description:
+ * @Author:         harveyhaha
+ * @CreateDate:     20-1-6 下午4:58
  */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
     abstract val layoutId: Int

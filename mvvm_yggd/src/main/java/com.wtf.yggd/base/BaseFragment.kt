@@ -8,7 +8,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
 /**
- * Created by wtf on 1/5/20 10:43 PM.
+ *
+ * @Description:
+ * @Author:         harveyhaha
+ * @CreateDate:     20-1-6 下午4:58
  */
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment() {
     protected var binding: V? = null

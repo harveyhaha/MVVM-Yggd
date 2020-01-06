@@ -18,17 +18,26 @@ package com.wtf.sample.di.component
 
 import android.app.Application
 import com.wtf.sample.app.MyApplication
+import com.wtf.sample.di.module.ActivityModule
+import com.wtf.sample.di.module.ViewModelModule
 import com.wtf.yggd.di.module.AppModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
-
+/**
+ *
+ * @Description:
+ * @Author:         harveyhaha
+ * @CreateDate:     20-1-6 下午4:53
+ */
 @Singleton
 @Component(
     modules = [
         AndroidInjectionModule::class,
-        AppModule::class
+        AppModule::class,
+        ActivityModule::class,
+        ViewModelModule::class
     ]
 )
 interface AppComponent {

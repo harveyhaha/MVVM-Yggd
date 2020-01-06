@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
 
+android {
+    compileSdkVersion androidVersion.compileSdkVersion
+    buildToolsVersion androidVersion.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 29
+        minSdkVersion androidVersion.minSdkVersion
+        targetSdkVersion androidVersion.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -27,22 +27,43 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinVersion"
+    api libs.appCompat
+    api libs.core_ktx
+    api libs.recyclerview
+    api libs.constraintlayout
+    api libs.swiperefreshlayout
+    api libs.design
 
-    api rootProject.ext.dependencies["gson"]
+    api libs.rxjava2
+    api libs.rxandroid2
+    api libs.rxpermissions2
+    api libs.retrofit
+    api libs.retrofit_converter_gson
 
-    api rootProject.ext.dependencies["dagger2"]
-    api rootProject.ext.dependencies["dagger2-android"]
-    api rootProject.ext.dependencies["dagger2-android-support"]
+    api libs.coroutines_android
+    api libs.coroutines_core
+    api libs.coroutines_core_common
+    api libs.coroutines_test
 
+    api libs.glide
+    kapt libs.glide_compiler
+
+    testImplementation libs.junit
+    androidTestImplementation libs.junit_test
+    androidTestImplementation libs.espresso_core
+
+    api libs.gson
+
+    api libs.dagger2
+    api libs.dagger2_android
+    api libs.dagger2_android_support
 }

@@ -3,6 +3,9 @@ package com.wtf.yggd.base
 import androidx.lifecycle.ViewModel
 
 /**
- * Created by wtf on 1/5/20 10:42 PM.
- */
+  *
+  * @Description:
+  * @Author:         harveyhaha
+  * @CreateDate:     20-1-6 下午4:58
+  */
 abstract class BaseViewModel : ViewModel()
