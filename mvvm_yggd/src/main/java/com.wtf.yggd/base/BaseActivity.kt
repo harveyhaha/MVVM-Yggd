@@ -16,11 +16,12 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
+        AppManager.instance.addActivity(this)
         setContentView(layoutId)
     }
 
-//    fun initViewDataBinding(savedInstanceState: Bundle?) {
-//        newsListViewModel = viewModelFactory.create(NewsListViewModel::class.java)
-//
-//    }
+    override fun onDestroy() {
+        super.onDestroy()
+        AppManager.instance.removeActivity(this)
+    }
 }

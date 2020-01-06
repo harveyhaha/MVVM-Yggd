@@ -1,7 +1,10 @@
 package com.wtf.yggd.base
 
 import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context
 import java.util.*
+import kotlin.system.exitProcess
 
 /**
  *
@@ -10,49 +13,47 @@ import java.util.*
  * @CreateDate:     20-1-6 下午5:20
  */
 class AppManager private constructor() {
+    private val activityStack: Stack<Activity> = Stack()
+
+    companion object {
+        val instance: AppManager by lazy { AppManager() }
+    }
 
     /**
      * 添加Activity到堆栈
      */
     fun addActivity(activity: Activity) {
-        if (activityStack == null) {
-            activityStack = Stack()
-        }
-        activityStack!!.add(activity)
+        activityStack.add(activity)
     }
 
     /**
      * 移除指定的Activity
      */
-    fun removeActivity(activity: Activity?) {
-        if (activity != null) {
-            activityStack!!.remove(activity)
-        }
+    fun removeActivity(activity: Activity) {
+        activityStack.remove(activity)
     }
 
     /**
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     fun currentActivity(): Activity {
-        return activityStack!!.lastElement()
+        return activityStack.lastElement()
     }
 
     /**
      * 结束当前Activity（堆栈中最后一个压入的）
      */
     fun finishActivity() {
-        val activity = activityStack!!.lastElement()
+        val activity = activityStack.lastElement()
         finishActivity(activity)
     }
 
     /**
      * 结束指定的Activity
      */
-    fun finishActivity(activity: Activity?) {
-        if (activity != null) {
-            if (!activity.isFinishing) {
-                activity.finish()
-            }
+    fun finishActivity(activity: Activity) {
+        if (!activity.isFinishing) {
+            activity.finish()
         }
     }
 
@@ -60,7 +61,7 @@ class AppManager private constructor() {
      * 结束指定类名的Activity
      */
     fun finishActivity(cls: Class<*>) {
-        for (activity in activityStack!!) {
+        for (activity in activityStack) {
             if (activity.javaClass == cls) {
                 finishActivity(activity)
                 break
@@ -72,15 +73,10 @@ class AppManager private constructor() {
      * 结束所有Activity
      */
     fun finishAllActivity() {
-        var i = 0
-        val size = activityStack!!.size
-        while (i < size) {
-            if (null != activityStack!![i]) {
-                finishActivity(activityStack!![i])
-            }
-            i++
+        for (activity in activityStack) {
+            finishActivity(activity)
         }
-        activityStack!!.clear()
+        activityStack.clear()
     }
 
     /**
@@ -89,51 +85,27 @@ class AppManager private constructor() {
      * @author kymjs
      */
     fun getActivity(cls: Class<*>): Activity? {
-        if (activityStack != null)
-            for (activity in activityStack!!) {
-                if (activity.javaClass == cls) {
-                    return activity
-                }
+        for (activity in activityStack) {
+            if (activity.javaClass == cls) {
+                return activity
             }
+        }
         return null
     }
 
     /**
      * 退出应用程序
      */
-    fun AppExit() {
+    fun AppExit(context: Context) {
         try {
             finishAllActivity()
-            // 杀死该应用进程
-            android.os.Process.killProcess(android.os.Process.myPid())
-            //            调用 System.exit(n) 实际上等效于调用：
-            //            Runtime.getRuntime().exit(n)
-            //            finish()是Activity的类方法，仅仅针对Activity，当调用finish()时，只是将活动推向后台，并没有立即释放内存，活动的资源并没有被清理；当调用System.exit(0)时，退出当前Activity并释放资源（内存），但是该方法不可以结束整个App如有多个Activty或者有其他组件service等不会结束。
-            //            其实android的机制决定了用户无法完全退出应用，当你的application最长时间没有被用过的时候，android自身会决定将application关闭了。
-            //System.exit(0);
+            val activityManager =
+                context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            activityManager.killBackgroundProcesses(context.packageName)
+            exitProcess(0)
         } catch (e: Exception) {
-            activityStack!!.clear()
+            activityStack.clear()
             e.printStackTrace()
         }
-
-    }
-
-    companion object {
-
-        var activityStack: Stack<Activity>? = null
-        private var mInstance: AppManager? = null
-
-        /**
-         * 单例模式
-         *
-         * @return AppManager
-         */
-        val instance: AppManager
-            get() {
-                if (mInstance == null) {
-                    mInstance = AppManager()
-                }
-                return mInstance as AppManager
-            }
     }
 }
