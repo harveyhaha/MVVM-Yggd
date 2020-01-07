@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.wtf.sample.ui
+package com.wtf.yggd.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

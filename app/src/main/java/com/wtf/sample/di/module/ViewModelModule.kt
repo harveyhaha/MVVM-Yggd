@@ -1,7 +1,8 @@
 package com.wtf.sample.di.module
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.wtf.sample.ui.ViewModelFactory
+import com.wtf.yggd.di.ViewModelFactory
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.di.ViewModelKey
 import dagger.Binds
@@ -27,6 +28,6 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(model: MainViewModel): MainViewModel
+    abstract fun bindMainViewModel(model: MainViewModel): ViewModel
 
 }
