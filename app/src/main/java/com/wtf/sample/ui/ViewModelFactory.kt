@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 
-package com.wtf.yggd.base
+package com.wtf.sample.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
-/**
-  *
-  * @Description:
-  * @Author:         harveyhaha
-  * @CreateDate:     20-1-6 下午4:58
-  */
+
 @Singleton
 class ViewModelFactory @Inject constructor(@JvmSuppressWildcards private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
 

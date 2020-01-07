@@ -13,6 +13,9 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class ActivityModule {
+//    @ContributesAndroidInjector
+//    abstract fun contributeBaseActivity(): BaseActivity<*,*>
+
     @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity
 }

@@ -1,7 +1,12 @@
 package com.wtf.sample
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
+import com.wtf.sample.databinding.ActivityMainBinding
+import com.wtf.sample.ui.ViewModelFactory
+import com.wtf.sample.viewmodels.MainViewModel
+import com.wtf.yggd.base.BaseActivity
+import javax.inject.Inject
 
 /**
  *
@@ -9,10 +14,16 @@ import androidx.appcompat.app.AppCompatActivity
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:53
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var gson: Gson
+//    @Inject
+//    lateinit var context: CoroutineContext
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun initContentView(savedInstanceState: Bundle?): Int {
+        return R.layout.activity_main
     }
+
 }
