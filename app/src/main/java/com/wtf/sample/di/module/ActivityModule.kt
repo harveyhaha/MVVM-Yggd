@@ -1,6 +1,6 @@
 package com.wtf.sample.di.module
 
-import com.wtf.sample.MainActivity
+import com.wtf.sample.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,8 +13,6 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class ActivityModule {
-//    @ContributesAndroidInjector
-//    abstract fun contributeBaseActivity(): BaseActivity<*,*>
 
     @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity

@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProviders
+import com.wtf.yggd.base.listeners.BaseActivityView
 import com.wtf.yggd.di.ViewModelFactory
 import dagger.android.AndroidInjection
 import java.lang.reflect.ParameterizedType
@@ -41,7 +43,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
             val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
             val actualTypeArguments: Array<Type> = type.actualTypeArguments
             val modelClass: Class<VM> = actualTypeArguments[0] as Class<VM>
-            viewModel = viewModelFactory.create(modelClass)
+            viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
         }
         setBindingVariable()
         //让ViewModel拥有View的生命周期感应

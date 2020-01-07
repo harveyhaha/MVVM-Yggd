@@ -8,6 +8,8 @@ import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import com.wtf.yggd.base.listeners.BaseFragmentView
 import com.wtf.yggd.di.ViewModelFactory
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -50,7 +52,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
             val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
             val actualTypeArguments: Array<Type> = type.actualTypeArguments
             val modelClass: Class<VM> = actualTypeArguments[0] as Class<VM>
-            viewModel = viewModelFactory.create(modelClass)
+            viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
         }
         return binding.root
     }

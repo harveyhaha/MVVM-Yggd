@@ -1,4 +1,4 @@
-package com.wtf.yggd.base
+package com.wtf.yggd.base.listeners
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,7 @@ import androidx.annotation.Nullable
 interface BaseFragmentView : BaseView {
     /**
      * 初始化根布局
-     *
-     * @return 布局layout的id
-     */
+     **/
     fun initContentView(inflater: LayoutInflater?, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): Int
 
 }
