@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProviders
-import com.wtf.yggd.base.listeners.BaseActivityView
+import com.wtf.yggd.base.listeners.IBaseActivityView
 import com.wtf.yggd.di.ViewModelFactory
 import dagger.android.AndroidInjection
 import java.lang.reflect.ParameterizedType
@@ -20,7 +20,7 @@ import javax.inject.Inject
  * @CreateDate:     20-1-6 下午4:58
  */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
-    BaseActivityView {
+    IBaseActivityView {
     open lateinit var binding: V
     open var viewModel: VM? = null
     @Inject

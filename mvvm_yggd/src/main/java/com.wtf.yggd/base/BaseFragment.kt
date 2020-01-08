@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.wtf.yggd.base.listeners.BaseFragmentView
+import com.wtf.yggd.base.listeners.IBaseFragmentView
 import com.wtf.yggd.di.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import java.lang.reflect.ParameterizedType
@@ -24,7 +24,7 @@ import javax.inject.Inject
  * @CreateDate:     20-1-6 下午4:58
  */
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(),
-    BaseFragmentView {
+    IBaseFragmentView {
     open lateinit var binding: V
     open var viewModel: VM? = null
     @Inject

@@ -8,7 +8,7 @@ import androidx.annotation.Nullable
 /**
  * Created by wtf on 1/7/20 8:36 PM.
  */
-interface BaseFragmentView : BaseView {
+interface IBaseFragmentView : IBaseView {
     /**
      * 初始化根布局
      **/
