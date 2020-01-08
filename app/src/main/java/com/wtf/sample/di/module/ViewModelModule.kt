@@ -2,8 +2,9 @@ package com.wtf.sample.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.wtf.yggd.di.ViewModelFactory
+import com.wtf.sample.viewmodels.LoginViewModel
 import com.wtf.sample.viewmodels.MainViewModel
+import com.wtf.yggd.di.ViewModelFactory
 import com.wtf.yggd.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
@@ -29,5 +30,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     abstract fun bindMainViewModel(model: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
+    abstract fun bindLoginViewModel(model: LoginViewModel): ViewModel
 
 }

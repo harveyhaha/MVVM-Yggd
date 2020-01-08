@@ -10,4 +10,8 @@
         android:id="@+id/mainFragment"
         android:name="com.wtf.sample.ui.MainFragment"
         android:label="MainFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.wtf.sample.ui.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>
