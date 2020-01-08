@@ -19,6 +19,7 @@ package com.wtf.sample.di.component
 import android.app.Application
 import com.wtf.sample.app.MyApplication
 import com.wtf.sample.di.module.ActivityModule
+import com.wtf.sample.di.module.FragmentModule
 import com.wtf.sample.di.module.ViewModelModule
 import com.wtf.yggd.di.module.AppModule
 import dagger.BindsInstance
@@ -37,6 +38,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         ActivityModule::class,
+        FragmentModule::class,
         ViewModelModule::class
     ]
 )

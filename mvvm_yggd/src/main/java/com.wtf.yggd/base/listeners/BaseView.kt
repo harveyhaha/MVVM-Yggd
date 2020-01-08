@@ -7,8 +7,8 @@ package com.wtf.yggd.base.listeners
  * @CreateDate:     20-1-7 上午11:19
  */
 interface BaseView {
-    fun setBindingVariable()
     fun initParam()
+    fun setBindingVariable()
     fun initView()
     fun initData()
 }

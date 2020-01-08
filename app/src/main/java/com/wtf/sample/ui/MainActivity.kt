@@ -5,6 +5,7 @@ import com.wtf.sample.R
 import com.wtf.sample.databinding.ActivityMainBinding
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.base.BaseActivity
+import timber.log.Timber
 
 /**
  *
@@ -18,4 +19,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return R.layout.activity_main
     }
 
+    override fun initView() {
+        super.initView()
+        Timber.i(viewModel.toString())
+    }
 }

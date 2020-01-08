@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.wtf.yggd.base.listeners.BaseFragmentView
 import com.wtf.yggd.di.ViewModelFactory
+import dagger.android.support.AndroidSupportInjection
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import javax.inject.Inject
@@ -26,11 +27,11 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     BaseFragmentView {
     open lateinit var binding: V
     open var viewModel: VM? = null
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         initParam()
     }
@@ -54,7 +55,14 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
             val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
         }
+        setBindingVariable()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        initData()
     }
 
     abstract override fun initContentView(
@@ -63,7 +71,25 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
         savedInstanceState: Bundle?
     ): Int
 
-    private fun initViewModel(): VM? {
+    /**
+     * 默认 依托fragment建立ViewModel,如果想引入ParentActivity一样的ViewModel,则可依照如下代码自定义
+     * return activity?.let {
+     *    ViewModelProviders.of(it, viewModelFactory).get(MainViewModel::class.java)
+     * }
+     */
+    open fun initViewModel(): VM? {
         return null
+    }
+
+    override fun initParam() {}
+
+    override fun setBindingVariable() {}
+
+    override fun initView() {}
+
+    override fun initData() {}
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.unbind()
     }
 }

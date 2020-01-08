@@ -33,10 +33,11 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
         //页面接受的参数方法
         initParam()
         initViewDataBinding(savedInstanceState)
+        initView()
+        initData()
     }
 
     private fun initViewDataBinding(savedInstanceState: Bundle?) {
-//        newsListViewModel = viewModelFactory.create(NewsListViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState))
         viewModel = initViewModel()
         if (viewModel == null) {
@@ -46,8 +47,6 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
         }
         setBindingVariable()
-        //让ViewModel拥有View的生命周期感应
-//        lifecycle.addObserver(viewModel)
     }
 
     abstract override fun initContentView(savedInstanceState: Bundle?): Int
@@ -69,6 +68,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     override fun onDestroy() {
         super.onDestroy()
+        binding.unbind()
         AppManager.instance.removeActivity(this)
     }
 }
