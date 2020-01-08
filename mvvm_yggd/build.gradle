@@ -38,9 +38,16 @@ dependencies {
     api libs.appCompat
     api libs.core_ktx
     api libs.recyclerview
+    api libs.design
     api libs.constraintlayout
     api libs.swiperefreshlayout
-    api 'com.google.android.material:material:1.2.0-alpha03'
+    api libs.lifecycle_extensions
+    api libs.lifecycle_livedata_ktx
+    api libs.lifecycle_viewmodel_ktx
+    api libs.navigation_fragment_ktx
+    api libs.navigation_ui_ktx
+    api libs.room_runtime
+    api libs.room_ktx
 
     api libs.rxjava2
     api libs.rxandroid2
@@ -85,5 +92,4 @@ dependencies {
     kapt libs.dagger2_compiler
     kapt libs.dagger2_android_processor
     kaptAndroidTest libs.dagger2_compiler
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 }

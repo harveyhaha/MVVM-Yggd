@@ -55,4 +55,6 @@ dependencies {
     kapt libs.dagger2_compiler
     kapt libs.dagger2_android_processor
     kaptAndroidTest libs.dagger2_compiler
+    kapt libs.room_compiler
+
 }

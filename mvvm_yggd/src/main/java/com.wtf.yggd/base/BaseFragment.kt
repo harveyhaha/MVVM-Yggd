@@ -51,7 +51,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
         if (viewModel == null) {
             val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
             val actualTypeArguments: Array<Type> = type.actualTypeArguments
-            val modelClass: Class<VM> = actualTypeArguments[0] as Class<VM>
+            val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
         }
         return binding.root
