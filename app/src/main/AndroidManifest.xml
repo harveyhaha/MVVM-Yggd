@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.wtf.sample.ui.MainActivity" />
+        <activity android:name=".ui.LoginActivity" />
 
     </application>
 

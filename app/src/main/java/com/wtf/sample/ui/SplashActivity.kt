@@ -22,7 +22,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, BaseViewModel>() {
     override fun initView() {
         super.initView()
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 2000)
     }

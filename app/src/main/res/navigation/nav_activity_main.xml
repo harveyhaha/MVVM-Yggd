@@ -12,6 +12,15 @@
         android:label="MainFragment" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.wtf.sample.ui.LoginFragment"
-        android:label="LoginFragment" />
+        android:name="com.wtf.sample.ui.LoginActivity"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
 </navigation>
