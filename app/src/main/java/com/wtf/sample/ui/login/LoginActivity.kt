@@ -1,9 +1,8 @@
-package com.wtf.sample.ui
+package com.wtf.sample.ui.login
 
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import com.wtf.sample.BR
 import com.wtf.sample.R
 import com.wtf.sample.databinding.ActivityLoginBinding
 import com.wtf.sample.viewmodels.LoginViewModel
@@ -28,7 +27,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun setBindingVariable() {
         super.setBindingVariable()
-        binding.setVariable(BR.viewmodel, viewModel)
+        binding.viewmodel = viewModel
     }
 
     override fun initData() {
@@ -43,17 +42,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     private fun loginCheck(): Boolean {
         var checkValid = true
-        if (TextUtils.isEmpty(viewModel?.userName)) {
+        if (TextUtils.isEmpty(viewModel?.userName?.get()?.trim())) {
             checkValid = false
             binding.usernameTextil.error = getString(R.string.user_name_warning)
         } else
-            binding.usernameTextil.isErrorEnabled = false
-        if (TextUtils.isEmpty(viewModel?.password)) {
+            binding.usernameTextil.error = null
+        if (TextUtils.isEmpty(viewModel?.password?.get()?.trim())) {
             checkValid = false
             binding.passwordTextil.error = getString(R.string.password_warning)
         } else
-            binding.usernameTextil.isErrorEnabled = false
-
+            binding.passwordTextil.error = null
+        Timber.i(
+            "username %s password %s",
+            viewModel?.userName?.get(),
+            viewModel?.password?.get()
+        )
         return checkValid
     }
 }

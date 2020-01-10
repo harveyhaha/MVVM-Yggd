@@ -39,6 +39,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     private fun initViewDataBinding(savedInstanceState: Bundle?) {
         binding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState))
+        binding.lifecycleOwner = this
         viewModel = initViewModel()
         if (viewModel == null) {
             val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType

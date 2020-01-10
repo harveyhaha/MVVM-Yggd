@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.wtf.sample.R
 import com.wtf.sample.databinding.ActivitySplashBinding
+import com.wtf.sample.ui.login.LoginActivity
 import com.wtf.yggd.base.BaseActivity
 import com.wtf.yggd.base.BaseViewModel
 
