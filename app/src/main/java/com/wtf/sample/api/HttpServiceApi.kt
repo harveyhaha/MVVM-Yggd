@@ -1,12 +1,9 @@
 package com.wtf.sample.api
 
-import androidx.annotation.NonNull
-import io.reactivex.Observable
-import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.Query
+import androidx.lifecycle.LiveData
+import com.wtf.sample.model.User
+import retrofit2.http.GET
+import retrofit2.http.Header
 
 /**
  *
@@ -15,6 +12,8 @@ import retrofit2.http.Query
  * @CreateDate:     20-1-10 下午4:39
  */
 interface HttpServiceApi {
+    @GET("user")
+    fun login(@Header("Authorization") token: String):LiveData<User>
     //login
 //    @POST("authorizations")
 //    @Headers("Accept: application/json")

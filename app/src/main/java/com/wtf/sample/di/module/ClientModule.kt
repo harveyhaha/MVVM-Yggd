@@ -1,7 +1,10 @@
 package com.wtf.sample.di.module
 
+import android.app.Application
+import androidx.room.Room
 import com.wtf.sample.api.HttpServiceApi
 import com.wtf.sample.config.BASE_URL
+import com.wtf.sample.db.AppDatabase
 import com.wtf.sample.http.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -23,13 +26,22 @@ import javax.inject.Singleton
 class ClientModule {
     @Singleton
     @Provides
+    fun provideDb(app: Application): AppDatabase {
+        return Room
+            .databaseBuilder(app, AppDatabase::class.java, "database.db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Singleton
+    @Provides
     fun provideHttpService(): HttpServiceApi {
-        val httpClientBuilder = OkHttpClient.Builder()
+        val okHttpClientBuilder = OkHttpClient.Builder()
         val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
-        httpClientBuilder.addInterceptor(httpLoggingInterceptor)
+        okHttpClientBuilder.addInterceptor(httpLoggingInterceptor)
         return Retrofit.Builder()
             .client(
-                httpClientBuilder
+                okHttpClientBuilder
                     .connectTimeout(10, TimeUnit.SECONDS)
                     .readTimeout(10, TimeUnit.SECONDS)
                     .writeTimeout(10, TimeUnit.SECONDS)
