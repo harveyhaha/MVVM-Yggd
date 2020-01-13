@@ -17,7 +17,7 @@
 package com.wtf.sample.http
 
 import androidx.lifecycle.LiveData
-import com.android.example.github.api.ApiResponse
+import com.wtf.sample.api.ApiResponse
 import retrofit2.CallAdapter
 import retrofit2.CallAdapter.Factory
 import retrofit2.Retrofit

@@ -5,8 +5,11 @@
     <string name="toolbar_submit_complete">完成</string>
     <!--login-->
     <string name="username">用户名</string>
-    <string name="password">密码</string>
+    <string name="password">personal access token</string>
     <string name="login">登录</string>
+    <string name="login_browser">打开浏览器</string>
     <string name="user_name_warning">用户名不可用！</string>
-    <string name="password_warning">密码不可用！</string>
+    <string name="password_warning">token 不可用！</string>
+    <string name="login_using_your_default_browser">使用默认浏览器登录 (OAuth)</string>
+
 </resources>
