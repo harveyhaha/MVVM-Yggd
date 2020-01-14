@@ -31,6 +31,10 @@ class AccountRepository @Inject constructor(
         return authTokenDao.getLoginToken()
     }
 
+    fun getLoginUser(): LiveData<UserEntity> {
+        return userDao.getLoginUser()
+    }
+
     fun login(authTokenEntity: AuthTokenEntity): LiveData<Resource<UserEntity>> {
         val basicToken = Credentials.basic(authTokenEntity.login, authTokenEntity.token)
         return object : NetworkBoundResource<UserEntity, UserEntity>(appExecutors) {
