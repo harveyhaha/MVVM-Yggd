@@ -1,10 +1,13 @@
 package com.wtf.sample.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import androidx.lifecycle.Observer
 import com.wtf.sample.R
 import com.wtf.sample.databinding.ActivityLoginBinding
+import com.wtf.sample.ui.MainActivity
 import com.wtf.sample.viewmodels.LoginViewModel
 import com.wtf.yggd.base.BaseActivity
 import timber.log.Timber
@@ -23,15 +26,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun initView() {
         super.initView()
         Timber.i(viewModel.toString())
+        viewModel?.hasLogin?.observe(this, Observer {
+            when (it) {
+                true -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+            }
+        })
     }
 
     override fun setBindingVariable() {
         super.setBindingVariable()
         binding.viewmodel = viewModel
-    }
-
-    override fun initData() {
-        super.initData()
     }
 
     fun onLoginClick(view: View) {
@@ -47,16 +54,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
             binding.usernameTextil.error = getString(R.string.user_name_warning)
         } else
             binding.usernameTextil.error = null
-        if (TextUtils.isEmpty(viewModel?.password?.get()?.trim())) {
+        if (TextUtils.isEmpty(viewModel?.token?.get()?.trim())) {
             checkValid = false
             binding.passwordTextil.error = getString(R.string.password_warning)
         } else
             binding.passwordTextil.error = null
-        Timber.i(
-            "username %s password %s",
-            viewModel?.userName?.get(),
-            viewModel?.password?.get()
-        )
         return checkValid
     }
 }

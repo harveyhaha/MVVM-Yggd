@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.wtf.sample.viewmodels.LoginViewModel
 import com.wtf.sample.viewmodels.MainViewModel
+import com.wtf.sample.viewmodels.SplashModel
 import com.wtf.yggd.di.ViewModelFactory
 import com.wtf.yggd.di.ViewModelKey
 import dagger.Binds
@@ -22,10 +23,11 @@ abstract class ViewModelModule {
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-    //    @Binds
-//    @IntoMap
-//    @ViewModelKey(BaseViewModel::class)
-//    abstract fun bindBaseViewModel(model: BaseViewModel): BaseViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashModel::class)
+    abstract fun bindSplashModel(model: SplashModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel::class)

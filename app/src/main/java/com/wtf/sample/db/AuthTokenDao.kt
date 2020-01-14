@@ -1,6 +1,11 @@
 package com.wtf.sample.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.wtf.sample.db.entity.AuthTokenEntity
 
 /**
  * @Description:
@@ -9,4 +14,9 @@ import androidx.room.Dao
  */
 @Dao
 interface AuthTokenDao {
+    @Query("select * from auth_token where isLogin = 1 ")
+    fun getLoginToken(): LiveData<AuthTokenEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertToken(authTokenEntity: AuthTokenEntity)
 }
