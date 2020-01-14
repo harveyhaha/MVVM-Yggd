@@ -2,6 +2,7 @@ package com.wtf.yggd.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.wtf.yggd.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -26,5 +27,11 @@ class AppModule {
     @Singleton
     fun provideCoroutineContext(): CoroutineContext {
         return Dispatchers.Main
+    }
+
+    @Singleton
+    @Provides
+    fun provideAppExecutors(): AppExecutors {
+        return AppExecutors()
     }
 }

@@ -9,8 +9,8 @@ import com.wtf.sample.db.entity.AuthTokenEntity
 import com.wtf.sample.db.entity.UserEntity
 import com.wtf.sample.http.NetworkBoundResource
 import com.wtf.sample.http.Resource
-import com.wtf.sample.utils.AbsentLiveData
-import com.wtf.sample.utils.AppExecutors
+import com.wtf.yggd.utils.AbsentLiveData
+import com.wtf.yggd.utils.AppExecutors
 import okhttp3.Credentials
 import javax.inject.Inject
 import javax.inject.Singleton

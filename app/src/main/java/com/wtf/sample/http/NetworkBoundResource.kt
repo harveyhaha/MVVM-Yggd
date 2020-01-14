@@ -8,7 +8,7 @@ import com.wtf.sample.api.ApiEmptyResponse
 import com.wtf.sample.api.ApiErrorResponse
 import com.wtf.sample.api.ApiResponse
 import com.wtf.sample.api.ApiSuccessResponse
-import com.wtf.sample.utils.AppExecutors
+import com.wtf.yggd.utils.AppExecutors
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.

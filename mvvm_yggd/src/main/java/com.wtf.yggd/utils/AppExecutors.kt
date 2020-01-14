@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.wtf.sample.utils
+package com.wtf.yggd.utils
 
 import android.os.Handler
 import android.os.Looper

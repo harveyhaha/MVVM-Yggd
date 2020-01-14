@@ -1,4 +1,4 @@
-package com.wtf.sample.utils
+package com.wtf.yggd.utils
 
 import androidx.lifecycle.LiveData
 

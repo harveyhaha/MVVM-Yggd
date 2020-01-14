@@ -10,7 +10,7 @@ import com.wtf.sample.db.AuthTokenDao
 import com.wtf.sample.db.UserDao
 import com.wtf.sample.http.LiveDataCallAdapterFactory
 import com.wtf.sample.repository.AccountRepository
-import com.wtf.sample.utils.AppExecutors
+import com.wtf.yggd.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -60,12 +60,6 @@ class ClientModule {
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
             .create(HttpServiceApi::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideAppExecutors(): AppExecutors {
-        return AppExecutors()
     }
 
     @Singleton
