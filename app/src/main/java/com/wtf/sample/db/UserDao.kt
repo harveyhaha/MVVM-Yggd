@@ -14,8 +14,8 @@ import com.wtf.sample.db.entity.UserEntity
  */
 @Dao
 interface UserDao {
-//    @Query("select * from user")
-//    fun login(name: String): LiveData<UserEntity>
+    @Query("select * from user inner join auth_token on user.login=auth_token.login and auth_token.isLogin=1")
+    fun getLoginUser(): LiveData<UserEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(userEntity: UserEntity)
