@@ -18,11 +18,12 @@ package com.wtf.yggd.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.wtf.yggd.di.scope.AppScope
 import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
 
-@Singleton
+@AppScope
 class ViewModelFactory @Inject constructor(@JvmSuppressWildcards private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

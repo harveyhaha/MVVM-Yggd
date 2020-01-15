@@ -2,6 +2,7 @@ package com.wtf.yggd.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.wtf.yggd.di.scope.BaseScope
 import com.wtf.yggd.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
@@ -17,14 +18,14 @@ import kotlin.coroutines.CoroutineContext
  */
 @Module
 class AppModule {
-    @Provides
     @Singleton
+    @Provides
     fun provideGson(): Gson {
         return GsonBuilder().create()
     }
 
-    @Provides
     @Singleton
+    @Provides
     fun provideCoroutineContext(): CoroutineContext {
         return Dispatchers.Main
     }

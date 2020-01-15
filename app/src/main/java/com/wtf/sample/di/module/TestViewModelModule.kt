@@ -20,23 +20,23 @@ import dagger.multibindings.IntoMap
  * @CreateDate:     20-1-6 下午4:53
  */
 @Module
-abstract class ViewModelModule {
+abstract class TestViewModelModule {
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(SplashModel::class)
-    abstract fun bindSplashModel(model: SplashModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(model: MainViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(LoginViewModel::class)
-    abstract fun bindLoginViewModel(model: LoginViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(SplashModel::class)
+//    abstract fun bindSplashModel(model: SplashModel): ViewModel
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(MainViewModel::class)
+//    abstract fun bindMainViewModel(model: MainViewModel): ViewModel
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(LoginViewModel::class)
+//    abstract fun bindLoginViewModel(model: LoginViewModel): ViewModel
 
 }

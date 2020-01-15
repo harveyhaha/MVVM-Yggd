@@ -18,16 +18,14 @@ package com.wtf.sample.di.component
 
 import android.app.Application
 import com.wtf.sample.app.MyApplication
-import com.wtf.sample.di.module.ActivityModule
-import com.wtf.sample.di.module.ClientModule
-import com.wtf.sample.di.module.FragmentModule
-import com.wtf.sample.di.module.ViewModelModule
-import com.wtf.yggd.di.module.AppModule
-import com.wtf.yggd.di.module.GlobalConfigModule
+import com.wtf.sample.di.module.TestActivityModule
+import com.wtf.sample.di.module.TestClientModule
+import com.wtf.sample.di.module.TestViewModelModule
+import com.wtf.yggd.di.component.BaseAppComponent
+import com.wtf.yggd.di.scope.AppScope
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
-import javax.inject.Singleton
 
 /**
  *
@@ -35,26 +33,26 @@ import javax.inject.Singleton
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:53
  */
-//@Singleton
-//@Component(
-//    modules = [
-//        AndroidInjectionModule::class,
+@AppScope
+@Component(
+    modules = [
+        AndroidInjectionModule::class,
 //        AppModule::class,
 //        GlobalConfigModule::class,
-//        ClientModule::class,
-//        ActivityModule::class,
+        TestClientModule::class,
+        TestActivityModule::class
 //        FragmentModule::class,
-//        ViewModelModule::class
-//    ]
-//)
-//interface AppComponent {
+//        TestViewModelModule::class
+    ], dependencies = [BaseAppComponent::class]
+)
+interface TestAppComponent {
 //    @Component.Builder
 //    interface Builder {
 //        @BindsInstance
 //        fun application(application: Application): Builder
-//
-//        fun build(): AppComponent
+
+//        fun build(): TestAppComponent
 //    }
-//
-//    fun inject(app: MyApplication)
-//}
+
+    fun inject(app: MyApplication)
+}

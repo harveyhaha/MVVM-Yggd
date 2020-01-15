@@ -3,6 +3,7 @@ package com.wtf.sample.di.module
 import com.wtf.sample.ui.MainActivity
 import com.wtf.sample.ui.SplashActivity
 import com.wtf.sample.ui.login.LoginActivity
+import com.wtf.yggd.di.module.AppModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

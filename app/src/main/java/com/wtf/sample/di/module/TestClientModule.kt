@@ -3,6 +3,7 @@ package com.wtf.sample.di.module
 import android.app.Application
 import androidx.room.Room
 import com.wtf.sample.BuildConfig
+import com.wtf.sample.R
 import com.wtf.sample.api.HttpServiceApi
 import com.wtf.sample.config.BASE_URL
 import com.wtf.sample.db.AppDatabase
@@ -10,6 +11,7 @@ import com.wtf.sample.db.AuthTokenDao
 import com.wtf.sample.db.UserDao
 import com.wtf.sample.http.LiveDataCallAdapterFactory
 import com.wtf.sample.repository.AccountRepository
+import com.wtf.yggd.di.scope.AppScope
 import com.wtf.yggd.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
@@ -19,6 +21,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -29,8 +32,8 @@ import javax.inject.Singleton
  * @CreateDate:     20-1-10 下午5:11
  */
 @Module
-class  ClientModule {
-    @Singleton
+class TestClientModule {
+    @AppScope
     @Provides
     fun provideDb(app: Application): AppDatabase {
         return Room
@@ -39,7 +42,14 @@ class  ClientModule {
             .build()
     }
 
-    @Singleton
+    @AppScope
+    @Provides
+    @Named("passwordWarning")
+    fun provideString(app: Application): String {
+        return app.getString(R.string.password_warning)
+    }
+
+    @AppScope
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
@@ -56,7 +66,7 @@ class  ClientModule {
             .build()
     }
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideHttpService(okHttpClient: OkHttpClient): HttpServiceApi {
 
@@ -69,19 +79,19 @@ class  ClientModule {
             .create(HttpServiceApi::class.java)
     }
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideAuthTokenDao(appDatabase: AppDatabase): AuthTokenDao {
         return appDatabase.authTokenDao()
     }
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideUserDao(appDatabase: AppDatabase): UserDao {
         return appDatabase.userDao()
     }
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideAccountRepository(
         appExecutors: AppExecutors,
