@@ -7,12 +7,8 @@ import com.wtf.sample.R
 import com.wtf.sample.api.HttpServiceApi
 import com.wtf.sample.config.BASE_URL
 import com.wtf.sample.db.AppDatabase
-import com.wtf.sample.db.AuthTokenDao
-import com.wtf.sample.db.UserDao
 import com.wtf.sample.http.LiveDataCallAdapterFactory
-import com.wtf.sample.repository.AccountRepository
 import com.wtf.yggd.di.scope.AppScope
-import com.wtf.yggd.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
 import okhttp3.Dispatcher
@@ -22,7 +18,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
-import javax.inject.Singleton
 
 
 /**
@@ -79,26 +74,26 @@ class TestClientModule {
             .create(HttpServiceApi::class.java)
     }
 
-    @AppScope
-    @Provides
-    fun provideAuthTokenDao(appDatabase: AppDatabase): AuthTokenDao {
-        return appDatabase.authTokenDao()
-    }
-
-    @AppScope
-    @Provides
-    fun provideUserDao(appDatabase: AppDatabase): UserDao {
-        return appDatabase.userDao()
-    }
-
-    @AppScope
-    @Provides
-    fun provideAccountRepository(
-        appExecutors: AppExecutors,
-        authTokenDao: AuthTokenDao,
-        userDao: UserDao,
-        httpServiceApi: HttpServiceApi
-    ): AccountRepository {
-        return AccountRepository(appExecutors, authTokenDao, userDao, httpServiceApi)
-    }
+//    @AppScope
+//    @Provides
+//    fun provideAuthTokenDao(appDatabase: AppDatabase): AuthTokenDao {
+//        return appDatabase.authTokenDao()
+//    }
+//
+//    @AppScope
+//    @Provides
+//    fun provideUserDao(appDatabase: AppDatabase): UserDao {
+//        return appDatabase.userDao()
+//    }
+//
+//    @AppScope
+//    @Provides
+//    fun provideAccountRepository(
+//        appExecutors: AppExecutors,
+//        authTokenDao: AuthTokenDao,
+//        userDao: UserDao,
+//        httpServiceApi: HttpServiceApi
+//    ): AccountRepository {
+//        return AccountRepository(appExecutors, authTokenDao, userDao, httpServiceApi)
+//    }
 }

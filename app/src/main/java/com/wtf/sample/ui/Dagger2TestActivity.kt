@@ -32,6 +32,9 @@ class Dagger2TestActivity : AppCompatActivity() {
     lateinit var okHttpClient: OkHttpClient
     @Inject
     lateinit var httpServiceApi: HttpServiceApi
+//    @Inject
+//    lateinit var viewmodelFactory: ViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)

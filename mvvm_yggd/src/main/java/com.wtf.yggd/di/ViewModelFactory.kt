@@ -21,10 +21,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.wtf.yggd.di.scope.AppScope
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
 @AppScope
-class ViewModelFactory @Inject constructor(@JvmSuppressWildcards private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
+//@Singleton
+class ViewModelFactory
+@Inject
+constructor(@JvmSuppressWildcards private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -37,6 +39,5 @@ class ViewModelFactory @Inject constructor(@JvmSuppressWildcards private val cre
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
-
     }
 }
