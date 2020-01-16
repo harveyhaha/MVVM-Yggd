@@ -129,4 +129,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
             com.thirtydegreesray.openhub.util.AppOpener.openInBrowser(context, url)
         }
     }
+
+    fun openInBrowser(@NonNull context: Context, @NonNull url: String?) {
+        val uri = Uri.parse(url)
+        var intent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent = AppOpener.createActivityChooserIntent(
+            context,
+            intent,
+            uri,
+            AppOpener.VIEW_IGNORE_PACKAGE
+        )
+        if (intent != null) {
+            context.startActivity(intent)
+        } else {
+            Toasty.warning(
+                context,
+                context.getString(R.string.no_browser_clients),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 }
