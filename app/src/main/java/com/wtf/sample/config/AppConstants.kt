@@ -8,3 +8,5 @@ package com.wtf.sample.config
  */
 //const val BASE_URL = "https://api.github.com/graphql"
 const val BASE_URL = "https://api.github.com/"
+const val OAUTH2_URL: String = BASE_URL + "login/oauth/authorize"
+const val OAUTH2_SCOPE = "user,repo,gist,notifications"

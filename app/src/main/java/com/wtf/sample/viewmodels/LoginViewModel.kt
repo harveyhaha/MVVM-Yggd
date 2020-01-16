@@ -5,13 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.gson.Gson
+import com.wtf.sample.BuildConfig
+import com.wtf.sample.config.OAUTH2_SCOPE
+import com.wtf.sample.config.OAUTH2_URL
 import com.wtf.sample.db.entity.AuthTokenEntity
 import com.wtf.sample.db.entity.UserEntity
-import com.wtf.yggd.http.Resource
-import com.wtf.yggd.http.Status
 import com.wtf.sample.repository.AccountRepository
 import com.wtf.yggd.base.BaseViewModel
+import com.wtf.yggd.http.Resource
+import com.wtf.yggd.http.Status
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -52,6 +56,14 @@ open class LoginViewModel @Inject constructor(
         loginLiveData?.removeObserver(loginObserver)
         loginLiveData = accountRepository.login(authTokenEntity)
         loginLiveData?.observeForever(loginObserver)
+    }
+
+    open fun getOAuth2Url(): String {
+        val randomState = UUID.randomUUID().toString()
+        return OAUTH2_URL +
+                "?client_id=" + BuildConfig.CLIENT_ID +
+                "&scope=" + OAUTH2_SCOPE +
+                "&state=" + randomState
     }
 
     override fun onCleared() {

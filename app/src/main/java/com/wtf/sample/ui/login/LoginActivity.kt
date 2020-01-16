@@ -1,9 +1,16 @@
 package com.wtf.sample.ui.login
 
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.NonNull
+import androidx.appcompat.widget.ViewUtils
 import androidx.lifecycle.Observer
 import com.wtf.sample.R
 import com.wtf.sample.databinding.ActivityLoginBinding
@@ -47,6 +54,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         }
     }
 
+    fun onBrowserLoginClick(view: View) {
+
+    }
+
     private fun loginCheck(): Boolean {
         var checkValid = true
         if (TextUtils.isEmpty(viewModel?.userName?.get()?.trim())) {
@@ -60,5 +71,62 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         } else
             binding.passwordTextil.error = null
         return checkValid
+    }
+
+    fun openInCustomTabsOrBrowser(@NonNull context: Context, @NonNull url: String) {
+        var url = url
+        if (TextUtils.isEmpty(url.trim())) {
+            Toasty.warning(context, context.getString(R.string.invalid_url), Toast.LENGTH_LONG)
+                .show()
+            return
+        }
+        //check http prefix
+        if (!url.contains("//")) {
+            url = "http://$url"
+        }
+        var customTabsPackageName: String?
+        if (PrefUtils.isCustomTabsEnable() &&
+            CustomTabsHelper.INSTANCE.getBestPackageName(context).also({
+                customTabsPackageName = it
+            }) != null
+        ) {
+            val backIconBitmap: Bitmap =
+                ViewUtils.getBitmapFromResource(context, R.drawable.ic_arrow_back_title)
+            val shareIntent =
+                Intent(context.applicationContext, ShareBroadcastReceiver::class.java)
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val sharePendingIntent = PendingIntent.getBroadcast(
+                context.applicationContext, 0, shareIntent, 0
+            )
+            val copyIntent =
+                Intent(context.applicationContext, CopyBroadcastReceiver::class.java)
+            copyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val copyPendingIntent = PendingIntent.getBroadcast(
+                context.applicationContext, 0, copyIntent, 0
+            )
+            val customTabsIntent: CustomTabsIntent = Builder()
+                .setToolbarColor(ViewUtils.getPrimaryColor(context))
+                .setCloseButtonIcon(backIconBitmap)
+                .setShowTitle(true)
+                .addMenuItem(context.getString(R.string.share), sharePendingIntent)
+                .addMenuItem(
+                    context.getString(R.string.copy_url),
+                    copyPendingIntent
+                ) //                    .setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
+//                    .setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .build()
+            customTabsIntent.intent.setPackage(customTabsPackageName)
+            customTabsIntent.launchUrl(context, Uri.parse(url))
+            if (PrefUtils.isCustomTabsTipsEnable()) {
+                Toasty.info(
+                    context,
+                    context.getString(R.string.use_custom_tabs_tips),
+                    Toast.LENGTH_LONG
+                ).show()
+                PrefUtils.set(PrefUtils.CUSTOM_TABS_TIPS_ENABLE, false)
+            }
+        } else {
+            com.thirtydegreesray.openhub.util.AppOpener.openInBrowser(context, url)
+        }
     }
 }
