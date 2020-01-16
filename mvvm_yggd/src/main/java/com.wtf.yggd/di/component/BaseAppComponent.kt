@@ -2,7 +2,9 @@ package com.wtf.yggd.di.component
 
 import android.app.Application
 import com.google.gson.Gson
+import com.wtf.yggd.di.ViewModelFactory
 import com.wtf.yggd.di.module.AppModule
+import com.wtf.yggd.utils.AppExecutors
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -20,6 +22,7 @@ import kotlin.coroutines.CoroutineContext
 interface BaseAppComponent {
     fun gson(): Gson
     fun coroutineContext(): CoroutineContext
+    fun appExecutors(): AppExecutors
     fun application(): Application
     @Component.Builder
     interface Builder {

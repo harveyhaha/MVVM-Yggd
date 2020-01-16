@@ -1,4 +1,4 @@
-package com.wtf.sample.ui
+package com.wtf.sample.ui.test
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import com.wtf.sample.R
 import com.wtf.sample.api.HttpServiceApi
 import com.wtf.sample.databinding.ActivityTestBinding
+import com.wtf.yggd.di.ViewModelFactory
 import dagger.android.AndroidInjection
 import okhttp3.OkHttpClient
 import timber.log.Timber
@@ -32,12 +33,12 @@ class Dagger2TestActivity : AppCompatActivity() {
     lateinit var okHttpClient: OkHttpClient
     @Inject
     lateinit var httpServiceApi: HttpServiceApi
-//    @Inject
-//    lateinit var viewmodelFactory: ViewModelFactory
+    @Inject
+    lateinit var viewmodelFactory: ViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_test)
         Timber.i(gson.toString())
         Timber.i(coroutineContext.toString())

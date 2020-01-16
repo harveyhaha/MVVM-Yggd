@@ -1,6 +1,7 @@
-package com.wtf.sample.di.module
+package com.wtf.sample.di.module.test
 
-import com.wtf.sample.ui.Dagger2TestActivity
+import com.wtf.sample.ui.test.Dagger2TestActivity
+import com.wtf.sample.ui.test.Dagger2TestBaseActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,6 +17,6 @@ abstract class TestActivityModule {
     @ContributesAndroidInjector
     abstract fun contributeDagger2TestActivity(): Dagger2TestActivity
 
-//    @ContributesAndroidInjector
-//    abstract fun contributeDagger2TestBaseActivity(): Dagger2TestBaseActivity
+    @ContributesAndroidInjector
+    abstract fun contributeDagger2TestBaseActivity(): Dagger2TestBaseActivity
 }

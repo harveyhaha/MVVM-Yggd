@@ -1,4 +1,4 @@
-package com.wtf.sample.ui
+package com.wtf.sample.ui.test
 
 import android.os.Bundle
 import com.google.gson.Gson

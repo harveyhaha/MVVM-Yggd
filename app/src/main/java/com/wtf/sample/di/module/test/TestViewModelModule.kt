@@ -1,4 +1,4 @@
-package com.wtf.sample.di.module
+package com.wtf.sample.di.module.test
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -21,19 +21,8 @@ abstract class TestViewModelModule {
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(SplashModel::class)
-//    abstract fun bindSplashModel(model: SplashModel): ViewModel
-//
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     abstract fun bindMainViewModel(model: MainViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(LoginViewModel::class)
-//    abstract fun bindLoginViewModel(model: LoginViewModel): ViewModel
-
 }

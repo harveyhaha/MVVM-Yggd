@@ -1,4 +1,4 @@
-package com.wtf.sample.di.module
+package com.wtf.sample.di.module.test
 
 import android.app.Application
 import androidx.room.Room

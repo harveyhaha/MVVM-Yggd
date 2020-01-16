@@ -16,14 +16,12 @@
 
 package com.wtf.sample.di.component
 
-import android.app.Application
 import com.wtf.sample.app.MyApplication
-import com.wtf.sample.di.module.TestActivityModule
-import com.wtf.sample.di.module.TestClientModule
-import com.wtf.sample.di.module.TestViewModelModule
+import com.wtf.sample.di.module.test.TestActivityModule
+import com.wtf.sample.di.module.test.TestClientModule
+import com.wtf.sample.di.module.test.TestViewModelModule
 import com.wtf.yggd.di.component.BaseAppComponent
 import com.wtf.yggd.di.scope.AppScope
-import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 
@@ -33,26 +31,18 @@ import dagger.android.AndroidInjectionModule
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:53
  */
-@AppScope
-@Component(
-    modules = [
-        AndroidInjectionModule::class,
-//        AppModule::class,
-//        GlobalConfigModule::class,
-        TestClientModule::class,
-        TestActivityModule::class
-//        FragmentModule::class,
+//@AppScope
+//@Component(
+//    modules = [
+//        AndroidInjectionModule::class,
+////        AppModule::class,
+////        GlobalConfigModule::class,
+//        TestClientModule::class,
+//        TestActivityModule::class,
+////        FragmentModule::class,
 //        TestViewModelModule::class
-    ], dependencies = [BaseAppComponent::class]
-)
+//    ], dependencies = [BaseAppComponent::class]
+//)
 interface TestAppComponent {
-//    @Component.Builder
-//    interface Builder {
-//        @BindsInstance
-//        fun application(application: Application): Builder
-
-//        fun build(): TestAppComponent
-//    }
-
     fun inject(app: MyApplication)
 }
