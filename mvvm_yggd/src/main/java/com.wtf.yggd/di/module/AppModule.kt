@@ -31,7 +31,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideAppExecutors(): AppExecutors {
+    fun provideAppExecutors():   {
         return AppExecutors()
     }
 }

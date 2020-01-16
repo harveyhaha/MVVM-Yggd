@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.wtf.yggd.base.listeners.IBaseActivityView
 import com.wtf.yggd.di.ViewModelFactory
 import dagger.android.AndroidInjection
@@ -66,6 +67,16 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
      * binding 绑定 ViewModel 操作
      */
     override fun setBindingVariable() {}
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        Glide.with(this).onTrimMemory(level)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        Glide.with(this).onLowMemory()
+    }
 
     override fun onDestroy() {
         super.onDestroy()
