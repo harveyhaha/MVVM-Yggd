@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.wtf.sample.http
+package com.wtf.yggd.http
 
 import androidx.lifecycle.LiveData
-import com.wtf.sample.api.ApiResponse
 import retrofit2.CallAdapter
 import retrofit2.CallAdapter.Factory
 import retrofit2.Retrofit
@@ -30,18 +29,18 @@ class LiveDataCallAdapterFactory : Factory() {
         annotations: Array<Annotation>,
         retrofit: Retrofit
     ): CallAdapter<*, *>? {
-        if (Factory.getRawType(returnType) != LiveData::class.java) {
+        if (getRawType(returnType) != LiveData::class.java) {
             return null
         }
-        val observableType = Factory.getParameterUpperBound(0, returnType as ParameterizedType)
-        val rawObservableType = Factory.getRawType(observableType)
+        val observableType = getParameterUpperBound(0, returnType as ParameterizedType)
+        val rawObservableType = getRawType(observableType)
         if (rawObservableType != ApiResponse::class.java) {
             throw IllegalArgumentException("type must be a resource")
         }
         if (observableType !is ParameterizedType) {
             throw IllegalArgumentException("resource must be parameterized")
         }
-        val bodyType = Factory.getParameterUpperBound(0, observableType)
+        val bodyType = getParameterUpperBound(0, observableType)
         return LiveDataCallAdapter<Any>(bodyType)
     }
 }

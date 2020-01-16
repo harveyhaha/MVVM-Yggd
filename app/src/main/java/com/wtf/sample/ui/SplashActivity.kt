@@ -24,9 +24,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashModel>() {
 
     override fun initView() {
         super.initView()
-        viewModel?.hasLogin?.observe(this, Observer {
-            if (it) {
-                startActivity(Intent(this, MainActivity::class.java))
+        viewModel?.loginUser?.observe(this, Observer {
+            if (it != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("user", viewModel?.loginUser?.value)
+                startActivity(intent)
                 finish()
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))
@@ -35,6 +37,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashModel>() {
         })
         Handler().postDelayed({
             viewModel?.checkLogin()
-        }, 2000)
+        }, 1000)
     }
 }

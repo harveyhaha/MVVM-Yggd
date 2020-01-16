@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.wtf.sample.http
+package com.wtf.yggd.http
 
 /**
  * Status of a resource that is provided to the UI.

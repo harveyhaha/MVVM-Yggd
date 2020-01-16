@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.wtf.sample.http
+package com.wtf.yggd.http
 
 import androidx.lifecycle.LiveData
-import com.wtf.sample.api.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback

@@ -107,6 +107,10 @@ ext {
             timber                          : "com.jakewharton.timber:timber:4.7.1",
             logger                          : "com.orhanobut:logger:2.2.0",
             leak_canary_debug               : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanaryVersion",
-            umeng_analytics                 : "com.umeng.analytics:analytics:6.0.1"
+            umeng_analytics                 : "com.umeng.analytics:analytics:6.0.1",
+
+//          app
+            logging_interceptor             : "com.squareup.okhttp3:logging-interceptor:4.2.2",
+            circleimageview                 : "de.hdodenhof:circleimageview:3.0.0"
     ]
 }

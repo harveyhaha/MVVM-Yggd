@@ -7,7 +7,7 @@ import com.wtf.sample.R
 import com.wtf.sample.api.HttpServiceApi
 import com.wtf.sample.config.BASE_URL
 import com.wtf.sample.db.AppDatabase
-import com.wtf.sample.http.LiveDataCallAdapterFactory
+import com.wtf.yggd.http.LiveDataCallAdapterFactory
 import com.wtf.yggd.di.scope.AppScope
 import dagger.Module
 import dagger.Provides

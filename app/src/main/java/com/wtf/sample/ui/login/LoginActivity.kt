@@ -26,12 +26,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun initView() {
         super.initView()
         Timber.i(viewModel.toString())
-        viewModel?.hasLogin?.observe(this, Observer {
-            when (it) {
-                true -> {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }
+        viewModel?.loginUser?.observe(this, Observer {
+            if (it != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("user", it)
+                startActivity(intent)
+                finish()
             }
         })
     }

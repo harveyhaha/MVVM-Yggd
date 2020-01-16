@@ -2,4 +2,6 @@
 <resources>
     <dimen name="titleTextSize">@dimen/sp_20</dimen>
     <dimen name="subTitleTextSize">@dimen/sp_15</dimen>
+    <dimen name="nav_header_height">@dimen/dp_160</dimen>
+
 </resources>

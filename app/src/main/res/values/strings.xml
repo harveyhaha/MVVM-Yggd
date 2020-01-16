@@ -11,5 +11,7 @@
     <string name="user_name_warning">用户名不可用！</string>
     <string name="password_warning">token 不可用！</string>
     <string name="login_using_your_default_browser">使用默认浏览器登录 (OAuth)</string>
-
+    <!--navigation_drawer-->
+    <string name="navigation_drawer_open" translatable="false">navigation_drawer_open</string>
+    <string name="navigation_drawer_close" translatable="false">navigation_drawer_close</string>
 </resources>

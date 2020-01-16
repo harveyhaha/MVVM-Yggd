@@ -22,19 +22,22 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
 
         Properties properties = new Properties()
         properties.load(project.rootProject.file('public.properties').newDataInputStream())
         buildConfigField "String", "CLIENT_ID", properties.getProperty("CLIENT_ID")
         buildConfigField "String", "CLIENT_SECRET", properties.getProperty("CLIENT_SECRET")
     }
-
+    androidExtensions {
+        experimental = true
+    }
     dataBinding {
         enabled true
     }
 
     buildTypes {
-        debug{
+        debug {
             buildConfigField("boolean", "LoggingInterceptor", "true")
         }
         release {
@@ -65,5 +68,6 @@ dependencies {
     kapt libs.dagger2_android_processor
     kaptAndroidTest libs.dagger2_compiler
     kapt libs.room_compiler
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    implementation libs.logging_interceptor
+    implementation libs.circleimageview
 }

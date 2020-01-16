@@ -8,7 +8,7 @@ import com.wtf.sample.config.BASE_URL
 import com.wtf.sample.db.AppDatabase
 import com.wtf.sample.db.AuthTokenDao
 import com.wtf.sample.db.UserDao
-import com.wtf.sample.http.LiveDataCallAdapterFactory
+import com.wtf.yggd.http.LiveDataCallAdapterFactory
 import com.wtf.sample.repository.AccountRepository
 import com.wtf.yggd.di.scope.AppScope
 import com.wtf.yggd.utils.AppExecutors

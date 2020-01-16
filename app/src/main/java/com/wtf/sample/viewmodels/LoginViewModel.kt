@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer
 import com.google.gson.Gson
 import com.wtf.sample.db.entity.AuthTokenEntity
 import com.wtf.sample.db.entity.UserEntity
-import com.wtf.sample.http.Resource
-import com.wtf.sample.http.Status
+import com.wtf.yggd.http.Resource
+import com.wtf.yggd.http.Status
 import com.wtf.sample.repository.AccountRepository
 import com.wtf.yggd.base.BaseViewModel
 import timber.log.Timber
@@ -21,11 +21,11 @@ import javax.inject.Inject
  * @CreateDate:     20-1-7 下午4:18
  */
 open class LoginViewModel @Inject constructor(
-    var accountRepository: AccountRepository,
-    var gson: Gson
+    private var accountRepository: AccountRepository,
+    private var gson: Gson
 ) :
     BaseViewModel() {
-    var hasLogin: MutableLiveData<Boolean> = MutableLiveData()
+    var loginUser: MutableLiveData<UserEntity> = MutableLiveData()
     val userName = ObservableField<String>("harveyhaha")
     val token = ObservableField<String>("7aa83b9794008988b825b33834b307a215231f27")
     lateinit var authTokenEntity: AuthTokenEntity
@@ -34,11 +34,11 @@ open class LoginViewModel @Inject constructor(
     private var loginObserver = Observer<Resource<UserEntity>> {
         when (it.status) {
             Status.SUCCESS -> {
-                hasLogin.postValue(true)
+                loginUser.postValue(it.data)
                 Timber.i("登录成功 %s", gson.toJson(it.data))
             }
             Status.ERROR -> {
-                hasLogin.postValue(false)
+                loginUser.postValue(null)
             }
             else -> {
             }

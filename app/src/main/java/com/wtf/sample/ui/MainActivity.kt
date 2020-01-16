@@ -1,11 +1,20 @@
 package com.wtf.sample.ui
 
 import android.os.Bundle
+import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
 import com.wtf.sample.R
 import com.wtf.sample.databinding.ActivityMainBinding
+import com.wtf.sample.db.entity.UserEntity
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.base.BaseActivity
+import com.wtf.yggd.base.GlideApp
+import de.hdodenhof.circleimageview.CircleImageView
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  *
@@ -13,14 +22,76 @@ import timber.log.Timber
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:53
  */
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
-
+open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+    @Inject
+    lateinit var gson: Gson
+    private var userEntity: UserEntity? = null
     override fun initContentView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_main
     }
 
+    override fun initParam() {
+        super.initParam()
+        userEntity = intent.getParcelableExtra("user")
+        Timber.i("LoginUser %s", gson.toJson(userEntity))
+    }
+
     override fun initView() {
         super.initView()
-        Timber.i(viewModel.toString())
+        initDrawerLayout()
+    }
+
+    private fun initDrawerLayout() {
+        initStartDrawerView()
+        updateStartDrawerContent(R.menu.activity_main_drawer)
+    }
+
+    private fun initStartDrawerView() {
+        val actionBarDrawerToggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        actionBarDrawerToggle.syncState()
+        binding.startNav.setNavigationItemSelectedListener { item ->
+            Timber.i("NavigationItemSelected %d", item.itemId)
+            closeDrawer()
+            true
+        }
+        userEntity?.let {
+            val avatarCircleImageView =
+                binding.startNav.getHeaderView(0).findViewById<CircleImageView>(R.id.avatar)
+            val nameTv =
+                binding.startNav.getHeaderView(0).findViewById<TextView>(R.id.name_tv)
+            val createTime =
+                binding.startNav.getHeaderView(0).findViewById<TextView>(R.id.create_time_tv)
+            GlideApp.with(this).load(userEntity?.avatar_url).into(avatarCircleImageView)
+            nameTv.text = userEntity?.name
+            createTime.text = userEntity?.created_at
+        }
+
+    }
+
+    private fun openDrawer(isStartDrawer: Boolean) {
+        binding.drawerLayout.openDrawer(if (isStartDrawer) GravityCompat.START else GravityCompat.END)
+    }
+
+    private fun closeDrawer() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.END))
+            binding.drawerLayout.closeDrawer(GravityCompat.END)
+    }
+
+    private fun updateStartDrawerContent(menuId: Int) {
+        updateDrawerContent(binding.startNav, menuId)
+    }
+
+    private fun updateDrawerContent(navView: NavigationView, menuId: Int) {
+        navView.menu.clear()
+        navView.inflateMenu(menuId)
+        if (binding.drawerLayout.indexOfChild(navView) == -1)
+            binding.drawerLayout.addView(navView)
     }
 }

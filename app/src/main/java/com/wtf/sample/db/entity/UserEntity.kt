@@ -1,12 +1,15 @@
 package com.wtf.sample.db.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 import javax.annotation.Nonnull
 
 /**
  * Created by wtf on 1/13/20 7:57 PM.
  */
+@Parcelize
 @Entity(tableName = "user")
 data class UserEntity(
     @PrimaryKey
@@ -29,4 +32,4 @@ data class UserEntity(
     val created_at: String?,
     val updated_at: String?,
     val two_factor_authentication: Boolean
-)
+) : Parcelable

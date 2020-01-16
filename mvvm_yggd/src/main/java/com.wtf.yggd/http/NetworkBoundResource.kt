@@ -1,24 +1,16 @@
-package com.wtf.sample.http
+package com.wtf.yggd.http
 
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.wtf.sample.api.ApiEmptyResponse
-import com.wtf.sample.api.ApiErrorResponse
-import com.wtf.sample.api.ApiResponse
-import com.wtf.sample.api.ApiSuccessResponse
 import com.wtf.yggd.utils.AppExecutors
 
 /**
- * A generic class that can provide a resource backed by both the sqlite database and the network.
- *
- *
- * You can read more about it in the [Architecture
- * Guide](https://developer.android.com/arch).
- * @param <ResultType>
- * @param <RequestType>
-</RequestType></ResultType> */
+ * @Description:    A generic class that can provide a resource backed by both the sqlite database and the network.
+ * @Author:         harveyhaha
+ * @CreateDate:     20-1-16 下午5:02
+ */
 abstract class NetworkBoundResource<ResultType, RequestType>
 @MainThread constructor(private val appExecutors: AppExecutors) {
 

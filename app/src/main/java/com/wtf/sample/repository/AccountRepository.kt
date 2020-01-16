@@ -1,15 +1,14 @@
 package com.wtf.sample.repository
 
 import androidx.lifecycle.LiveData
-import com.wtf.sample.api.ApiResponse
 import com.wtf.sample.api.HttpServiceApi
 import com.wtf.sample.db.AuthTokenDao
 import com.wtf.sample.db.UserDao
 import com.wtf.sample.db.entity.AuthTokenEntity
 import com.wtf.sample.db.entity.UserEntity
-import com.wtf.sample.http.NetworkBoundResource
-import com.wtf.sample.http.Resource
-import com.wtf.yggd.utils.AbsentLiveData
+import com.wtf.yggd.http.ApiResponse
+import com.wtf.yggd.http.NetworkBoundResource
+import com.wtf.yggd.http.Resource
 import com.wtf.yggd.utils.AppExecutors
 import okhttp3.Credentials
 import javax.inject.Inject
@@ -35,6 +34,9 @@ class AccountRepository @Inject constructor(
         return userDao.getLoginUser()
     }
 
+    /**
+     *
+     */
     fun login(authTokenEntity: AuthTokenEntity): LiveData<Resource<UserEntity>> {
         val basicToken = Credentials.basic(authTokenEntity.login, authTokenEntity.token)
         return object : NetworkBoundResource<UserEntity, UserEntity>(appExecutors) {
@@ -49,7 +51,7 @@ class AccountRepository @Inject constructor(
             }
 
             override fun loadFromDb(): LiveData<UserEntity> {
-                return AbsentLiveData.create()
+                return userDao.getLoginUser(authTokenEntity.login, authTokenEntity.token)
             }
 
             override fun createCall(): LiveData<ApiResponse<UserEntity>> {
@@ -57,9 +59,5 @@ class AccountRepository @Inject constructor(
             }
 
         }.asLiveData()
-    }
-
-    fun updateAuthToken(authTokenEntity: AuthTokenEntity) {
-        authTokenDao.insertToken(authTokenEntity)
     }
 }

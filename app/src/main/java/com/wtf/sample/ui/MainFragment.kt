@@ -33,6 +33,5 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override fun initView() {
         super.initView()
-        Timber.i(viewModel.toString())
     }
 }

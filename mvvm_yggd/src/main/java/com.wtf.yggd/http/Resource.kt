@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.wtf.sample.http
+package com.wtf.yggd.http
 
-import com.wtf.sample.http.Status.ERROR
-import com.wtf.sample.http.Status.LOADING
-import com.wtf.sample.http.Status.SUCCESS
+import com.wtf.yggd.http.Status.ERROR
+import com.wtf.yggd.http.Status.LOADING
+import com.wtf.yggd.http.Status.SUCCESS
 
 /**
  * A generic class that holds a value with its loading status.

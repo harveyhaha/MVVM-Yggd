@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.wtf.sample.db.entity.AuthTokenEntity
 import com.wtf.sample.db.entity.UserEntity
-import com.wtf.sample.http.Resource
-import com.wtf.sample.http.Status
+import com.wtf.yggd.http.Resource
+import com.wtf.yggd.http.Status
 import com.wtf.sample.repository.AccountRepository
 import com.wtf.yggd.base.BaseViewModel
 import com.wtf.yggd.utils.observeOnce
@@ -17,9 +17,9 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-14 上午11:35
  */
-class SplashModel @Inject constructor(var accountRepository: AccountRepository) :
+class SplashModel @Inject constructor(private var accountRepository: AccountRepository) :
     BaseViewModel() {
-    var hasLogin: MutableLiveData<Boolean> = MutableLiveData()
+    var loginUser: MutableLiveData<UserEntity> = MutableLiveData()
     private lateinit var authTokenEntity: AuthTokenEntity
     private var loginLiveData: LiveData<Resource<UserEntity>>? = null
     private var loginObserver = Observer<Resource<UserEntity>> {
@@ -27,10 +27,10 @@ class SplashModel @Inject constructor(var accountRepository: AccountRepository) 
             Status.LOADING -> {
             }
             Status.SUCCESS -> {
-                hasLogin.postValue(true)
+                loginUser.postValue(it.data)
             }
             Status.ERROR -> {
-                hasLogin.postValue(false)
+                loginUser.postValue(it.data)
             }
         }
     }
@@ -38,7 +38,7 @@ class SplashModel @Inject constructor(var accountRepository: AccountRepository) 
     fun checkLogin() {
         accountRepository.getLoginToken().observeOnce {
             if (it == null) {
-                hasLogin.postValue(false)
+                loginUser.postValue(null)
             } else {
                 authTokenEntity = it
                 login(it)
