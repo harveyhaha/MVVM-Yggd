@@ -1,10 +1,7 @@
 package com.wtf.sample.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.wtf.sample.db.entity.UserEntity
 
 /**
@@ -17,9 +14,12 @@ interface UserDao {
     @Query("select * from user inner join auth_token on user.login=auth_token.login and auth_token.isLogin=1")
     fun getLoginUser(): LiveData<UserEntity>
 
-    @Query("select * from user inner join auth_token on user.login=auth_token.login and auth_token.isLogin=1 and user.login=:login and auth_token.token=:token")
-    fun getLoginUser(login: String, token: String): LiveData<UserEntity>
+    @Query("select * from user inner join auth_token on user.login=auth_token.login and auth_token.isLogin=1  and auth_token.token=:token")
+    fun getLoginUser(token: String): LiveData<UserEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(userEntity: UserEntity)
+
+    @Delete
+    fun deleteUser(userEntity: UserEntity)
 }

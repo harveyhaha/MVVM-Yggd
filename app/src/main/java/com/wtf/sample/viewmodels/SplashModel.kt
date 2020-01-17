@@ -48,7 +48,7 @@ class SplashModel @Inject constructor(private var accountRepository: AccountRepo
 
     private fun login(authTokenEntity: AuthTokenEntity) {
         loginLiveData?.removeObserver(loginObserver)
-        loginLiveData = accountRepository.login(authTokenEntity)
+        loginLiveData = accountRepository.loginWithPersonalAccess(authTokenEntity)
         loginLiveData?.observeForever(loginObserver)
     }
 }

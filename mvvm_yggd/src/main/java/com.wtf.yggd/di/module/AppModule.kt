@@ -1,5 +1,7 @@
 package com.wtf.yggd.di.module
 
+import android.app.Application
+import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.wtf.yggd.utils.AppExecutors
@@ -33,5 +35,11 @@ class AppModule {
     @Provides
     fun provideAppExecutors(): AppExecutors {
         return AppExecutors()
+    }
+
+    @Singleton
+    @Provides
+    fun provideContext(application: Application): Context {
+        return application.applicationContext
     }
 }

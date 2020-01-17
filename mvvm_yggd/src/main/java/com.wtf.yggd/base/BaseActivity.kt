@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProviders
 import com.wtf.yggd.base.listeners.IBaseActivityView
 import com.wtf.yggd.di.ViewModelFactory
+import com.wtf.yggd.utils.AppManager
 import dagger.android.AndroidInjection
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -30,9 +31,9 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         AppManager.instance.addActivity(this)
+        initViewDataBinding(savedInstanceState)
         //页面接受的参数方法
         initParam()
-        initViewDataBinding(savedInstanceState)
         initView()
         initData()
     }

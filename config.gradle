@@ -94,6 +94,7 @@ ext {
             junit_jupiter_api               : "org.junit.jupiter:junit-jupiter-api:5.5.2",
             junit_platform_runner           : "org.junit.platform:junit-platform-runner:1.5.2",
             junit_ext                       : "androidx.test.ext:junit:1.1.1",
+
             //第三方断言库
             assertj_core                    : "org.assertj:assertj-core:3.14.0",
             core_testing                    : "androidx.arch.core:core-testing:2.1.0",

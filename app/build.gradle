@@ -28,6 +28,7 @@ android {
         properties.load(project.rootProject.file('public.properties').newDataInputStream())
         buildConfigField "String", "CLIENT_ID", properties.getProperty("CLIENT_ID")
         buildConfigField "String", "CLIENT_SECRET", properties.getProperty("CLIENT_SECRET")
+        buildConfigField "String", "REDIRECT_URI", properties.getProperty("REDIRECT_URI")
     }
     androidExtensions {
         experimental = true

@@ -19,4 +19,7 @@ interface AuthTokenDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertToken(authTokenEntity: AuthTokenEntity)
+
+    @Query("DELETE FROM auth_token WHERE login=:login")
+    fun deleteAuthToken(login: String)
 }

@@ -1,4 +1,4 @@
-package com.wtf.yggd.base
+package com.wtf.yggd.utils
 
 import android.app.Activity
 import android.app.ActivityManager

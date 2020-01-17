@@ -5,10 +5,10 @@ import androidx.room.Room
 import com.wtf.sample.BuildConfig
 import com.wtf.sample.R
 import com.wtf.sample.api.HttpServiceApi
-import com.wtf.sample.config.BASE_URL
+import com.wtf.sample.config.BASE_API_URL
 import com.wtf.sample.db.AppDatabase
-import com.wtf.yggd.http.LiveDataCallAdapterFactory
 import com.wtf.yggd.di.scope.AppScope
+import com.wtf.yggd.http.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.Dispatcher
@@ -67,7 +67,7 @@ class TestClientModule {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()

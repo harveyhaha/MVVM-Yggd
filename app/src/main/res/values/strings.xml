@@ -11,6 +11,8 @@
     <string name="user_name_warning">用户名不可用！</string>
     <string name="password_warning">token 不可用！</string>
     <string name="login_using_your_default_browser">使用默认浏览器登录 (OAuth)</string>
+    <string name="login_error_cannot_find_browser_client">没有可用的浏览器软件</string>
+    <string name="login_error_cannot_get_oauth2_token">无法获取oauth2令牌</string>
     <!--navigation_drawer-->
     <string name="navigation_drawer_open" translatable="false">navigation_drawer_open</string>
     <string name="navigation_drawer_close" translatable="false">navigation_drawer_close</string>

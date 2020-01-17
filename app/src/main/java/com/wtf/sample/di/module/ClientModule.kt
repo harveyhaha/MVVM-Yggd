@@ -4,13 +4,15 @@ import android.app.Application
 import androidx.room.Room
 import com.wtf.sample.BuildConfig
 import com.wtf.sample.api.HttpServiceApi
+import com.wtf.sample.api.LoginService
+import com.wtf.sample.config.BASE_API_URL
 import com.wtf.sample.config.BASE_URL
 import com.wtf.sample.db.AppDatabase
 import com.wtf.sample.db.AuthTokenDao
 import com.wtf.sample.db.UserDao
-import com.wtf.yggd.http.LiveDataCallAdapterFactory
 import com.wtf.sample.repository.AccountRepository
 import com.wtf.yggd.di.scope.AppScope
+import com.wtf.yggd.http.LiveDataCallAdapterFactory
 import com.wtf.yggd.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
@@ -28,7 +30,7 @@ import java.util.concurrent.TimeUnit
  * @CreateDate:     20-1-10 下午5:11
  */
 @Module
-class  ClientModule {
+class ClientModule {
     @AppScope
     @Provides
     fun provideDb(app: Application): AppDatabase {
@@ -58,14 +60,25 @@ class  ClientModule {
     @AppScope
     @Provides
     fun provideHttpService(okHttpClient: OkHttpClient): HttpServiceApi {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(BASE_API_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .build()
+            .create(HttpServiceApi::class.java)
+    }
 
+    @AppScope
+    @Provides
+    fun provideLoginService(okHttpClient: OkHttpClient): LoginService {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
-            .create(HttpServiceApi::class.java)
+            .create(LoginService::class.java)
     }
 
     @AppScope
@@ -86,8 +99,9 @@ class  ClientModule {
         appExecutors: AppExecutors,
         authTokenDao: AuthTokenDao,
         userDao: UserDao,
-        httpServiceApi: HttpServiceApi
+        httpServiceApi: HttpServiceApi,
+        loginService: LoginService
     ): AccountRepository {
-        return AccountRepository(appExecutors, authTokenDao, userDao, httpServiceApi)
+        return AccountRepository(appExecutors, authTokenDao, userDao, httpServiceApi, loginService)
     }
 }

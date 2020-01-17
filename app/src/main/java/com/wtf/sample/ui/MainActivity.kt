@@ -1,14 +1,18 @@
 package com.wtf.sample.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import com.wtf.sample.R
 import com.wtf.sample.databinding.ActivityMainBinding
 import com.wtf.sample.db.entity.UserEntity
+import com.wtf.sample.ui.login.LoginActivity
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.base.BaseActivity
 import com.wtf.yggd.base.GlideApp
@@ -33,12 +37,22 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initParam() {
         super.initParam()
         userEntity = intent.getParcelableExtra("user")
+        viewModel?.loginedUser?.value = userEntity
         Timber.i("LoginUser %s", gson.toJson(userEntity))
     }
 
     override fun initView() {
         super.initView()
         initDrawerLayout()
+        viewModel?.loginedUser?.observe(this, Observer {
+            if (it == null) {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+        })
+    }
+
+    override fun initData() {
+        super.initData()
     }
 
     private fun initDrawerLayout() {
@@ -56,6 +70,7 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         actionBarDrawerToggle.syncState()
         binding.startNav.setNavigationItemSelectedListener { item ->
             Timber.i("NavigationItemSelected %d", item.itemId)
+            navigationSelected(item)
             closeDrawer()
             true
         }
@@ -70,7 +85,6 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             nameTv.text = userEntity?.name
             createTime.text = userEntity?.created_at
         }
-
     }
 
     private fun openDrawer(isStartDrawer: Boolean) {
@@ -82,6 +96,14 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.END))
             binding.drawerLayout.closeDrawer(GravityCompat.END)
+    }
+
+    private fun navigationSelected(item: MenuItem) {
+        when (item.itemId) {
+            R.id.setting_logout -> {
+                viewModel?.logout()
+            }
+        }
     }
 
     private fun updateStartDrawerContent(menuId: Int) {
