@@ -16,6 +16,7 @@ import com.wtf.sample.ui.login.LoginActivity
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.base.BaseActivity
 import com.wtf.yggd.base.GlideApp
+import com.wtf.yggd.utils.AppManager
 import de.hdodenhof.circleimageview.CircleImageView
 import timber.log.Timber
 import javax.inject.Inject
@@ -102,6 +103,9 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         when (item.itemId) {
             R.id.setting_logout -> {
                 viewModel?.logout()
+            }
+            R.id.setting_power -> {
+                AppManager.instance.AppExit(this)
             }
         }
     }
