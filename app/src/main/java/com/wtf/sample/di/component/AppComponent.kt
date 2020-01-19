@@ -33,8 +33,8 @@ import dagger.android.AndroidInjectionModule
 @Component(
     modules = [
         AndroidInjectionModule::class
-        , ClientModule::class
         , AppConfigModule::class
+        , ClientModule::class
         , ActivityModule::class
         , FragmentModule::class
         , ViewModelModule::class

@@ -1,5 +1,6 @@
 package com.wtf.sample.di.module
 
+import com.wtf.yggd.di.scope.AppScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -19,7 +20,7 @@ class AppConfigModule constructor(var builder: Builder) {
         }
     }
 
-    //    @ConfigScope
+    @AppScope
     @Provides
     fun provideInterceptors(): List<Interceptor> {
         return builder.interceptors

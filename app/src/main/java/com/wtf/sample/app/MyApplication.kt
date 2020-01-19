@@ -2,7 +2,6 @@ package com.wtf.sample.app
 
 import android.content.Context
 import com.wtf.sample.di.component.DaggerAppComponent
-import com.wtf.sample.di.component.DaggerAppConfigComponent
 import com.wtf.sample.di.module.AppConfigModule
 import com.wtf.yggd.base.BaseApplication
 import dagger.android.AndroidInjector
@@ -28,10 +27,10 @@ open class MyApplication : BaseApplication(), HasAndroidInjector {
     }
 
     private fun initDagger() {
-        val appConfigComponent =
-            DaggerAppConfigComponent.builder().buildAppConfigModule(AppConfigModule.builder().build()).build()
+//        val appConfigComponent =
+//            DaggerAppConfigComponent.builder().buildAppConfigModule(AppConfigModule.builder().build()).build()
 
-        DaggerAppComponent.builder().baseAppComponent(baseAppComponent).appConfigComponent(appConfigComponent).build()
+        DaggerAppComponent.builder().baseAppComponent(baseAppComponent).build()
             .inject(this)
         //用于测试dagger
 //        DaggerTestAppComponent.builder().baseAppComponent(baseAppComponent).build().inject(this)
