@@ -17,10 +17,7 @@
 package com.wtf.sample.di.component
 
 import com.wtf.sample.app.MyApplication
-import com.wtf.sample.di.module.ActivityModule
-import com.wtf.sample.di.module.ClientModule
-import com.wtf.sample.di.module.FragmentModule
-import com.wtf.sample.di.module.ViewModelModule
+import com.wtf.sample.di.module.*
 import com.wtf.yggd.di.component.BaseAppComponent
 import com.wtf.yggd.di.scope.AppScope
 import dagger.Component
@@ -35,13 +32,18 @@ import dagger.android.AndroidInjectionModule
 @AppScope
 @Component(
     modules = [
-        AndroidInjectionModule::class,
-        ClientModule::class,
-        ActivityModule::class,
-        FragmentModule::class,
-        ViewModelModule::class
-    ], dependencies = [BaseAppComponent::class]
+        AndroidInjectionModule::class
+        , ClientModule::class
+        , AppConfigModule::class
+        , ActivityModule::class
+        , FragmentModule::class
+        , ViewModelModule::class
+    ]
+    , dependencies = [
+        BaseAppComponent::class
+    ]
 )
 interface AppComponent {
+
     fun inject(app: MyApplication)
 }

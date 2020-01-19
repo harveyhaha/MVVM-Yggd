@@ -2,9 +2,9 @@ package com.wtf.sample.api
 
 import androidx.lifecycle.LiveData
 import com.wtf.sample.db.entity.UserEntity
-import com.wtf.sample.model.OauthToken
 import com.wtf.yggd.http.ApiResponse
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Header
 
 /**
  *
