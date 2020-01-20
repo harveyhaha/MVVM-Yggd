@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.wtf.sample.R
-import com.wtf.sample.databinding.FragmentMainBinding
+import com.wtf.sample.databinding.FragmentNewsBinding
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.base.BaseFragment
 
@@ -16,13 +16,13 @@ import com.wtf.yggd.base.BaseFragment
  * @Author:         harveyhaha
  * @CreateDate:     20-1-8 下午2:15
  */
-class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
+class NewsFragment : BaseFragment<FragmentNewsBinding, MainViewModel>() {
     override fun initContentView(
         inflater: LayoutInflater?,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): Int {
-        return R.layout.fragment_main
+        return R.layout.fragment_news
     }
 
     override fun initViewModel(): MainViewModel? {
