@@ -20,6 +20,7 @@ import com.wtf.sample.app.MyApplication
 import com.wtf.sample.di.module.*
 import com.wtf.yggd.di.component.BaseAppComponent
 import com.wtf.yggd.di.scope.AppScope
+import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 
@@ -33,8 +34,8 @@ import dagger.android.AndroidInjectionModule
 @Component(
     modules = [
         AndroidInjectionModule::class
-        , AppConfigModule::class
         , ClientModule::class
+        , AppConfigModule::class
         , ActivityModule::class
         , FragmentModule::class
         , ViewModelModule::class
@@ -44,6 +45,11 @@ import dagger.android.AndroidInjectionModule
     ]
 )
 interface AppComponent {
-
     fun inject(app: MyApplication)
+    @Component.Builder
+    interface Builder {
+        fun baseAppComponent(baseAppComponent: BaseAppComponent): Builder
+        fun appConfigModule(appConfigModule: AppConfigModule): Builder
+        fun build(): AppComponent
+    }
 }

@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.wtf.yggd.di.scope.BaseScope
 import com.wtf.yggd.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
@@ -20,25 +19,25 @@ import kotlin.coroutines.CoroutineContext
  */
 @Module
 class AppModule {
-    @BaseScope
+    @Singleton
     @Provides
     fun provideGson(): Gson {
         return GsonBuilder().create()
     }
 
-    @BaseScope
+    @Singleton
     @Provides
     fun provideCoroutineContext(): CoroutineContext {
         return Dispatchers.Main
     }
 
-    @BaseScope
+    @Singleton
     @Provides
     fun provideAppExecutors(): AppExecutors {
         return AppExecutors()
     }
 
-    @BaseScope
+    @Singleton
     @Provides
     fun provideContext(application: Application): Context {
         return application.applicationContext

@@ -16,7 +16,7 @@ import kotlin.coroutines.CoroutineContext
  * @Author:         harveyhaha
  * @CreateDate:     20-1-15 下午5:08
  */
-@BaseScope
+@Singleton
 @Component(
     modules = [AppModule::class]
 )

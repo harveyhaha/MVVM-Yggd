@@ -8,7 +8,7 @@ import com.wtf.sample.R
 import com.wtf.sample.databinding.FragmentMainBinding
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.base.BaseFragment
-import timber.log.Timber
+
 
 /**
  *
@@ -33,5 +33,16 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override fun initView() {
         super.initView()
+        initToolbar()
+    }
+
+    override fun initData() {
+        super.initData()
+        viewModel?.getPrivateReceiveEvents()
+    }
+
+    private fun initToolbar() {
+        getAppCompatActivity().setSupportActionBar(binding.toolbar)
+        getAppCompatActivity().supportActionBar?.title = "main"
     }
 }
