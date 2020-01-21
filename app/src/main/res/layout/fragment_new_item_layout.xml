@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
             android:text="haha"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/avatar_iv"
             app:layout_constraintStart_toEndOf="@+id/avatar_iv"
             app:layout_constraintTop_toTopOf="@+id/avatar_iv" />

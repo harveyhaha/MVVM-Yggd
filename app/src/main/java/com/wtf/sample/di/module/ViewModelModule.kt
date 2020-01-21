@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.wtf.sample.viewmodels.LoginViewModel
 import com.wtf.sample.viewmodels.MainViewModel
+import com.wtf.sample.viewmodels.NewsViewModel
 import com.wtf.sample.viewmodels.SplashModel
 import com.wtf.yggd.di.ViewModelFactory
 import com.wtf.yggd.di.ViewModelKey
-import com.wtf.yggd.di.module.AppModule
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -38,5 +38,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(model: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewsViewModel::class)
+    abstract fun bindNewsViewModel(model: NewsViewModel): ViewModel
 
 }

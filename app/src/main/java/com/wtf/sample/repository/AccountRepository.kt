@@ -100,10 +100,10 @@ class AccountRepository @Inject constructor(
         }.asLiveData()
     }
 
-    fun getUserPrivateReceiveEvents(username: String): LiveData<Resource<Event>> {
-        return object : NetworkOnlyFetchResource<Event>(appExecutors) {
-            override fun createCall(): LiveData<ApiResponse<Event>> {
-                return httpServiceApi.getPrivateReceivedEvents(username)
+    fun getUserPrivateReceiveEvents(username: String, page: Int): LiveData<Resource<MutableList<Event>>> {
+        return object : NetworkOnlyFetchResource<MutableList<Event>>(appExecutors) {
+            override fun createCall(): LiveData<ApiResponse<MutableList<Event>>> {
+                return httpServiceApi.getPrivateReceivedEvents(username, page)
             }
         }.asLiveData()
     }

@@ -9,6 +9,10 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.wtf.sample.ui.NewsFragment"
-        android:label="MainFragment" />
+        android:label="NewsFragment">
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

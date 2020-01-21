@@ -34,7 +34,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        initParam()
     }
 
     @NonNull
@@ -56,6 +55,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
             val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
         }
+        initParam()
         setBindingVariable()
         return binding.root
     }

@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import com.wtf.sample.R
@@ -37,8 +38,13 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initParam() {
         super.initParam()
         userEntity = intent.getParcelableExtra("user")
-        viewModel?.loginedUser?.value = userEntity
-        Timber.i("LoginUser %s", gson.toJson(userEntity))
+        userEntity?.let {
+            val args = NewsFragmentArgs(it.name)
+            Navigation.findNavController(this, R.id.main_nav_fragment)
+                .setGraph(R.navigation.nav_activity_main, args.toBundle())
+            viewModel?.loginedUser?.value = userEntity
+            Timber.i("LoginUser %s", gson.toJson(userEntity))
+        }
     }
 
     override fun initView() {

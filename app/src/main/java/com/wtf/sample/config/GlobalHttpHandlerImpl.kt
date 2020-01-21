@@ -17,7 +17,9 @@ class GlobalHttpHandlerImpl : GlobalHttpHandler {
         basicToken?.let {
             addToken(requestBuilder, it)
         }
-        return requestBuilder.build()
+        val newRequest = requestBuilder.build()
+        Timber.i("request %s", newRequest.toString())
+        return newRequest
     }
 
     private fun addToken(requestBuilder: Request.Builder, token: String): Request.Builder {
