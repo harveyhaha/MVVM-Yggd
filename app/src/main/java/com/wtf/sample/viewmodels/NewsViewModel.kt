@@ -20,12 +20,13 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-21 上午9:47
  */
-class NewsViewModel @Inject constructor(var accountRepository: AccountRepository) : BaseViewModel() {
+class NewsViewModel @Inject constructor(var accountRepository: AccountRepository) :
+    BaseViewModel() {
     lateinit var username: String
     var eventDataList: MutableLiveData<MutableList<Event>> = MutableLiveData()
     private var _eventDataList = mutableListOf<Event>()
     lateinit var privateReceiveEventsObserver: Observer<Resource<MutableList<Event>>>
-    var page = 1
+    private var page = 1
     //gone if true gone the load more view
     var recycleLoadMoreStatus: MutableLiveData<RecycleLoadMoreStatus> = MutableLiveData()
     var swipeRefreshLayoutIsEnable = ObservableBoolean(true)
@@ -36,8 +37,19 @@ class NewsViewModel @Inject constructor(var accountRepository: AccountRepository
         const val PAGE_SIZE = 30
     }
 
+    fun getPrivateReceiveEventsLoadMore() {
+        getPrivateReceiveEvents(page)
+    }
+
     fun getPrivateReceiveEvents(page: Int = 1) {
         val isRefreshing = page == 1
+        if (isRefreshing) {
+            swipeRefreshLayoutIsRefreshing.set(true)
+            recycleLoadMoreStatus.postValue(RecycleLoadMoreStatus(null, false))
+        } else {
+            swipeRefreshLayoutIsEnable.set(false)
+            recycleLoadMoreStatus.postValue(RecycleLoadMoreStatus(null, true))
+        }
         val privateReceiveEventsLiveData = accountRepository.getUserPrivateReceiveEvents(username, page)
         privateReceiveEventsObserver = Observer {
             when (it.status) {
@@ -48,12 +60,17 @@ class NewsViewModel @Inject constructor(var accountRepository: AccountRepository
                             _eventDataList.clear()
                             _eventDataList.addAll(data)
                             swipeRefreshLayoutIsRefreshing.set(false)
+                            recycleLoadMoreStatus.postValue(RecycleLoadMoreStatus(null, true))
                         } else {
                             _eventDataList.addAll(data)
                             when {
                                 _eventDataList.size >= TOTAL_COUNTER -> {
                                     //complete
-                                    recycleLoadMoreStatus.postValue(RecycleLoadMoreStatus(LoadMoreStatus.Complete))
+                                    recycleLoadMoreStatus.postValue(
+                                        RecycleLoadMoreStatus(
+                                            LoadMoreStatus.Complete
+                                        )
+                                    )
                                 }
                                 data.size < PAGE_SIZE -> {
                                     recycleLoadMoreStatus.postValue(
@@ -65,9 +82,14 @@ class NewsViewModel @Inject constructor(var accountRepository: AccountRepository
                                 }
                                 else -> {
                                     //complete
-                                    recycleLoadMoreStatus.postValue(RecycleLoadMoreStatus(LoadMoreStatus.Complete))
+                                    recycleLoadMoreStatus.postValue(
+                                        RecycleLoadMoreStatus(
+                                            LoadMoreStatus.Complete
+                                        )
+                                    )
                                 }
                             }
+                            swipeRefreshLayoutIsEnable.set(true)
                         }
                         eventDataList.postValue(_eventDataList)
                     }

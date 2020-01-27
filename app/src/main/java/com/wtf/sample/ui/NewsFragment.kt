@@ -67,14 +67,10 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
 
     private fun initEventUi() {
         adapter = NewsAdapter()
-        adapter.loadMoreModule?.let { loadMoreModule ->
-            loadMoreModule.isEnableLoadMore = true
-            loadMoreModule.setOnLoadMoreListener(this)
-            loadMoreModule.isAutoLoadMore = true
-        }
+        adapter.loadMoreModule?.setOnLoadMoreListener(this)
         adapter.adapterAnimation = ScaleInAnimation()
         adapter.setOnItemClickListener { _, _, position ->
-            Toast.makeText(requireContext(), "posion$position", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "position$position", Toast.LENGTH_SHORT).show()
         }
         binding.swipeRefreshLayout.setOnRefreshListener(this)
         binding.swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189))
@@ -100,23 +96,19 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
                         adapter.loadMoreModule?.loadMoreFail()
                     }
                 }
+                adapter.loadMoreModule?.isEnableLoadMore = it.isEnable
             })
-            viewModel.getPrivateReceiveEvents(viewModel.page)
+            onRefresh()
         }
     }
 
     override fun onRefresh() {
         Timber.i("onRefresh")
-        viewModel?.let { viewModel ->
-            viewModel.page = 1
-            viewModel.getPrivateReceiveEvents()
-        }
+        viewModel?.getPrivateReceiveEvents()
     }
 
     override fun onLoadMore() {
         Timber.i("onLoadMore")
-        viewModel?.let { viewModel ->
-            viewModel.getPrivateReceiveEvents(viewModel.page)
-        }
+        viewModel?.getPrivateReceiveEventsLoadMore()
     }
 }
