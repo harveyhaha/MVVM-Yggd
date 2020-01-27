@@ -18,6 +18,7 @@ data class UserEntity(
     val id: String,
     val node_id: String,
     val avatar_url: String,
+    val url: String,
     val type: String,
     val name: String,
     val company: String?,

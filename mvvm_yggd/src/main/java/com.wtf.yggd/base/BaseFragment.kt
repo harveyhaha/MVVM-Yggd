@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -33,7 +34,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        initParam()
     }
 
     @NonNull
@@ -55,6 +55,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
             val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
         }
+        initParam()
         setBindingVariable()
         return binding.root
     }
@@ -91,5 +92,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onDestroyView() {
         super.onDestroyView()
         binding.unbind()
+    }
+
+    override fun getAppCompatActivity(): AppCompatActivity {
+        return context as AppCompatActivity
     }
 }

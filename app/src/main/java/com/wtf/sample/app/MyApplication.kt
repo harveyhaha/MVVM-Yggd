@@ -1,7 +1,9 @@
 package com.wtf.sample.app
 
 import android.content.Context
+import com.wtf.sample.config.GlobalHttpHandlerImpl
 import com.wtf.sample.di.component.DaggerAppComponent
+import com.wtf.sample.di.module.AppConfigModule
 import com.wtf.yggd.base.BaseApplication
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -26,7 +28,14 @@ open class MyApplication : BaseApplication(), HasAndroidInjector {
     }
 
     private fun initDagger() {
-        DaggerAppComponent.builder().baseAppComponent(baseAppComponent).build().inject(this)
+        val appConfigModule = AppConfigModule.Builder()
+            .buildGlobalHttpHandler(GlobalHttpHandlerImpl())
+            .build()
+        DaggerAppComponent.builder()
+            .baseAppComponent(baseAppComponent)
+            .appConfigModule(appConfigModule)
+            .build()
+            .inject(this)
         //用于测试dagger
 //        DaggerTestAppComponent.builder().baseAppComponent(baseAppComponent).build().inject(this)
     }

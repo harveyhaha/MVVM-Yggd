@@ -1,6 +1,7 @@
 package com.wtf.sample.viewmodels
 
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.wtf.sample.db.entity.UserEntity
 import com.wtf.sample.repository.AccountRepository
 import com.wtf.yggd.base.BaseViewModel
@@ -12,7 +13,7 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-7 下午4:18
  */
-class MainViewModel @Inject constructor(var accountRepository: AccountRepository) :
+class MainViewModel @Inject constructor(var accountRepository: AccountRepository, var gson: Gson) :
     BaseViewModel() {
     var loginedUser: MutableLiveData<UserEntity> = MutableLiveData()
 

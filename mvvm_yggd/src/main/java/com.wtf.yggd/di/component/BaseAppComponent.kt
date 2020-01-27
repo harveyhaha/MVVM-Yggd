@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.google.gson.Gson
 import com.wtf.yggd.di.module.AppModule
+import com.wtf.yggd.di.scope.BaseScope
 import com.wtf.yggd.utils.AppExecutors
 import dagger.BindsInstance
 import dagger.Component

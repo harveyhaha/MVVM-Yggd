@@ -1,6 +1,6 @@
 package com.wtf.sample.di.module
 
-import com.wtf.sample.ui.MainFragment
+import com.wtf.sample.ui.NewsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -15,6 +15,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeMainFragment(): MainFragment
+    abstract fun contributeMainFragment(): NewsFragment
 
 }

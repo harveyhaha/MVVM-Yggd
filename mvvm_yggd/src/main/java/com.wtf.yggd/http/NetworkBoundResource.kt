@@ -8,6 +8,8 @@ import com.wtf.yggd.utils.AppExecutors
 
 /**
  * @Description:    A generic class that can provide a resource backed by both the sqlite database and the network.
+ * @param ResultType 处理后返回的entity
+ * @param RequestType http api 请求返回gson解析的entity
  * @Author:         harveyhaha
  * @CreateDate:     20-1-16 下午5:02
  */
