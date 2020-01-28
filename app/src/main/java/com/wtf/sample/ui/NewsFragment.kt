@@ -62,7 +62,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
 
     private fun initToolbar() {
         getAppCompatActivity().setSupportActionBar(binding.toolbar)
-        getAppCompatActivity().supportActionBar?.title = "main"
+        getAppCompatActivity().supportActionBar?.title = getString(R.string.news)
     }
 
     private fun initEventUi() {

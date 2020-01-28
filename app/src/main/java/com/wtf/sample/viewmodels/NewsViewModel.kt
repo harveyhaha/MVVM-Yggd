@@ -42,6 +42,7 @@ class NewsViewModel @Inject constructor(var accountRepository: AccountRepository
     }
 
     fun getPrivateReceiveEvents(page: Int = 1) {
+        this.page = page
         val isRefreshing = page == 1
         if (isRefreshing) {
             swipeRefreshLayoutIsRefreshing.set(true)

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">mvvm- yggd</string>
+
+    <string name="news">动态</string>
+
     <string name="toolbar_cancel">取消</string>
     <string name="toolbar_submit">确定</string>
     <string name="toolbar_submit_complete">完成</string>
