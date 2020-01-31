@@ -9,7 +9,7 @@ import com.wtf.sample.db.entity.UserEntity
  */
 data class Event constructor(
     var id: String,
-    var type: String,
+    @EventType var type: String,
     var actor: UserEntity,
     var repo: Repository,
     var payload: EventPayload,
