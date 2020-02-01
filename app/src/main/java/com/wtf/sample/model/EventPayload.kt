@@ -12,5 +12,6 @@ data class EventPayload constructor(
     var ref: String,
     var head: String,
     var before: String,
-    var commits: ArrayList<EventCommits>
+    var commits: ArrayList<EventCommits>,
+    var forkee: EventForkee
 )

@@ -19,4 +19,12 @@
     <!--navigation_drawer-->
     <string name="navigation_drawer_open" translatable="false">navigation_drawer_open</string>
     <string name="navigation_drawer_close" translatable="false">navigation_drawer_close</string>
+    <!--tiem-->
+    <string name="just_now">刚刚</string>
+    <string name="seconds_ago">秒前</string>
+    <string name="minutes_ago">分钟前</string>
+    <string name="hours_ago">小时前</string>
+    <string name="days_ago">天前</string>
+    <!--event-->
+    <string name="fork_from">forked %s from %s </string>
 </resources>

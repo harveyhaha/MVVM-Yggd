@@ -7,6 +7,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.wtf.sample.R
 import com.wtf.sample.databinding.FragmentNewItemLayoutBinding
 import com.wtf.sample.model.Event
+import com.wtf.sample.model.EventType
+import com.wtf.sample.utils.StringUtils
 import com.wtf.yggd.base.GlideApp
 
 /**
@@ -21,11 +23,23 @@ class NewsAdapter : BaseQuickAdapter<Event, BaseViewHolder>(R.layout.fragment_ne
         binding?.let {
             GlideApp.with(context).load(item?.actor?.avatar_url).into(binding.avatarIv)
             binding.nameTv.text = item?.actor?.login
+            if (item?.created_at != null)
+                binding.timeAgo.text = StringUtils.getNewsTime(context, item.created_at)
+            binding.content.text = getContentString(item)
         }
     }
 
     override fun onItemViewHolderCreated(viewHolder: BaseViewHolder, viewType: Int) {
         super.onItemViewHolderCreated(viewHolder, viewType)
         DataBindingUtil.bind<FragmentNewItemLayoutBinding>(viewHolder.itemView)
+    }
+
+    private fun getContentString(item: Event?): String {
+        when (item?.type) {
+            EventType.ForkEvent -> {
+                return context.getString(R.string.fork_from, item.payload.forkee.full_name, item.repo.name)
+            }
+        }
+        return item?.type ?: ""
     }
 }

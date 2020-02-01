@@ -44,6 +44,6 @@ open class MyApplication : BaseApplication(), HasAndroidInjector {
 
     companion object {
         lateinit var context: Context
-        lateinit var INSTANCE: BaseApplication
+        lateinit var INSTANCE: MyApplication
     }
 }

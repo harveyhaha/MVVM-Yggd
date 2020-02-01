@@ -1,6 +1,7 @@
 package com.wtf.sample.model
 
 import com.wtf.sample.db.entity.UserEntity
+import java.util.*
 
 /**
  * @Description:
@@ -14,5 +15,5 @@ data class Event constructor(
     var repo: Repository,
     var payload: EventPayload,
     var public: Boolean,
-    var create_at: String
+    var created_at: Date
 )

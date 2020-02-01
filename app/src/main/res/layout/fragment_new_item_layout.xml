@@ -31,5 +31,25 @@
             app:layout_constraintBottom_toBottomOf="@+id/avatar_iv"
             app:layout_constraintStart_toEndOf="@+id/avatar_iv"
             app:layout_constraintTop_toTopOf="@+id/avatar_iv" />
+
+        <TextView
+            android:id="@+id/time_ago"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:text="ago"
+            app:layout_constraintBottom_toBottomOf="@+id/name_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/name_tv" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="content"
+            app:layout_constraintEnd_toEndOf="@+id/time_ago"
+            app:layout_constraintStart_toStartOf="@+id/avatar_iv"
+            app:layout_constraintTop_toBottomOf="@+id/avatar_iv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -38,6 +38,7 @@ dependencies {
     api libs.appCompat
     api libs.core_ktx
     api libs.recyclerview
+    api libs.preference
     api libs.design
     api libs.constraintlayout
     api libs.swiperefreshlayout
