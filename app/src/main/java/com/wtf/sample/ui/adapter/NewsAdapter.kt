@@ -37,7 +37,7 @@ class NewsAdapter : BaseQuickAdapter<Event, BaseViewHolder>(R.layout.fragment_ne
     private fun getContentString(item: Event?): String {
         when (item?.type) {
             EventType.ForkEvent -> {
-                return context.getString(R.string.fork_from, item.payload.forkee.full_name, item.repo.name)
+                return context.getString(R.string.fork_from, item.repo.name, item.payload.forkee.full_name)
             }
         }
         return item?.type ?: ""

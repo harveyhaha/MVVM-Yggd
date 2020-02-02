@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news">news</string>
+    <string name="setting">setting+</string>
+
+    <string name="toolbar_cancel">cancel</string>
+    <string name="toolbar_submit">submit</string>
+    <string name="toolbar_submit_complete">complete</string>
+    <!--login-->
+    <string name="username">username</string>
+    <string name="login">login</string>
+    <string name="login_browser">open browser</string>
+    <string name="user_name_warning">username is error！</string>
+    <string name="password_warning">token error！</string>
+    <string name="login_using_your_default_browser">login using your default browser (OAuth)</string>
+    <string name="login_error_cannot_find_browser_client">cannot find browser client</string>
+    <string name="login_error_cannot_get_oauth2_token">cannot get oauth2 token</string>
+    <!--tiem-->
+    <string name="just_now">just now</string>
+    <string name="seconds_ago">seconds ago</string>
+    <string name="minutes_ago">minutes ago</string>
+    <string name="hours_ago">hours ago</string>
+    <string name="days_ago">days ago</string>
+
+    <string name="fork_from">forked %s to %s</string>
+</resources>

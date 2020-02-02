@@ -1,14 +1,15 @@
 <resources>
-    <string name="app_name">mvvm- yggd</string>
+    <string name="app_name" translatable="false">mvvm-yggd</string>
 
     <string name="news">动态</string>
+    <string name="setting">设置</string>
 
     <string name="toolbar_cancel">取消</string>
     <string name="toolbar_submit">确定</string>
     <string name="toolbar_submit_complete">完成</string>
     <!--login-->
     <string name="username">用户名</string>
-    <string name="password">personal access token</string>
+    <string name="password" translatable="false">personal access token</string>
     <string name="login">登录</string>
     <string name="login_browser">打开浏览器</string>
     <string name="user_name_warning">用户名不可用！</string>
@@ -26,5 +27,5 @@
     <string name="hours_ago">小时前</string>
     <string name="days_ago">天前</string>
     <!--event-->
-    <string name="fork_from">forked %s from %s </string>
+    <string name="fork_from">从 %s 创建分支 %s</string>
 </resources>
