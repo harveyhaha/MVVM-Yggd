@@ -1,9 +1,11 @@
 package com.wtf.sample.app
 
 import android.content.Context
+import com.wtf.sample.config.ActivityLifecycleCallbacksImpl
 import com.wtf.sample.config.GlobalHttpHandlerImpl
 import com.wtf.sample.di.component.DaggerAppComponent
 import com.wtf.sample.di.module.AppConfigModule
+import com.wtf.sample.utils.LanguageUtils
 import com.wtf.yggd.base.BaseApplication
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -24,7 +26,13 @@ open class MyApplication : BaseApplication(), HasAndroidInjector {
         super.onCreate()
         context = applicationContext
         INSTANCE = this
+        initActivityLifecycleCallbacks()
         initDagger()
+        LanguageUtils.updateAppLanguage(this)
+    }
+
+    private fun initActivityLifecycleCallbacks() {
+        registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
     }
 
     private fun initDagger() {

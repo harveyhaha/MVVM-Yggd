@@ -3,7 +3,7 @@ package com.wtf.sample.di.module
 import com.wtf.sample.ui.MainActivity
 import com.wtf.sample.ui.SplashActivity
 import com.wtf.sample.ui.login.LoginActivity
-import com.wtf.yggd.di.module.AppModule
+import com.wtf.sample.ui.setting.SettingActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -24,4 +24,7 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeSettingActivity(): SettingActivity
 }

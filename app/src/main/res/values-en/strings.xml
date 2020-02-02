@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="news">news</string>
-    <string name="setting">setting+</string>
+    <string name="setting">setting</string>
 
     <string name="toolbar_cancel">cancel</string>
     <string name="toolbar_submit">submit</string>
@@ -23,4 +23,6 @@
     <string name="days_ago">days ago</string>
 
     <string name="fork_from">forked %s to %s</string>
+    <!--setting-->
+    <string name="language">Language</string>
 </resources>

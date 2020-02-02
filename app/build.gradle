@@ -72,4 +72,6 @@ dependencies {
     implementation libs.logging_interceptor
     implementation libs.circleimageview
     implementation libs.base_recycler_view_adapter_helper
+    implementation libs.material_dialogs
+    implementation libs.eventbus
 }

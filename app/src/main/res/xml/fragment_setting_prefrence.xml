@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:icon="@drawable/ic_person_teal_300_24dp"
+        android:key="language"
+        android:title="@string/language" />
+</PreferenceScreen>

@@ -114,6 +114,7 @@ ext {
 //          app
             logging_interceptor              : "com.squareup.okhttp3:logging-interceptor:4.3.1",
             circleimageview                  : "de.hdodenhof:circleimageview:3.1.0",
-            base_recycler_view_adapter_helper: "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11"
+            base_recycler_view_adapter_helper: "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11",
+            eventbus                         : "org.greenrobot:eventbus:3.1.1"
     ]
 }

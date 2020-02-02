@@ -14,6 +14,7 @@ import com.wtf.sample.R
 import com.wtf.sample.databinding.ActivityMainBinding
 import com.wtf.sample.db.entity.UserEntity
 import com.wtf.sample.ui.login.LoginActivity
+import com.wtf.sample.ui.setting.SettingActivity
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.base.BaseActivity
 import com.wtf.yggd.base.GlideApp
@@ -107,6 +108,10 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private fun navigationSelected(item: MenuItem) {
         when (item.itemId) {
+            R.id.setting -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+            }
             R.id.setting_logout -> {
                 viewModel?.logout()
             }

@@ -28,4 +28,7 @@
     <string name="days_ago">天前</string>
     <!--event-->
     <string name="fork_from">从 %s 创建分支 %s</string>
+    <!--setting-->
+    <string name="language">语言</string>
 </resources>
+

@@ -49,6 +49,7 @@
         <activity android:name=".ui.test.Dagger2TestBaseActivity">
 
         </activity>
+        <activity android:name=".ui.setting.SettingActivity" />
 
     </application>
 

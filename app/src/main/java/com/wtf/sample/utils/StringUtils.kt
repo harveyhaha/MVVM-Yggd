@@ -50,22 +50,10 @@ class StringUtils {
         }
 
         private fun getDateString(context: Context, date: Date): String {
-            val locale = getLocale(SpUtils.getLanguage(context))
+            val locale = LanguageUtils.getLocale(SpUtils.getLanguage(context))
             val regex: String = dateRegexMap[locale] ?: "yyyy-MM-dd"
             val format = SimpleDateFormat(regex, locale)
             return format.format(date)
-        }
-
-        private fun getLocale(language: String): Locale {
-            val locale: Locale
-            val array = language.split("-").toTypedArray()
-            locale = if (array.size > 1) { //zh-rCN, zh-rTW", pt-rPT, etc... remove the 'r'
-                val country = array[1].replaceFirst("r".toRegex(), "")
-                Locale(array[0], country)
-            } else {
-                Locale(language)
-            }
-            return locale
         }
     }
 }
