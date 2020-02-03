@@ -29,15 +29,19 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, BaseViewModel>() {
 
     private fun initToolbar() {
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = getString(R.string.setting)
-        supportActionBar?.setDefaultDisplayHomeAsUpEnabled(true)
+        supportActionBar?.let { actionBar ->
+            actionBar.title = getString(R.string.setting)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+        }
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: RecreateEvent?) {
-        if (event != null) {
-            recreate()
-        }
+    fun onMessageEvent(event: RecreateEvent) {
+        recreate()
     }
 
     override fun onStart() {

@@ -12,11 +12,13 @@ import com.chad.library.adapter.base.animation.ScaleInAnimation
 import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.chad.library.adapter.base.loadmore.LoadMoreStatus
 import com.wtf.sample.R
+import com.wtf.sample.busevent.DrawerEvent
 import com.wtf.sample.databinding.FragmentNewsBinding
 import com.wtf.sample.ui.adapter.NewsAdapter
 import com.wtf.sample.viewmodels.NewsViewModel
 import com.wtf.yggd.base.BaseFragment
 import com.wtf.yggd.weiget.DividerItemDecoration
+import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 
 
@@ -30,7 +32,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
     OnLoadMoreListener {
 
     val args: NewsFragmentArgs by navArgs()
-    lateinit var adapter: NewsAdapter
+    lateinit var newsAdapter: NewsAdapter
     override fun initContentView(
         inflater: LayoutInflater?,
         container: ViewGroup?,
@@ -62,24 +64,31 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
 
     private fun initToolbar() {
         getAppCompatActivity().setSupportActionBar(binding.toolbar)
-        getAppCompatActivity().supportActionBar?.title = getString(R.string.news)
+        getAppCompatActivity().supportActionBar?.let { actionbar ->
+            actionbar.title = getString(R.string.news)
+            actionbar.setDisplayHomeAsUpEnabled(true)
+            actionbar.setHomeAsUpIndicator(R.drawable.ic_menu)
+        }
+        binding.toolbar.setNavigationOnClickListener {
+            EventBus.getDefault().post(DrawerEvent(true))
+        }
     }
 
     private fun initEventUi() {
-        adapter = NewsAdapter()
-        adapter.loadMoreModule?.setOnLoadMoreListener(this)
-        adapter.adapterAnimation = ScaleInAnimation()
-        adapter.setOnItemClickListener { _, _, position ->
+        newsAdapter = NewsAdapter()
+        newsAdapter.loadMoreModule?.setOnLoadMoreListener(this)
+        newsAdapter.adapterAnimation = ScaleInAnimation()
+        newsAdapter.setOnItemClickListener { _, _, position ->
             Toast.makeText(requireContext(), "position$position", Toast.LENGTH_SHORT).show()
         }
         binding.swipeRefreshLayout.setOnRefreshListener(this)
         binding.swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189))
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = newsAdapter
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         viewModel?.let { viewModel ->
             viewModel.eventDataList.observe(this, Observer {
                 if (it != null) {
-                    adapter.setNewData(it)
+                    newsAdapter.setNewData(it)
                 }
             })
             viewModel.recycleLoadMoreStatus.observe(this, Observer {
@@ -87,16 +96,16 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
                     LoadMoreStatus.Loading -> {
                     }
                     LoadMoreStatus.Complete -> {
-                        adapter.loadMoreModule?.loadMoreComplete()
+                        newsAdapter.loadMoreModule?.loadMoreComplete()
                     }
                     LoadMoreStatus.End -> {
-                        adapter.loadMoreModule?.loadMoreEnd(it.isEnable)
+                        newsAdapter.loadMoreModule?.loadMoreEnd(it.isEnable)
                     }
                     LoadMoreStatus.Fail -> {
-                        adapter.loadMoreModule?.loadMoreFail()
+                        newsAdapter.loadMoreModule?.loadMoreFail()
                     }
                 }
-                adapter.loadMoreModule?.isEnableLoadMore = it.isEnable
+                newsAdapter.loadMoreModule?.isEnableLoadMore = it.isEnable
             })
             onRefresh()
         }

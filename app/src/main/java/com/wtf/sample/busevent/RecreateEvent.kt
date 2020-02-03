@@ -2,7 +2,7 @@ package com.wtf.sample.busevent
 
 /**
  *
- * @Description:    重新启动
+ * @Description:    重新启动Activity
  * @Author:         harveyhaha
  * @CreateDate:     2/2/20 9:09 PM
  */

@@ -11,6 +11,8 @@ import androidx.navigation.Navigation
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import com.wtf.sample.R
+import com.wtf.sample.busevent.DrawerEvent
+import com.wtf.sample.busevent.RecreateEvent
 import com.wtf.sample.databinding.ActivityMainBinding
 import com.wtf.sample.db.entity.UserEntity
 import com.wtf.sample.ui.login.LoginActivity
@@ -20,6 +22,9 @@ import com.wtf.yggd.base.BaseActivity
 import com.wtf.yggd.base.GlideApp
 import com.wtf.yggd.utils.AppManager
 import de.hdodenhof.circleimageview.CircleImageView
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -51,6 +56,7 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initView() {
         super.initView()
+        EventBus.getDefault().register(this)
         initDrawerLayout()
         viewModel?.loginedUser?.observe(this, Observer {
             if (it == null) {
@@ -130,5 +136,23 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navView.inflateMenu(menuId)
         if (binding.drawerLayout.indexOfChild(navView) == -1)
             binding.drawerLayout.addView(navView)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: DrawerEvent) {
+        if (event.isOpen) {
+            openDrawer(true)
+        } else
+            closeDrawer()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: RecreateEvent) {
+        recreate()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 }

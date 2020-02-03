@@ -32,16 +32,16 @@ class StringUtils {
                     return context.getString(R.string.just_now)
                 }
                 subTime < SECONDS_LIMIT -> {
-                    return (subTime / MILLIS_LIMIT).roundToInt().toString() + context.getString(R.string.seconds_ago)
+                    return context.getString(R.string.seconds_ago, (subTime / MILLIS_LIMIT).roundToInt())
                 }
                 subTime < MINUTES_LIMIT -> {
-                    return (subTime / SECONDS_LIMIT).roundToInt().toString() + context.getString(R.string.minutes_ago)
+                    return context.getString(R.string.minutes_ago, (subTime / SECONDS_LIMIT).roundToInt())
                 }
                 subTime < HOURS_LIMIT -> {
-                    return (subTime / MINUTES_LIMIT).roundToInt().toString() + context.getString(R.string.hours_ago)
+                    return context.getString(R.string.hours_ago, (subTime / MINUTES_LIMIT).roundToInt())
                 }
                 subTime < DAYS_LIMIT -> {
-                    return (subTime / HOURS_LIMIT).roundToInt().toString() + context.getString(R.string.days_ago)
+                    return context.getString(R.string.days_ago, (subTime / HOURS_LIMIT).roundToInt())
                 }
                 else -> {
                     return getDateString(context, date)
