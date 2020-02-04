@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="main">Home</string>
     <string name="news">News</string>
+    <string name="notification">Notification</string>
+    <string name="issue">Issue</string>
     <string name="setting">Setting</string>
+    <string name="stars">Star</string>
+    <string name="logout">Logout</string>
 
     <string name="toolbar_cancel">cancel</string>
     <string name="toolbar_submit">submit</string>
@@ -15,7 +20,7 @@
     <string name="login_using_your_default_browser">login using your default browser (OAuth)</string>
     <string name="login_error_cannot_find_browser_client">cannot find browser client</string>
     <string name="login_error_cannot_get_oauth2_token">cannot get oauth2 token</string>
-    <!--tiem-->
+    <!--time-->
     <string name="just_now">just now</string>
     <string name="seconds_ago">%d seconds ago</string>
     <string name="minutes_ago">%d minutes ago</string>

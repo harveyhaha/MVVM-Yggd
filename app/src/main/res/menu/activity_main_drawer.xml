@@ -6,39 +6,41 @@
         <item
             android:id="@+id/user_profile"
             android:checkable="false"
-            android:icon="@drawable/ic_person_teal_300_24dp"
-            android:title="主页" />
+            android:icon="@drawable/ic_main"
+            android:title="@string/main" />
         <item
             android:id="@+id/user_notification"
             android:checkable="false"
-            android:icon="@drawable/ic_person_teal_300_24dp"
-            android:title="通知" />
+            android:icon="@drawable/ic_notification"
+            android:title="@string/notification" />
         <item
             android:id="@+id/user_news"
             android:checkable="false"
-            android:icon="@drawable/ic_person_teal_300_24dp"
-            android:title="动态" />
+            android:icon="@drawable/ic_message"
+            android:title="@string/news" />
         <item
             android:id="@+id/user_issues"
             android:checkable="false"
-            android:icon="@drawable/ic_person_teal_300_24dp"
-            android:title="问题" />
+            android:icon="@drawable/ic_info_outline"
+            android:title="@string/issue" />
+    </group>
+    <group android:id="@+id/mine">
+        <item
+            android:id="@+id/stared"
+            android:checkable="false"
+            android:icon="@drawable/ic_mark"
+            android:title="@string/stars" />
     </group>
     <group android:id="@+id/setting_group">
         <item
             android:id="@+id/setting"
             android:checkable="false"
-            android:icon="@drawable/ic_person_teal_300_24dp"
-            android:title="设置" />
+            android:icon="@drawable/ic_settings"
+            android:title="@string/setting" />
         <item
             android:id="@+id/setting_logout"
             android:checkable="false"
-            android:icon="@drawable/ic_person_teal_300_24dp"
-            android:title="登出" />
-        <item
-            android:id="@+id/setting_power"
-            android:checkable="false"
-            android:icon="@drawable/ic_person_teal_300_24dp"
-            android:title="退出应用" />
+            android:icon="@drawable/ic_out"
+            android:title="@string/logout" />
     </group>
 </menu>

@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">mvvm-yggd</string>
-
+    <string name="main">主页</string>
+    <string name="notification">通知</string>
     <string name="news">动态</string>
+    <string name="issue">问题</string>
     <string name="setting">设置</string>
+    <string name="stars">收藏</string>
+    <string name="logout">退出登录</string>
 
     <string name="toolbar_cancel">取消</string>
     <string name="toolbar_submit">确定</string>
@@ -20,7 +24,7 @@
     <!--navigation_drawer-->
     <string name="navigation_drawer_open" translatable="false">navigation_drawer_open</string>
     <string name="navigation_drawer_close" translatable="false">navigation_drawer_close</string>
-    <!--tiem-->
+    <!--time-->
     <string name="just_now">刚刚</string>
     <string name="seconds_ago">%d秒前</string>
     <string name="minutes_ago">%d分钟前</string>

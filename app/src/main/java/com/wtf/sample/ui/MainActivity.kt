@@ -20,7 +20,6 @@ import com.wtf.sample.ui.setting.SettingActivity
 import com.wtf.sample.viewmodels.MainViewModel
 import com.wtf.yggd.base.BaseActivity
 import com.wtf.yggd.base.GlideApp
-import com.wtf.yggd.utils.AppManager
 import de.hdodenhof.circleimageview.CircleImageView
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -120,9 +119,6 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
             R.id.setting_logout -> {
                 viewModel?.logout()
-            }
-            R.id.setting_power -> {
-                AppManager.instance.AppExit(this)
             }
         }
     }
