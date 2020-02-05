@@ -32,6 +32,13 @@
     <string name="days_ago">%d天前</string>
     <!--event-->
     <string name="fork_from">从 %s 创建分支 %s</string>
+    <string name="watch_from">收藏 %s</string>
+    <string name="create_branch">创建分支 %s 在 %s</string>
+    <string name="create_tag">创建标签 %s 在 %s</string>
+    <string name="pushed_to">提交 %s</string>
+    <string name="pushed_total_commit">%s 条提交到 %s</string>
+    <string name="pushed_more_commit">%s 条更多提交 >></string>
+
     <!--setting-->
     <string name="language">语言</string>
 </resources>

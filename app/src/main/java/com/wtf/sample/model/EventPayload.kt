@@ -10,8 +10,13 @@ data class EventPayload constructor(
     var size: Int,
     var distinct_size: Int,
     var ref: String,
+    @EventPayloadRefType var ref_type: String,
     var head: String,
     var before: String,
     var commits: ArrayList<EventCommits>,
     var forkee: EventForkee
-)
+) {
+    fun getBranch(): String {
+        return ref.substring(ref.lastIndexOf("/") + 1)
+    }
+}

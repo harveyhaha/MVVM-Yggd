@@ -27,7 +27,14 @@
     <string name="hours_ago">%d hours ago</string>
     <string name="days_ago">%d days ago</string>
 
+    <!--event-->
     <string name="fork_from">forked %s to %s</string>
+    <string name="watch_from">starred %s</string>
+    <string name="create_branch">create branch %s at %s</string>
+    <string name="create_tag">create tag %s at %s</string>
+    <string name="pushed_to">pushed %s</string>
+    <string name="pushed_total_commit">%s commit to %s</string>
+    <string name="pushed_more_commit">%s more commit >></string>
     <!--setting-->
     <string name="language">Language</string>
 </resources>

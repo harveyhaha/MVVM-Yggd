@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="@+id/avatar_iv" />
 
         <TextView
-            android:id="@+id/time_ago"
+            android:id="@+id/time_ago_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_20"
@@ -43,13 +43,51 @@
             app:layout_constraintTop_toTopOf="@+id/name_tv" />
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/content_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:text="content"
-            app:layout_constraintEnd_toEndOf="@+id/time_ago"
+            app:layout_constraintEnd_toEndOf="@+id/time_ago_tv"
             app:layout_constraintStart_toStartOf="@+id/avatar_iv"
             app:layout_constraintTop_toBottomOf="@+id/avatar_iv" />
+        <!--pushed-->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/pushedGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="pushed_commit_title_tv,pushed_commit_list_tv" />
+
+        <TextView
+            android:id="@+id/pushed_commit_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="pushed_commit_title"
+            app:layout_constraintEnd_toEndOf="@+id/time_ago_tv"
+            app:layout_constraintStart_toStartOf="@+id/avatar_iv"
+            app:layout_constraintTop_toBottomOf="@+id/content_tv" />
+
+        <TextView
+            android:id="@+id/pushed_commit_list_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="pushed_commit_list"
+            app:layout_constraintEnd_toEndOf="@+id/time_ago_tv"
+            app:layout_constraintStart_toStartOf="@+id/avatar_iv"
+            app:layout_constraintTop_toBottomOf="@+id/pushed_commit_title_tv" />
+
+        <TextView
+            android:id="@+id/pushed_more_commit_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="1 more commit"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/time_ago_tv"
+            app:layout_constraintStart_toStartOf="@+id/avatar_iv"
+            app:layout_constraintTop_toBottomOf="@+id/pushed_commit_list_tv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
