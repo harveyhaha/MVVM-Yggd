@@ -94,3 +94,4 @@ dependencies {
     kapt libs.dagger2_android_processor
     kaptAndroidTest libs.dagger2_compiler
 }
+apply from: '../bintray.gradle'

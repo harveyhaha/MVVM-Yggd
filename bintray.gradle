@@ -11,14 +11,14 @@ if (project.rootProject.findProject('local.properties') != null){
 def gitUrl = 'https://github.com/harveyhaha/MVVM-Yggd.git'   // Git仓库的url
 def siteUrl = 'https://github.com/harveyhaha/MVVM-Yggd'   // 项目的主页
 
-version = rootProject.ext.android["versionName"]
-group = "me.jessyan"
+version = rootProject.ext.androidVersion["versionName"]
+group = "com.harveyhaha.yggd"
 
 
 bintray {
     user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray_user")
     key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray_apikey")
-
+    configurations = ['archives']
     pkg {
         repo = 'maven'
         name = POM_NAME
@@ -26,19 +26,17 @@ bintray {
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         publish = true // 是否是公开项目。
+        publicDownloadNumbers = true
 
         version {
-            name = rootProject.ext.androidVersion["versionName"]
+            name = version
             desc = 'A common Architecture for Android Applications developing based on MVVM'
             released = new Date()
-            vcsTag = 'v' + rootProject.ext.android["versionName"]
+            vcsTag = 'v' + version
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
-    configurations = ['archives']
 }
-
-
 
 install {
     repositories.mavenInstaller {
@@ -50,6 +48,9 @@ install {
                 name POM_NAME
                 description 'A common Architecture for Android Applications developing based on MVVM'
                 url siteUrl
+                groupId group
+                artifactId POM_NAME
+                version version
                 // Set your license
                 licenses {
                     license {
