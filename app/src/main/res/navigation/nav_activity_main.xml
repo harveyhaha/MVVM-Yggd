@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.wtf.sample.ui.NewsFragment"
+        android:name="com.harveyhaha.sample.ui.NewsFragment"
         android:label="NewsFragment">
         <argument
             android:name="username"

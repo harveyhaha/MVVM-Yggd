@@ -15,7 +15,7 @@ android {
     buildToolsVersion androidVersion.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.wtf.yggd"
+        applicationId "com.harveyhaha.yggd"
         minSdkVersion androidVersion.minSdkVersion
         targetSdkVersion androidVersion.targetSdkVersion
         versionCode 1
