@@ -60,7 +60,7 @@ ext {
             numberprogressbar                : "com.daimajia.numberprogressbar:library:1.2@aar",
             nineoldandroids                  : "com.nineoldandroids:library:2.4.0",
             vlayout                          : "com.alibaba.android:vlayout:1.1.0@aar",
-            base_recyclerView_adapter_helper : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50",
+            base_recyclerView_adapter_helper : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11",
             material_dialogs                 : "com.afollestad.material-dialogs:core:3.1.1",
 
             //rx2
@@ -114,7 +114,6 @@ ext {
 //          app
             logging_interceptor              : "com.squareup.okhttp3:logging-interceptor:4.3.1",
             circleimageview                  : "de.hdodenhof:circleimageview:3.1.0",
-            base_recycler_view_adapter_helper: "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11",
             eventbus                         : "org.greenrobot:eventbus:3.1.1"
     ]
 }

@@ -61,17 +61,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':mvvm_yggd')
+//    implementation project(path: ':mvvm_yggd')
+    implementation 'com.harveyhaha.yggd:mvvm_yggd:1.0.1'
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.61"
-
     kapt libs.dagger2_compiler
     kapt libs.dagger2_android_processor
     kaptAndroidTest libs.dagger2_compiler
     kapt libs.room_compiler
     implementation libs.logging_interceptor
     implementation libs.circleimageview
-    implementation libs.base_recycler_view_adapter_helper
+    implementation libs.base_recyclerView_adapter_helper
     implementation libs.material_dialogs
     implementation libs.eventbus
 }

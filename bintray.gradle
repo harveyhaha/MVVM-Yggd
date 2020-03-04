@@ -1,94 +1,57 @@
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
 
 Properties properties = new Properties()
 boolean isHasFile = false
-if (project.rootProject.findProject('local.properties') != null){
+File localPropertiesFile = project.rootProject.file('local.properties')
+if (localPropertiesFile.exists()){
     isHasFile = true
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 }
 
 def gitUrl = 'https://github.com/harveyhaha/MVVM-Yggd.git'   // Git仓库的url
 def siteUrl = 'https://github.com/harveyhaha/MVVM-Yggd'   // 项目的主页
+def issueUrl = 'https://github.com/harveyhaha/MVVM-Yggd/issues'
 
-version = rootProject.ext.androidVersion["versionName"]
 group = "com.harveyhaha.yggd"
-
+version = rootProject.ext.androidVersion.versionName
+def description = "A common Architecture for Android Applications developing based on MVVM"
 
 bintray {
     user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray_user")
     key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray_apikey")
+    publications = ['mavenPublish']
     configurations = ['archives']
+    override = true
+
     pkg {
         repo = 'maven'
         name = POM_NAME
+        desc = description
         licenses = ["Apache-2.0"]
         websiteUrl = siteUrl
+        issueTrackerUrl = issueUrl
         vcsUrl = gitUrl
         publish = true // 是否是公开项目。
         publicDownloadNumbers = true
 
         version {
-            name = version
-            desc = 'A common Architecture for Android Applications developing based on MVVM'
+            name = this.version
+            desc = "Version ${this.version}"
             released = new Date()
-            vcsTag = 'v' + version
+            vcsTag = this.version
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
 }
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-                // Add your description here
-                name POM_NAME
-                description 'A common Architecture for Android Applications developing based on MVVM'
-                url siteUrl
-                groupId group
-                artifactId POM_NAME
-                version version
-                // Set your license
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'harveyhaha'        //填写bintray或者github的用户名
-                        name 'harveyhaha'         //姓名，可以是中文
-                        email 'suifengharvey@gmail.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-task javadoc(type: Javadoc) {
-    failOnError false
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
+//可配置远程maven库
+//project.ext {
+//    mavDevelopers = [(properties.getProperty("bintray.user")):("wutengfei")]
+//    mavSiteUrl = siteUrl
+//    mavGitUrl = mavSiteUrl + '.git'
+//    bugTrackerUrl = mavSiteUrl + '/issues/'
+//    mavProjectName = POM_NAME
+//    mavLibraryLicenses = ["Apache-2.0": 'http://www.apache.org/licenses/LICENSE-2.0.txt']
+//    mavLibraryDescription = description
+//    mavVersion = this.version
+//}
+apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/gradle-mavenizer.gradle"
