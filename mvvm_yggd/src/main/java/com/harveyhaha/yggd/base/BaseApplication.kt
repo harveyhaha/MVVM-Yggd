@@ -3,12 +3,8 @@ package com.harveyhaha.yggd.base
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import com.harveyhaha.yggd.BuildConfig
 import com.harveyhaha.yggd.di.component.BaseAppComponent
 import com.harveyhaha.yggd.di.component.DaggerBaseAppComponent
-import com.harveyhaha.yggd.logger.CrashReportingTree
-import com.harveyhaha.yggd.logger.MyDebugTree
-import timber.log.Timber
 
 /**
  *
@@ -22,17 +18,9 @@ open class BaseApplication : Application() {
         super.attachBaseContext(base)
         MultiDex.install(this)
         initBaseDagger()
-        initTimber()
     }
 
     private fun initBaseDagger() {
         baseAppComponent = DaggerBaseAppComponent.builder().application(this).build()
-    }
-
-    private fun initTimber() {
-        if (BuildConfig.DEBUG)
-            Timber.plant(MyDebugTree())
-        else
-            Timber.plant(CrashReportingTree())
     }
 }

@@ -1,15 +1,19 @@
 package com.harveyhaha.sample.app
 
 import android.content.Context
+import com.harveyhaha.sample.BuildConfig
 import com.harveyhaha.sample.config.ActivityLifecycleCallbacksImpl
 import com.harveyhaha.sample.config.GlobalHttpHandlerImpl
 import com.harveyhaha.sample.di.component.DaggerAppComponent
 import com.harveyhaha.sample.di.module.AppConfigModule
 import com.harveyhaha.sample.utils.LanguageUtils
 import com.harveyhaha.yggd.base.BaseApplication
+import com.harveyhaha.yggd.logger.CrashReportingTree
+import com.harveyhaha.yggd.logger.MyDebugTree
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -28,6 +32,7 @@ open class MyApplication : BaseApplication(), HasAndroidInjector {
         INSTANCE = this
         initActivityLifecycleCallbacks()
         initDagger()
+        initTimber()
         LanguageUtils.updateAppLanguage(this)
     }
 
@@ -48,6 +53,12 @@ open class MyApplication : BaseApplication(), HasAndroidInjector {
 //        DaggerTestAppComponent.builder().baseAppComponent(baseAppComponent).build().inject(this)
     }
 
+    private fun initTimber() {
+        if (BuildConfig.DEBUG)
+            Timber.plant(MyDebugTree())
+        else
+            Timber.plant(CrashReportingTree())
+    }
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     companion object {
