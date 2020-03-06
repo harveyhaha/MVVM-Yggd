@@ -67,13 +67,13 @@ dependencies {
     /**-------------------testing libs------------------------------------------**/
     //UI Testing , AndroidJUnitRunner and JUnit Rules &Espresso dependencies
     //junit 5
-    testApi libs.junit_jupiter_engine
-    testApi libs.junit_jupiter_api
-    testApi libs.junit_platform_runner
-    androidTestApi libs.junit_ext
-    androidTestApi libs.assertj_core
-    androidTestApi libs.core_testing
-    androidTestApi libs.espresso_core
+    testImplementation libs.junit_jupiter_engine
+    testImplementation libs.junit_jupiter_api
+    testImplementation libs.junit_platform_runner
+    androidTestImplementation libs.junit_ext
+    androidTestImplementation libs.assertj_core
+    androidTestImplementation libs.core_testing
+    androidTestImplementation libs.espresso_core
     api libs.espresso_contrib
     api libs.espresso_idling_resource
     api libs.test_rules
