@@ -34,7 +34,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
         initViewDataBinding(savedInstanceState)
         //页面接受的参数方法
         initParam()
-        initView()
+        initView(savedInstanceState)
         initData()
     }
 
@@ -59,7 +59,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     override fun initParam() {}
 
-    override fun initView() {}
+    override fun initView(savedInstanceState: Bundle?) {}
 
     override fun initData() {}
 

@@ -62,7 +62,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        initView(savedInstanceState)
         initData()
     }
 
@@ -86,7 +86,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     override fun setBindingVariable() {}
 
-    override fun initView() {}
+    override fun initView(savedInstanceState: Bundle?) {}
 
     override fun initData() {}
     override fun onDestroyView() {

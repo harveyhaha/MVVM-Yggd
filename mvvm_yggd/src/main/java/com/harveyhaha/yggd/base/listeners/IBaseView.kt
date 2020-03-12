@@ -1,5 +1,7 @@
 package com.harveyhaha.yggd.base.listeners
 
+import android.os.Bundle
+
 /**
  *
  * @Description:
@@ -9,6 +11,6 @@ package com.harveyhaha.yggd.base.listeners
 interface IBaseView {
     fun initParam()
     fun setBindingVariable()
-    fun initView()
+    fun initView(savedInstanceState: Bundle?)
     fun initData()
 }
