@@ -52,8 +52,8 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
         binding.viewmodel = viewModel
     }
 
-    override fun initView() {
-        super.initView()
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
         initToolbar()
         initEventUi()
     }

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.harveyhaha.yggd.base.listeners.IBaseFragmentView
 import com.harveyhaha.yggd.di.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
@@ -53,7 +53,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
             val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
             val actualTypeArguments: Array<Type> = type.actualTypeArguments
             val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
-            viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
+            viewModel = ViewModelProvider(this, viewModelFactory).get(modelClass)
         }
         initParam()
         setBindingVariable()

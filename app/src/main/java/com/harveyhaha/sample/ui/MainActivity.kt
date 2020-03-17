@@ -53,8 +53,8 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-    override fun initView() {
-        super.initView()
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
         EventBus.getDefault().register(this)
         initDrawerLayout()
         viewModel?.loginedUser?.observe(this, Observer {

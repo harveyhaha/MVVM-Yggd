@@ -5,7 +5,7 @@ ext {
             minSdkVersion    : 19,
             targetSdkVersion : 29,
             versionCode      : 1,
-            versionName      : "1.0.6"
+            versionName      : "1.0.7"
     ]
     versions = [
             kotlinVersion        : "1.3.70",
@@ -14,7 +14,6 @@ ext {
             fragmentVersion      : "1.1.0-alpha09",
             navigationVersion    : '2.2.1',
             roomVersion          : '2.2.4',
-            roomCoroutinesVersion: '2.1.0-alpha04',
             lifecycleVersion     : '2.2.0',
             designVersion        : '1.2.0-alpha05',
             retrofitVersion      : '2.7.1',
@@ -43,7 +42,6 @@ ext {
             room_runtime                    : "androidx.room:room-runtime:$versions.roomVersion",
             room_ktx                        : "androidx.room:room-ktx:$versions.roomVersion",
             room_compiler                   : "androidx.room:room-compiler:$versions.roomVersion",
-            room_coroutines                 : "androidx.room:room-coroutines:${versions.roomCoroutinesVersion}",
 
             //network
             retrofit                        : "com.squareup.retrofit2:retrofit:$versions.retrofitVersion",

@@ -22,8 +22,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, BaseViewModel>() {
         return R.layout.activity_setting
     }
 
-    override fun initView() {
-        super.initView()
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
         initToolbar()
     }
 

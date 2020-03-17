@@ -22,8 +22,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashModel>() {
         return R.layout.activity_splash
     }
 
-    override fun initView() {
-        super.initView()
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
         viewModel?.loginUser?.observe(this, Observer {
             if (it != null) {
                 val intent = Intent(this, MainActivity::class.java)

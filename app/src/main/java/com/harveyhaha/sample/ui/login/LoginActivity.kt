@@ -24,8 +24,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         return R.layout.activity_login
     }
 
-    override fun initView() {
-        super.initView()
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
         Timber.i(viewModel.toString())
         viewModel?.loginUser?.observe(this, Observer {
             if (it != null) {

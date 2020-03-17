@@ -35,8 +35,8 @@ class Dagger2TestBaseActivity : BaseActivity<ActivityTestBinding, BaseViewModel>
         return R.layout.activity_test
     }
 
-    override fun initView() {
-        super.initView()
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
         Timber.i(gson.toString())
         Timber.i(coroutineContext.toString())
         Timber.i(passwordWarning)

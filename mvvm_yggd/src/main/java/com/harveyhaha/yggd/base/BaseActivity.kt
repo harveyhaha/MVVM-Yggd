@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.harveyhaha.yggd.base.listeners.IBaseActivityView
 import com.harveyhaha.yggd.di.ViewModelFactory
 import com.harveyhaha.yggd.utils.AppManager
@@ -46,7 +46,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
             val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
             val actualTypeArguments: Array<Type> = type.actualTypeArguments
             val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
-            viewModel = ViewModelProviders.of(this, viewModelFactory).get(modelClass)
+            viewModel = ViewModelProvider(this, viewModelFactory).get(modelClass)
         }
         setBindingVariable()
     }

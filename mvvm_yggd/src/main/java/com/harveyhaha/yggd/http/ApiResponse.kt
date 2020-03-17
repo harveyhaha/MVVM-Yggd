@@ -49,7 +49,7 @@ class ApiEmptyResponse<T> : ApiResponse<T>()
 
 data class ApiSuccessResponse<T>(
     val body: T,
-    val links: Map<String, String>
+    val links: Map<String?, String?>
 ) : ApiResponse<T>() {
     constructor(body: T, linkHeader: String?) : this(
         body = body,
@@ -77,8 +77,8 @@ data class ApiSuccessResponse<T>(
         private val PAGE_PATTERN = Pattern.compile("\\bpage=(\\d+)")
         private const val NEXT_LINK = "next"
 
-        private fun String.extractLinks(): Map<String, String> {
-            val links = mutableMapOf<String, String>()
+        private fun String.extractLinks(): Map<String?, String?> {
+            val links = mutableMapOf<String?, String?>()
             val matcher = LINK_PATTERN.matcher(this)
 
             while (matcher.find()) {
