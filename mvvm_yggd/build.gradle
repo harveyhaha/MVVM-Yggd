@@ -49,6 +49,7 @@ dependencies {
     api libs.navigation_ui_ktx
     api libs.room_runtime
     api libs.room_ktx
+    api libs.room_coroutines
 
     api libs.rxjava2
     api libs.rxandroid2
