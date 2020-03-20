@@ -24,10 +24,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashModel>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        viewModel?.loginUser?.observe(this, Observer {
+        viewModel.loginUser.observe(this, Observer {
             if (it != null) {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("user", viewModel?.loginUser?.value)
+                intent.putExtra("user", viewModel.loginUser.value)
                 startActivity(intent)
                 finish()
             } else {
@@ -36,7 +36,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashModel>() {
             }
         })
         Handler().postDelayed({
-            viewModel?.checkLogin()
+            viewModel.checkLogin()
         }, 1000)
     }
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.harveyhaha.yggd.base.listeners.IBaseActivityView
 import com.harveyhaha.yggd.di.ViewModelFactory
 import com.harveyhaha.yggd.utils.AppManager
@@ -23,7 +24,8 @@ import javax.inject.Inject
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
     IBaseActivityView {
     open lateinit var binding: V
-    open var viewModel: VM? = null
+    open lateinit var viewModel: VM
+
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -41,20 +43,16 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
     private fun initViewDataBinding(savedInstanceState: Bundle?) {
         binding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState))
         binding.lifecycleOwner = this
-        viewModel = initViewModel()
-        if (viewModel == null) {
-            val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
-            val actualTypeArguments: Array<Type> = type.actualTypeArguments
-            val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
-            viewModel = ViewModelProvider(this, viewModelFactory).get(modelClass)
-        }
+        val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
+        val actualTypeArguments: Array<Type> = type.actualTypeArguments
+        val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
+        viewModel = ViewModelProvider(getViewModelStoreOwner(), viewModelFactory).get(modelClass)
         setBindingVariable()
     }
 
     abstract override fun initContentView(savedInstanceState: Bundle?): Int
-
-    open fun initViewModel(): VM? {
-        return null
+    override fun getViewModelStoreOwner(): ViewModelStoreOwner {
+        return this
     }
 
     override fun initParam() {}

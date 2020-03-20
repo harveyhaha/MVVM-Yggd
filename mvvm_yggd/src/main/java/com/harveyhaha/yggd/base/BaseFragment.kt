@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.harveyhaha.yggd.base.listeners.IBaseFragmentView
 import com.harveyhaha.yggd.di.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
@@ -27,7 +28,8 @@ import javax.inject.Inject
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(),
     IBaseFragmentView {
     open lateinit var binding: V
-    open var viewModel: VM? = null
+    open lateinit var viewModel: VM
+
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -48,13 +50,10 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
             container,
             false
         )
-        viewModel = initViewModel()
-        if (viewModel == null) {
-            val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
-            val actualTypeArguments: Array<Type> = type.actualTypeArguments
-            val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
-            viewModel = ViewModelProvider(this, viewModelFactory).get(modelClass)
-        }
+        val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
+        val actualTypeArguments: Array<Type> = type.actualTypeArguments
+        val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
+        viewModel = ViewModelProvider(getViewModelStoreOwner(), viewModelFactory).get(modelClass)
         initParam()
         setBindingVariable()
         return binding.root
@@ -73,13 +72,10 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     ): Int
 
     /**
-     * 默认 依托fragment建立ViewModel,如果想引入ParentActivity一样的ViewModel,则可依照如下代码自定义
-     * return activity?.let {
-     *    ViewModelProviders.of(it, viewModelFactory).get(MainViewModel::class.java)
-     * }
+     * fragment可通过返回activity ViewModelStoreOwner 将ViewModel建在Activity上
      */
-    open fun initViewModel(): VM? {
-        return null
+    override fun getViewModelStoreOwner(): ViewModelStoreOwner {
+        return this
     }
 
     override fun initParam() {}

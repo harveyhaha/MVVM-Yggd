@@ -43,7 +43,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
 
     override fun initParam() {
         super.initParam()
-        viewModel?.username = args.username
+        viewModel.username = args.username
         Timber.i("login user:%s", args.username)
     }
 
@@ -85,7 +85,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
         binding.swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189))
         binding.recyclerView.adapter = newsAdapter
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
-        viewModel?.let { viewModel ->
+        viewModel.let { viewModel ->
             viewModel.eventDataList.observe(this, Observer {
                 if (it != null) {
                     newsAdapter.setNewData(it)
@@ -113,11 +113,11 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
 
     override fun onRefresh() {
         Timber.i("onRefresh")
-        viewModel?.getPrivateReceiveEvents()
+        viewModel.getPrivateReceiveEvents()
     }
 
     override fun onLoadMore() {
         Timber.i("onLoadMore")
-        viewModel?.getPrivateReceiveEventsLoadMore()
+        viewModel.getPrivateReceiveEventsLoadMore()
     }
 }

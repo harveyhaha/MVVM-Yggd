@@ -48,7 +48,7 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             val args = NewsFragmentArgs(it.name)
             Navigation.findNavController(this, R.id.main_nav_fragment)
                 .setGraph(R.navigation.nav_activity_main, args.toBundle())
-            viewModel?.loginedUser?.value = userEntity
+            viewModel.loginedUser.value = userEntity
             Timber.i("LoginUser %s", gson.toJson(userEntity))
         }
     }
@@ -57,7 +57,7 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         super.initView(savedInstanceState)
         EventBus.getDefault().register(this)
         initDrawerLayout()
-        viewModel?.loginedUser?.observe(this, Observer {
+        viewModel.loginedUser.observe(this, Observer {
             if (it == null) {
                 startActivity(Intent(this, LoginActivity::class.java))
             }
@@ -118,7 +118,7 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 startActivity(intent)
             }
             R.id.setting_logout -> {
-                viewModel?.logout()
+                viewModel.logout()
             }
         }
     }

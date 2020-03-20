@@ -3,7 +3,6 @@ package com.harveyhaha.sample.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import androidx.lifecycle.Observer
 import com.harveyhaha.sample.R
 import com.harveyhaha.sample.databinding.ActivityLoginBinding
@@ -27,7 +26,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         Timber.i(viewModel.toString())
-        viewModel?.loginUser?.observe(this, Observer {
+        viewModel.loginUser.observe(this, Observer {
             if (it != null) {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("user", it)
@@ -44,28 +43,28 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        viewModel?.handleOauth(intent)
+        viewModel.handleOauth(intent)
     }
 
-    fun onLoginClick(view: View) {
+    fun onLoginClick() {
         if (loginCheck()) {
-            viewModel?.basicLogin()
+            viewModel.basicLogin()
         }
     }
 
-    fun onBrowserLoginClick(view: View) {
-        val oauthTokenUrl = viewModel?.getOAuth2Url() ?: ""
+    fun onBrowserLoginClick() {
+        val oauthTokenUrl = viewModel.getOAuth2Url()
         BrowserUtils.instance.openInBrowser(this, oauthTokenUrl)
     }
 
     private fun loginCheck(): Boolean {
         var checkValid = true
-        if (TextUtils.isEmpty(viewModel?.userName?.get()?.trim())) {
+        if (TextUtils.isEmpty(viewModel.userName.get()?.trim())) {
             checkValid = false
             binding.usernameTextil.error = getString(R.string.user_name_warning)
         } else
             binding.usernameTextil.error = null
-        if (TextUtils.isEmpty(viewModel?.token?.get()?.trim())) {
+        if (TextUtils.isEmpty(viewModel.token.get()?.trim())) {
             checkValid = false
             binding.passwordTextil.error = getString(R.string.password_warning)
         } else
