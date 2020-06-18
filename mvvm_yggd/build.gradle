@@ -74,11 +74,11 @@ dependencies {
     androidTestImplementation libs.assertj_core
     androidTestImplementation libs.core_testing
     androidTestImplementation libs.espresso_core
-    api libs.espresso_contrib
-    api libs.espresso_idling_resource
-    api libs.test_rules
-    api libs.core_testing
-    api libs.coroutines_test
+    androidTestImplementation libs.espresso_contrib
+    androidTestImplementation libs.espresso_idling_resource
+    androidTestImplementation libs.test_rules
+    androidTestImplementation libs.core_testing
+    androidTestImplementation libs.coroutines_test
 
     api libs.gson
     debugApi libs.leak_canary_debug
