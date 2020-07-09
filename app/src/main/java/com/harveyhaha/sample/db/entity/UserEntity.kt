@@ -1,10 +1,10 @@
 package com.harveyhaha.sample.db.entity
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
-import javax.annotation.Nonnull
 
 /**
  * Created by wtf on 1/13/20 7:57 PM.
@@ -13,7 +13,7 @@ import javax.annotation.Nonnull
 @Entity(tableName = "user")
 data class UserEntity(
     @PrimaryKey
-    @Nonnull
+    @NonNull
     val login: String,
     val id: String,
     val node_id: String,

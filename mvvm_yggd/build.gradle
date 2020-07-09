@@ -52,7 +52,6 @@ dependencies {
 
     api libs.rxjava2
     api libs.rxandroid2
-    api libs.rxpermissions2
     api libs.retrofit
     api libs.retrofit_converter_gson
 
