@@ -30,60 +30,37 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinVersion"
-    api libs.appCompat
-    api libs.core_ktx
-    api libs.recyclerview
-    api libs.preference
-    api libs.design
-    api libs.constraintlayout
-    api libs.swiperefreshlayout
-    api libs.lifecycle_extensions
-    api libs.lifecycle_livedata_ktx
-    api libs.lifecycle_viewmodel_ktx
-    api libs.navigation_fragment_ktx
-    api libs.navigation_ui_ktx
-    api libs.room_runtime
-    api libs.room_ktx
+    api androidx.appCompat
+    api androidx.recyclerview
+    api androidx.preference
+    api androidx.design
+    api androidx.constraintlayout
+    api androidx.swiperefreshlayout
+    api androidx.lifecycle_extensions
+    api androidx.multidex
+    api androidx.core_ktx
+    api androidx.lifecycle_livedata_ktx
+    api androidx.lifecycle_viewmodel_ktx
 
-    api libs.rxjava2
-    api libs.rxandroid2
+//    api androidxs
+
     api libs.retrofit
     api libs.retrofit_converter_gson
-
     api libs.coroutines_android
     api libs.coroutines_core
     api libs.coroutines_core_common
     api libs.coroutines_test
-
     api libs.glide
     kapt libs.glide_compiler
-
-    /**-------------------testing libs------------------------------------------**/
-    //UI Testing , AndroidJUnitRunner and JUnit Rules &Espresso dependencies
-    //junit 5
-    testImplementation libs.junit_jupiter_engine
-    testImplementation libs.junit_jupiter_api
-    testImplementation libs.junit_platform_runner
-    androidTestImplementation libs.junit_ext
-    androidTestImplementation libs.assertj_core
-    androidTestImplementation libs.core_testing
-    androidTestImplementation libs.espresso_core
-    androidTestImplementation libs.espresso_contrib
-    androidTestImplementation libs.espresso_idling_resource
-    androidTestImplementation libs.test_rules
-    androidTestImplementation libs.core_testing
-    androidTestImplementation libs.coroutines_test
-
     api libs.gson
-    debugApi libs.leak_canary_debug
     api libs.timber
-
-    api libs.multidex
 
     api libs.dagger2
     api libs.dagger2_android

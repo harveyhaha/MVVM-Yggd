@@ -1,79 +1,27 @@
 ext {
+    versionsApp = [
+            mvvm_yggd        : "1.0.13",
+            espressoVersion  : '3.2.0',
+            leakCanaryVersion: "2.1",
+            navigationVersion : '2.3.0',
+            roomVersion       : '2.2.5',
+    ]
     androidVersion = [
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.2",
             minSdkVersion    : 19,
             targetSdkVersion : 29,
             versionCode      : 1,
-            versionName      : "1.0.12"
+            versionName      : "1.0.13"
     ]
-    versions = [
-            kotlinVersion    : "1.3.70",
-            appcompatVersion : "1.1.0",
-            coroutinesVersion: "1.3.2",
-            fragmentVersion  : "1.1.0-alpha09",
-            navigationVersion: '2.2.1',
-            roomVersion      : '2.2.4',
-            lifecycleVersion : '2.2.0',
-            designVersion    : '1.2.0-alpha05',
-            retrofitVersion  : '2.7.1',
-            dagger2Version   : '2.26',
-            glideVersion     : '4.11.0',
-            espressoVersion  : '3.2.0',
-            leakCanaryVersion: "2.1",
-            gsonVersion      : '2.8.6',
-            coreKtxVersion   : '1.2.0'
-    ]
-    libs = [
-            //support
-            appCompat                       : "androidx.appcompat:appcompat:$versions.appcompatVersion",
-            core_ktx                        : "androidx.core:core-ktx:$versions.coreKtxVersion",
-            recyclerview                    : "androidx.recyclerview:recyclerview:$versions.appcompatVersion",
-            preference                      : "androidx.preference:preference:$versions.appcompatVersion",
-            design                          : "com.google.android.material:material:$versions.designVersion",
-            fragment_ktx                    : "androidx.fragment:fragment-ktx:$versions.fragmentVersion",
-            constraintlayout                : "androidx.constraintlayout:constraintlayout:1.1.3",
-            swiperefreshlayout              : "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0",
-            lifecycle_extensions            : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion",
-            lifecycle_livedata_ktx          : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion",
-            lifecycle_viewmodel_ktx         : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion",
-            navigation_fragment_ktx         : "androidx.navigation:navigation-fragment-ktx:$versions.navigationVersion",
-            navigation_ui_ktx               : "androidx.navigation:navigation-ui-ktx:$versions.navigationVersion",
-            room_runtime                    : "androidx.room:room-runtime:$versions.roomVersion",
-            room_ktx                        : "androidx.room:room-ktx:$versions.roomVersion",
-            room_compiler                   : "androidx.room:room-compiler:$versions.roomVersion",
-            multidex                        : "androidx.multidex:multidex:2.0.1",
-
-            //network
-            retrofit                        : "com.squareup.retrofit2:retrofit:$versions.retrofitVersion",
-            retrofit_converter_gson         : "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion",
-            retrofit_adapter_rxjava2        : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofitVersion",
-            okhttp3                         : "com.squareup.okhttp3:okhttp:3.12.3",
-            okhttp4                         : "com.squareup.okhttp3:okhttp:4.0.0",
-            okhttp_urlconnection            : "com.squareup.okhttp:okhttp-urlconnection:2.0.0",
-            glide                           : "com.github.bumptech.glide:glide:$versions.glideVersion",
-            glide_compiler                  : "com.github.bumptech.glide:compiler:$versions.glideVersion",
-            glide_loader_okhttp3            : "com.github.bumptech.glide:okhttp3-integration:$versions.glideVersion",
-
-            //rx2
-            rxandroid2                      : "io.reactivex.rxjava2:rxandroid:2.1.1",
-            rxjava2                         : "io.reactivex.rxjava2:rxjava:2.2.10",
-
-            //tools
-            dagger2                         : "com.google.dagger:dagger:$versions.dagger2Version",
-            dagger2_android                 : "com.google.dagger:dagger-android:$versions.dagger2Version",
-            dagger2_android_support         : "com.google.dagger:dagger-android-support:$versions.dagger2Version",
-            dagger2_compiler                : "com.google.dagger:dagger-compiler:$versions.dagger2Version",
-            dagger2_android_processor       : "com.google.dagger:dagger-android-processor:$versions.dagger2Version",
-            gson                            : "com.google.code.gson:gson:$versions.gsonVersion",
-            annotation                      : "javax.annotation:jsr250-api:1.0",
-
-            //coroutines
-            coroutines_android              : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion",
-            coroutines_core                 : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion",
-            coroutines_core_common          : "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.coroutinesVersion",
-            coroutines_test                 : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesVersion",
-
+    libsApp = [
+            mvvm_yggd                       : "com.harveyhaha.yggd:mvvm_yggd:${versionsApp.mvvm_yggd}",
+            leak_canary_debug               : "com.squareup.leakcanary:leakcanary-android:$versionsApp.leakCanaryVersion",
+            navigation_fragment_ktx         : "androidx.navigation:navigation-fragment-ktx:$versionsApp.navigationVersion",
+            navigation_ui_ktx               : "androidx.navigation:navigation-ui-ktx:$versionsApp.navigationVersion",
+            room_runtime                    : "androidx.room:room-runtime:$versionsApp.roomVersion",
+            room_ktx                        : "androidx.room:room-ktx:$versionsApp.roomVersion",
+            room_compiler                   : "androidx.room:room-compiler:$versionsApp.roomVersion",
             //test
             junit_jupiter_engine            : "org.junit.jupiter:junit-jupiter-engine:5.5.2",
             junit_jupiter_api               : "org.junit.jupiter:junit-jupiter-api:5.5.2",
@@ -83,17 +31,13 @@ ext {
             //第三方断言库
             assertj_core                    : "org.assertj:assertj-core:3.14.0",
             core_testing                    : "androidx.arch.core:core-testing:2.1.0",
-            espresso_core                   : "androidx.test.espresso:espresso-core:$versions.espressoVersion",
-            espresso_contrib                : "androidx.test.espresso:espresso-contrib:$versions.espressoVersion",
-            espresso_intents                : "androidx.test.espresso:espresso-intents:$versions.espressoVersion",
-            espresso_idling_resource        : "androidx.test.espresso:espresso-idling-resource:$versions.espressoVersion",
+            espresso_core                   : "androidx.test.espresso:espresso-core:$versionsApp.espressoVersion",
+            espresso_contrib                : "androidx.test.espresso:espresso-contrib:$versionsApp.espressoVersion",
+            espresso_intents                : "androidx.test.espresso:espresso-intents:$versionsApp.espressoVersion",
+            espresso_idling_resource        : "androidx.test.espresso:espresso-idling-resource:$versionsApp.espressoVersion",
             test_rules                      : "androidx.test:rules:1.2.0",
             mockk                           : "io.mockk:mockk:1.9.3",
 
-            timber                          : "com.jakewharton.timber:timber:4.7.1",
-            leak_canary_debug               : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanaryVersion",
-
-//          app
             logging_interceptor             : "com.squareup.okhttp3:logging-interceptor:4.3.1",
             circleimageview                 : "de.hdodenhof:circleimageview:3.1.0",
             eventbus                        : "org.greenrobot:eventbus:3.1.1",
