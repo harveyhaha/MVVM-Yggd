@@ -25,7 +25,7 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:58
  */
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(),
+open abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(),
     IBaseFragmentView {
     open lateinit var binding: V
     open lateinit var viewModel: VM

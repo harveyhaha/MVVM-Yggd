@@ -68,7 +68,7 @@ dependencies {
     androidTestImplementation libsApp.core_testing
     androidTestImplementation libsApp.espresso_core
 
-    api libsApp.navigation_fragment_ktx
+    implementation libsApp.navigation_fragment_ktx
     implementation libsApp.navigation_ui_ktx
     implementation libsApp.room_runtime
     implementation libsApp.room_ktx

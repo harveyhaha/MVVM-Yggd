@@ -1,7 +1,6 @@
 package com.harveyhaha.yggd.base
 
 import androidx.lifecycle.ViewModel
-import javax.inject.Inject
 
 /**
  *
@@ -9,4 +8,4 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:58
  */
-open class BaseViewModel @Inject constructor() : ViewModel()
+open class BaseViewModel : ViewModel()

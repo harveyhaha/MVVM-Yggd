@@ -38,6 +38,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api androidx.appCompat
+    api androidx.lifecycle_runtime
+    api androidx.lifecycle_common_java8
     api androidx.recyclerview
     api androidx.preference
     api androidx.design
