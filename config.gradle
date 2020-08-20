@@ -12,7 +12,7 @@ ext {
             minSdkVersion    : 19,
             targetSdkVersion : 29,
             versionCode      : 1,
-            versionName      : "1.0.15"
+            versionName      : "1.0.16"
     ]
     libsApp = [
             mvvm_yggd                       : "com.harveyhaha.yggd:mvvm_yggd:${versionsApp.mvvm_yggd}",
