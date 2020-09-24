@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import com.harveyhaha.yggd.base.listeners.IBaseFragmentView
 import com.harveyhaha.yggd.di.ViewModelFactory
+import com.harveyhaha.yggd.utils.autoCleared
 import dagger.android.support.AndroidSupportInjection
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -25,9 +26,9 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:58
  */
-open abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(),
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(),
     IBaseFragmentView {
-    open lateinit var binding: V
+    open var binding by autoCleared<V>()
     open lateinit var viewModel: VM
 
     @Inject
@@ -85,10 +86,6 @@ open abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Frag
     override fun initView(savedInstanceState: Bundle?) {}
 
     override fun initData() {}
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.unbind()
-    }
 
     override fun getAppCompatActivity(): AppCompatActivity {
         return context as AppCompatActivity

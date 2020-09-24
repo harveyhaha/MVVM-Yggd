@@ -21,7 +21,7 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:58
  */
-open abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
     IBaseActivityView {
     open lateinit var binding: V
     open lateinit var viewModel: VM
