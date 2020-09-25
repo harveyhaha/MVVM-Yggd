@@ -25,11 +25,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
     open lateinit var binding: V
     open lateinit var viewModel: VM
 
-//    @Inject
-//    lateinit var viewModelFactory: ViewModelFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
-//        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         AppManager.instance.addActivity(this)
         initViewDataBinding(savedInstanceState)

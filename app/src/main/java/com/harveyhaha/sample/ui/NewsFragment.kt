@@ -15,9 +15,9 @@ import com.harveyhaha.sample.R
 import com.harveyhaha.sample.busevent.DrawerEvent
 import com.harveyhaha.sample.databinding.FragmentNewsBinding
 import com.harveyhaha.sample.ui.adapter.NewsAdapter
-import com.harveyhaha.sample.viewmodels.NewsViewModel
 import com.harveyhaha.yggd.base.BaseFragment
 import com.harveyhaha.yggd.weiget.DividerItemDecoration
+import com.wtf.commonlib.viewmodels.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber

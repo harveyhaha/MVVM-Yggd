@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer
 import com.harveyhaha.sample.R
 import com.harveyhaha.sample.databinding.ActivitySplashBinding
 import com.harveyhaha.sample.ui.login.LoginActivity
-import com.harveyhaha.sample.viewmodels.SplashModel
 import com.harveyhaha.yggd.base.BaseActivity
+import com.wtf.commonlib.viewmodels.SplashModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

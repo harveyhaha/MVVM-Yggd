@@ -9,8 +9,8 @@ import com.harveyhaha.sample.R
 import com.harveyhaha.sample.databinding.ActivityLoginBinding
 import com.harveyhaha.sample.ui.MainActivity
 import com.harveyhaha.sample.utils.BrowserUtils
-import com.harveyhaha.sample.viewmodels.LoginViewModel
 import com.harveyhaha.yggd.base.BaseActivity
+import com.wtf.commonlib.viewmodels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 

@@ -17,9 +17,9 @@ import com.harveyhaha.sample.databinding.ActivityMainBinding
 import com.harveyhaha.sample.db.entity.UserEntity
 import com.harveyhaha.sample.ui.login.LoginActivity
 import com.harveyhaha.sample.ui.setting.SettingActivity
-import com.harveyhaha.sample.viewmodels.MainViewModel
 import com.harveyhaha.yggd.base.BaseActivity
 import com.harveyhaha.yggd.base.GlideApp
+import com.wtf.commonlib.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import org.greenrobot.eventbus.EventBus

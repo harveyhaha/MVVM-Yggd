@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.harveyhaha.sample.viewmodels.LoginViewModel" />
+            type="com.wtf.commonlib.viewmodels.LoginViewModel" />
 
     </data>
 

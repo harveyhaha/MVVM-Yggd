@@ -12,12 +12,12 @@ import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.harveyhaha.sample.R
 import com.harveyhaha.sample.databinding.FragmentNewItemLayoutBinding
-import com.harveyhaha.sample.model.Event
-import com.harveyhaha.sample.model.EventPayloadRefType
-import com.harveyhaha.sample.model.EventType
 import com.harveyhaha.sample.utils.AppUtils
 import com.harveyhaha.sample.utils.StringUtils
 import com.harveyhaha.yggd.base.GlideApp
+import com.wtf.commonlib.model.Event
+import com.wtf.commonlib.model.EventPayloadRefType
+import com.wtf.commonlib.model.EventType
 import java.util.regex.Matcher
 
 /**
