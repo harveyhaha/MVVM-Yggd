@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion androidVersion.compileSdkVersion
@@ -79,7 +80,12 @@ dependencies {
     implementation libsApp.material_dialogs
     implementation libsApp.eventbus
 
-    kapt libs.dagger2_compiler
-    kapt libs.dagger2_android_processor
-    kaptAndroidTest libs.dagger2_compiler
+    api libsApp.hilt_android
+    kapt libsApp.hilt_android_compiler
+    api libsApp.hilt_lifecycle_viewmodel
+    kapt libsApp.hilt_compiler
+
+    androidTestImplementation libsApp.hilt_android_testing
+    kaptAndroidTest libsApp.hilt_android_compiler
+    kaptAndroidTest libsApp.hilt_compiler
 }

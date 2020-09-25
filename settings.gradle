@@ -1,1 +1,2 @@
-include ':app', ':mvvm_yggd'
+include ':app'
+include ':mvvm_yggd'

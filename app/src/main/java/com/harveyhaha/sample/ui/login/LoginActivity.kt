@@ -3,6 +3,7 @@ package com.harveyhaha.sample.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import androidx.lifecycle.Observer
 import com.harveyhaha.sample.R
 import com.harveyhaha.sample.databinding.ActivityLoginBinding
@@ -10,6 +11,7 @@ import com.harveyhaha.sample.ui.MainActivity
 import com.harveyhaha.sample.utils.BrowserUtils
 import com.harveyhaha.sample.viewmodels.LoginViewModel
 import com.harveyhaha.yggd.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 /**
@@ -18,6 +20,7 @@ import timber.log.Timber
  * @Author:         harveyhaha
  * @CreateDate:     20-1-8 下午2:15
  */
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun initContentView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_login
@@ -46,13 +49,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         viewModel.handleOauth(intent)
     }
 
-    fun onLoginClick() {
+    fun onLoginClick(view: View) {
         if (loginCheck()) {
             viewModel.basicLogin()
         }
     }
 
-    fun onBrowserLoginClick() {
+    fun onBrowserLoginClick(view: View) {
         val oauthTokenUrl = viewModel.getOAuth2Url()
         BrowserUtils.instance.openInBrowser(this, oauthTokenUrl)
     }

@@ -1,5 +1,7 @@
 package com.harveyhaha.yggd.base
 
+// import com.harveyhaha.yggd.di.ViewModelFactory
+// import dagger.android.support.AndroidSupportInjection
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +12,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import com.harveyhaha.yggd.base.listeners.IBaseFragmentView
-import com.harveyhaha.yggd.di.ViewModelFactory
 import com.harveyhaha.yggd.utils.autoCleared
-import dagger.android.support.AndroidSupportInjection
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-import javax.inject.Inject
 
+// import javax.inject.Inject
 
 /**
  *
@@ -31,14 +30,11 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     open var binding by autoCleared<V>()
     open lateinit var viewModel: VM
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
     }
 
+    @Suppress("UNCHECKED_CAST")
     @NonNull
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +50,10 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
         val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
         val actualTypeArguments: Array<Type> = type.actualTypeArguments
         val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
-        viewModel = ViewModelProvider(getViewModelStoreOwner(), viewModelFactory).get(modelClass)
+        viewModel = ViewModelProvider(
+            if (isActivityViewModel()) requireActivity().viewModelStore else this.viewModelStore,
+            if (isActivityViewModel()) requireActivity().defaultViewModelProviderFactory else defaultViewModelProviderFactory
+        ).get(modelClass)
         initParam()
         setBindingVariable()
         return binding.root
@@ -75,8 +74,8 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     /**
      * fragment可通过返回activity ViewModelStoreOwner 将ViewModel建在Activity上
      */
-    override fun getViewModelStoreOwner(): ViewModelStoreOwner {
-        return this
+    override fun isActivityViewModel(): Boolean {
+        return false
     }
 
     override fun initParam() {}
@@ -88,6 +87,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun initData() {}
 
     override fun getAppCompatActivity(): AppCompatActivity {
-        return context as AppCompatActivity
+        return requireActivity() as AppCompatActivity
     }
 }

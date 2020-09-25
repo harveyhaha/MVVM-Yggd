@@ -48,7 +48,7 @@ class LanguageUtils {
         fun getLocale(language: String): Locale {
             val locale: Locale
             val array = language.split("-").toTypedArray()
-            locale = if (array.size > 1) { //zh-rCN, zh-rTW", pt-rPT, etc... remove the 'r'
+            locale = if (array.size > 1) { // zh-rCN, zh-rTW", pt-rPT, etc... remove the 'r'
                 val country = array[1].replaceFirst("r".toRegex(), "")
                 Locale(array[0], country)
             } else {

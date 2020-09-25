@@ -18,9 +18,9 @@ import com.harveyhaha.sample.ui.adapter.NewsAdapter
 import com.harveyhaha.sample.viewmodels.NewsViewModel
 import com.harveyhaha.yggd.base.BaseFragment
 import com.harveyhaha.yggd.weiget.DividerItemDecoration
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
-
 
 /**
  *
@@ -28,6 +28,7 @@ import timber.log.Timber
  * @Author:         harveyhaha
  * @CreateDate:     20-1-8 下午2:15
  */
+@AndroidEntryPoint
 class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRefreshLayout.OnRefreshListener,
     OnLoadMoreListener {
 

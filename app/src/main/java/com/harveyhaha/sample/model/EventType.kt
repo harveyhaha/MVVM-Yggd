@@ -108,8 +108,8 @@ import com.harveyhaha.sample.model.EventType.Companion.WatchEvent
     WatchEvent
 )
 @Retention(AnnotationRetention.SOURCE)
-annotation class EventType{
-    companion object{
+annotation class EventType {
+    companion object {
         const val CheckRunEvent = "CheckRunEvent"
         const val CheckSuiteEvent = "CheckSuiteEvent"
         const val CommitCommentEvent = "CommitCommentEvent"

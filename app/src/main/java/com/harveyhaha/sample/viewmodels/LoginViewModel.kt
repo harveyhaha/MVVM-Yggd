@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import androidx.databinding.ObservableField
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -21,7 +22,6 @@ import com.harveyhaha.yggd.http.Resource
 import com.harveyhaha.yggd.http.Status
 import timber.log.Timber
 import java.util.*
-import javax.inject.Inject
 
 /**
  *
@@ -29,12 +29,11 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-7 下午4:18
  */
-open class LoginViewModel @Inject constructor(
+open class LoginViewModel @ViewModelInject constructor(
     private var context: Context,
     private var accountRepository: AccountRepository,
     private var gson: Gson
-) :
-    BaseViewModel() {
+) : BaseViewModel() {
     var loginUser: MutableLiveData<UserEntity> = MutableLiveData()
     val userName = ObservableField<String>("harveyhaha")
     val token = ObservableField<String>("7aa83b9794008988b825b33834b307a215231f27")

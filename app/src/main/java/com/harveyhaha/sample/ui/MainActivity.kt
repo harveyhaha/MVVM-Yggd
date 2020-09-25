@@ -20,6 +20,7 @@ import com.harveyhaha.sample.ui.setting.SettingActivity
 import com.harveyhaha.sample.viewmodels.MainViewModel
 import com.harveyhaha.yggd.base.BaseActivity
 import com.harveyhaha.yggd.base.GlideApp
+import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -33,6 +34,7 @@ import javax.inject.Inject
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:53
  */
+@AndroidEntryPoint
 open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     @Inject
     lateinit var gson: Gson

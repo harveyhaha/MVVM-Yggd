@@ -1,7 +1,9 @@
-package com.harveyhaha.sample.di.module
+package com.harveyhaha.sample.di
 
-import android.app.Application
+import android.content.Context
 import androidx.room.Room
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.harveyhaha.sample.BuildConfig
 import com.harveyhaha.sample.api.HttpServiceApi
 import com.harveyhaha.sample.api.LoginService
@@ -12,11 +14,14 @@ import com.harveyhaha.sample.db.AppDatabase
 import com.harveyhaha.sample.db.AuthTokenDao
 import com.harveyhaha.sample.db.UserDao
 import com.harveyhaha.sample.repository.AccountRepository
-import com.harveyhaha.yggd.di.scope.AppScope
 import com.harveyhaha.yggd.http.LiveDataCallAdapterFactory
 import com.harveyhaha.yggd.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import okhttp3.Dispatcher
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -25,25 +30,58 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
+import kotlin.coroutines.CoroutineContext
 
 /**
  *
  * @Description:
- * @Author:         harveyhaha
- * @CreateDate:     20-1-10 下午5:11
+ * @Author:         wutengfei
+ * @CreateDate:     2020/9/24 17:39/
  */
 @Module
-class ClientModule {
-    @AppScope
+@InstallIn(ApplicationComponent::class)
+object ClientModule {
+    @Singleton
     @Provides
-    fun provideDb(app: Application): AppDatabase {
+    fun provideGlobalHttpHandlerImpl(): GlobalHttpHandlerImpl {
+        return GlobalHttpHandlerImpl()
+    }
+
+    @Singleton
+    @Provides
+    fun provideGson(): Gson {
+        return GsonBuilder().create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCoroutineContext(): CoroutineContext {
+        return Dispatchers.Main
+    }
+
+    @Singleton
+    @Provides
+    fun provideAppExecutors(): AppExecutors {
+        return AppExecutors()
+    }
+
+    @Singleton
+    @Provides
+    fun provideContext(@ApplicationContext context: Context): Context {
+        return context
+    }
+
+    @Singleton
+    @Provides
+    fun provideDb(@ApplicationContext context: Context): AppDatabase {
         return Room
-            .databaseBuilder(app.applicationContext, AppDatabase::class.java, "database.db")
+            .databaseBuilder(context, AppDatabase::class.java, "database.db")
             .fallbackToDestructiveMigration()
             .build()
     }
 
-    @AppScope
+    @Singleton
     @Provides
     fun provideOkHttpClient(globalHttpHandler: GlobalHttpHandlerImpl?): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
@@ -67,7 +105,7 @@ class ClientModule {
             .build()
     }
 
-    @AppScope
+    @Singleton
     @Provides
     fun provideHttpService(okHttpClient: OkHttpClient): HttpServiceApi {
         return Retrofit.Builder()
@@ -79,7 +117,7 @@ class ClientModule {
             .create(HttpServiceApi::class.java)
     }
 
-    @AppScope
+    @Singleton
     @Provides
     fun provideLoginService(okHttpClient: OkHttpClient): LoginService {
         return Retrofit.Builder()
@@ -91,19 +129,19 @@ class ClientModule {
             .create(LoginService::class.java)
     }
 
-    @AppScope
+    @Singleton
     @Provides
     fun provideAuthTokenDao(appDatabase: AppDatabase): AuthTokenDao {
         return appDatabase.authTokenDao()
     }
 
-    @AppScope
+    @Singleton
     @Provides
     fun provideUserDao(appDatabase: AppDatabase): UserDao {
         return appDatabase.userDao()
     }
 
-    @AppScope
+    @Singleton
     @Provides
     fun provideAccountRepository(
         appExecutors: AppExecutors,

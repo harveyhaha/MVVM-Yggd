@@ -1,7 +1,6 @@
 package com.harveyhaha.yggd.base.listeners
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelStoreOwner
 
 /**
  *
@@ -10,7 +9,7 @@ import androidx.lifecycle.ViewModelStoreOwner
  * @CreateDate:     20-1-7 上午11:19
  */
 interface IBaseView {
-    fun getViewModelStoreOwner(): ViewModelStoreOwner
+    fun isActivityViewModel(): Boolean
     fun initParam()
     fun setBindingVariable()
     fun initView(savedInstanceState: Bundle?)

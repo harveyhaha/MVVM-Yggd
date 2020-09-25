@@ -9,6 +9,7 @@ import com.harveyhaha.sample.databinding.ActivitySplashBinding
 import com.harveyhaha.sample.ui.login.LoginActivity
 import com.harveyhaha.sample.viewmodels.SplashModel
 import com.harveyhaha.yggd.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  *
@@ -16,6 +17,7 @@ import com.harveyhaha.yggd.base.BaseActivity
  * @Author:         harveyhaha
  * @CreateDate:     20-1-8 下午2:59
  */
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashModel>() {
 
     override fun initContentView(savedInstanceState: Bundle?): Int {

@@ -11,22 +11,19 @@ import com.harveyhaha.sample.db.entity.UserEntity
 import com.harveyhaha.sample.model.Event
 import com.harveyhaha.sample.model.OauthToken
 import com.harveyhaha.sample.model.User
-import com.harveyhaha.yggd.di.scope.AppScope
 import com.harveyhaha.yggd.http.ApiResponse
 import com.harveyhaha.yggd.http.NetworkBoundResource
 import com.harveyhaha.yggd.http.NetworkOnlyFetchResource
 import com.harveyhaha.yggd.http.Resource
 import com.harveyhaha.yggd.utils.AppExecutors
 import okhttp3.Credentials
-import javax.inject.Inject
 
 /**
  * @Description:
  * @Author:         harveyhaha
  * @CreateDate:     20-1-10 下午5:58
  */
-@AppScope
-class AccountRepository @Inject constructor(
+class AccountRepository constructor(
     private val appExecutors: AppExecutors,
     private val authTokenDao: AuthTokenDao,
     private val userDao: UserDao,
@@ -69,7 +66,6 @@ class AccountRepository @Inject constructor(
             override fun createCall(): LiveData<ApiResponse<User>> {
                 return httpServiceApi.login(token)
             }
-
         }.asLiveData()
     }
 

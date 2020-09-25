@@ -50,6 +50,7 @@ dependencies {
     api androidx.core_ktx
     api androidx.lifecycle_livedata_ktx
     api androidx.lifecycle_viewmodel_ktx
+    api androidx.fragment_ktx
 
 //    api androidxs
 
@@ -63,13 +64,5 @@ dependencies {
     kapt libs.glide_compiler
     api libs.gson
     api libs.timber
-
-    api libs.dagger2
-    api libs.dagger2_android
-    api libs.dagger2_android_support
-
-    kapt libs.dagger2_compiler
-    kapt libs.dagger2_android_processor
-    kaptAndroidTest libs.dagger2_compiler
 }
 apply from: '../bintray.gradle'

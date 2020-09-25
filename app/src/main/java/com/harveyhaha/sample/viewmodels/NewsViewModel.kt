@@ -2,6 +2,7 @@ package com.harveyhaha.sample.viewmodels
 
 import android.widget.Toast
 import androidx.databinding.ObservableBoolean
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.chad.library.adapter.base.loadmore.LoadMoreStatus
@@ -13,21 +14,21 @@ import com.harveyhaha.sample.repository.AccountRepository
 import com.harveyhaha.yggd.base.BaseViewModel
 import com.harveyhaha.yggd.http.Resource
 import com.harveyhaha.yggd.http.Status
-import javax.inject.Inject
 
 /**
  * @Description:
  * @Author:         harveyhaha
  * @CreateDate:     20-1-21 上午9:47
  */
-class NewsViewModel @Inject constructor(var accountRepository: AccountRepository) :
+class NewsViewModel @ViewModelInject constructor(var accountRepository: AccountRepository) :
     BaseViewModel() {
     lateinit var username: String
     var eventDataList: MutableLiveData<MutableList<Event>> = MutableLiveData()
     private var _eventDataList = mutableListOf<Event>()
     lateinit var privateReceiveEventsObserver: Observer<Resource<MutableList<Event>>>
     private var page = 1
-    //gone if true gone the load more view
+
+    // gone if true gone the load more view
     var recycleLoadMoreStatus: MutableLiveData<RecycleLoadMoreStatus> = MutableLiveData()
     var swipeRefreshLayoutIsEnable = ObservableBoolean(true)
     var swipeRefreshLayoutIsRefreshing = ObservableBoolean(true)
@@ -66,7 +67,7 @@ class NewsViewModel @Inject constructor(var accountRepository: AccountRepository
                             _eventDataList.addAll(data)
                             when {
                                 _eventDataList.size >= TOTAL_COUNTER -> {
-                                    //complete
+                                    // complete
                                     recycleLoadMoreStatus.postValue(
                                         RecycleLoadMoreStatus(
                                             LoadMoreStatus.Complete
@@ -82,7 +83,7 @@ class NewsViewModel @Inject constructor(var accountRepository: AccountRepository
                                     )
                                 }
                                 else -> {
-                                    //complete
+                                    // complete
                                     recycleLoadMoreStatus.postValue(
                                         RecycleLoadMoreStatus(
                                             LoadMoreStatus.Complete
@@ -117,5 +118,4 @@ class NewsViewModel @Inject constructor(var accountRepository: AccountRepository
         }
         privateReceiveEventsLiveData.observeForever(privateReceiveEventsObserver)
     }
-
 }

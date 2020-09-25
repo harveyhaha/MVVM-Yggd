@@ -6,10 +6,10 @@ import com.harveyhaha.sample.busevent.RecreateEvent
 import com.harveyhaha.sample.databinding.ActivitySettingBinding
 import com.harveyhaha.yggd.base.BaseActivity
 import com.harveyhaha.yggd.base.BaseViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-
 
 /**
  *
@@ -17,6 +17,7 @@ import org.greenrobot.eventbus.ThreadMode
  * @Author:         harveyhaha
  * @CreateDate:     20-2-2 下午2:15
  */
+@AndroidEntryPoint
 class SettingActivity : BaseActivity<ActivitySettingBinding, BaseViewModel>() {
     override fun initContentView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_setting

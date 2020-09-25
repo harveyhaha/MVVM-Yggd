@@ -7,11 +7,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
-
 /**
  * Created by wtf on 2/1/20 10:29 AM.
  */
-
 
 class StringUtils {
 
@@ -19,9 +17,9 @@ class StringUtils {
         private val dateRegexMap =
             hashMapOf<Locale, String>(Locale.CANADA to "yyyy-MM-dd", Locale.ENGLISH to "MMM d, yyyy")
         private const val MILLIS_LIMIT: Float = 1000f
-        private const val SECONDS_LIMIT = 60 * MILLIS_LIMIT //60000
-        private const val MINUTES_LIMIT = 60 * SECONDS_LIMIT //3600000
-        private const val HOURS_LIMIT = 24 * MINUTES_LIMIT //216000000
+        private const val SECONDS_LIMIT = 60 * MILLIS_LIMIT // 60000
+        private const val MINUTES_LIMIT = 60 * SECONDS_LIMIT // 3600000
+        private const val HOURS_LIMIT = 24 * MINUTES_LIMIT // 216000000
         private const val DAYS_LIMIT = 30 * HOURS_LIMIT
 
         fun getNewsTime(context: Context, date: Date): String {

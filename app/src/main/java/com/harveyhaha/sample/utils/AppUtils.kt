@@ -9,7 +9,7 @@ import java.util.regex.Pattern
  * @CreateDate:     2/2/20 7:12 PM
  */
 class AppUtils {
-    companion object{
+    companion object {
         val REPO_FULL_NAME_PATTERN =
             Pattern.compile("([a-z]|[A-Z]|\\d|-)*/([a-z]|[A-Z]|\\d|-|\\.|_)*")
     }

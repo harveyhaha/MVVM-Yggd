@@ -8,6 +8,7 @@ import com.afollestad.materialdialogs.list.listItems
 import com.harveyhaha.sample.R
 import com.harveyhaha.sample.busevent.RecreateEvent
 import com.harveyhaha.sample.utils.SpUtils
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -16,6 +17,7 @@ import org.greenrobot.eventbus.EventBus
  * @Author:         harveyhaha
  * @CreateDate:     2/2/20 3:26 PM
  */
+@AndroidEntryPoint
 class SettingFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClickListener {
     companion object {
         private const val LANGUAGE_KEY = "language"

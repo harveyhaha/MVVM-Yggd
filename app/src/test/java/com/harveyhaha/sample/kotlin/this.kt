@@ -34,6 +34,5 @@ class A { // 隐式标签 @A
         var name = lambda@ fun String.() {
             var x = this
         }
-
     }
 }
