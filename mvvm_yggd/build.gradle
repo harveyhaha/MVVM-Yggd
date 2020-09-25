@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion androidVersion.minSdkVersion
         targetSdkVersion androidVersion.targetSdkVersion
-        versionCode androidPadVersion.versionCode
-        versionName androidPadVersion.versionName
+        versionCode androidVersion.versionCode
+        versionName androidVersion.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
