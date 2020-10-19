@@ -7,6 +7,9 @@
                 url 'https://dl.bintray.com/harveyhaha/maven'
     }
 
+    dependencies {
+       implementation "com.harveyhaha.yggd:mvvm_yggd:1.0.19"
+    }
 #  android-ktx
 [ https://developer.android.google.cn/kotlin/ktx]()
 # splot

@@ -51,7 +51,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':commonlib')
-//    implementation 'com.harveyhaha.yggd:mvvm_yggd:1.0.3'
     implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlinVersion"
     debugImplementation libsApp.leak_canary_debug
 

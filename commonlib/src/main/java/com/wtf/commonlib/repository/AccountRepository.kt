@@ -17,13 +17,14 @@ import com.wtf.commonlib.model.Event
 import com.wtf.commonlib.model.OauthToken
 import com.wtf.commonlib.model.User
 import okhttp3.Credentials
+import javax.inject.Inject
 
 /**
  * @Description:
  * @Author:         harveyhaha
  * @CreateDate:     20-1-10 下午5:58
  */
-class AccountRepository constructor(
+class AccountRepository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val authTokenDao: AuthTokenDao,
     private val userDao: UserDao,

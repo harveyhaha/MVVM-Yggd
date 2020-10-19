@@ -59,5 +59,4 @@ dependencies {
     kaptAndroidTest libsApp.hilt_compiler
 
     implementation libsApp.base_recyclerView_adapter_helper
-
 }

@@ -43,14 +43,6 @@
                     android:scheme="harveyhaha" />
             </intent-filter>
         </activity>
-        <activity android:name="com.harveyhaha.sample.ui.test.Dagger2TestActivity">
-
-        </activity>
-        <activity android:name="com.harveyhaha.sample.ui.test.Dagger2TestBaseActivity">
-
-        </activity>
         <activity android:name="com.harveyhaha.sample.ui.setting.SettingActivity" />
-
     </application>
-
 </manifest>

@@ -1,7 +1,5 @@
 package com.harveyhaha.yggd.base
 
-// import com.harveyhaha.yggd.di.ViewModelFactory
-// import dagger.android.AndroidInjection
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,8 +9,6 @@ import com.harveyhaha.yggd.base.listeners.IBaseActivityView
 import com.harveyhaha.yggd.utils.AppManager
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-
-// import javax.inject.Inject
 
 /**
  *
