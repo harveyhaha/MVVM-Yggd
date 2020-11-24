@@ -21,6 +21,7 @@ open class MyApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+
         context = applicationContext
         INSTANCE = this
         initActivityLifecycleCallbacks()
