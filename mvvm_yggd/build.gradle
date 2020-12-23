@@ -41,18 +41,12 @@ dependencies {
     api androidx.lifecycle_runtime
     api androidx.lifecycle_common_java8
     api androidx.recyclerview
-    api androidx.preference
-    api androidx.design
-    api androidx.constraintlayout
-    api androidx.swiperefreshlayout
     api androidx.lifecycle_extensions
     api androidx.multidex
     api androidx.core_ktx
     api androidx.lifecycle_livedata_ktx
     api androidx.lifecycle_viewmodel_ktx
     api androidx.fragment_ktx
-
-//    api androidxs
 
     api libs.retrofit
     api libs.retrofit_converter_gson
@@ -62,7 +56,6 @@ dependencies {
     api libs.coroutines_test
     api libs.glide
     kapt libs.glide_compiler
-    api libs.gson
     api libs.timber
 }
 apply from: '../bintray.gradle'

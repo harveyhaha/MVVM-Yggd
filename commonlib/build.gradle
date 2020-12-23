@@ -43,6 +43,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    api androidx.constraintlayout
+    api androidx.recyclerview
+    api androidx.preference
+    api androidx.design
+    api androidx.constraintlayout
+    api androidx.swiperefreshlayout
+    api libs.gson
+
     implementation libsApp.logging_interceptor
 
     implementation libsApp.room_runtime
