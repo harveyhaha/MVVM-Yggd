@@ -1,5 +1,6 @@
 package com.harveyhaha.yggd.http
 
+import com.harveyhaha.yggd.http.gsonconvert.ServiceErrorException
 import retrofit2.Response
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -13,9 +14,15 @@ import java.util.regex.Pattern
 sealed class ApiResponse<T> {
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse(
-                error.message ?: "unknown error"
-            )
+            var errorCode = -1
+            var errorMessage = "unknown error"
+            if (error is ServiceErrorException) {
+                errorCode = error.errorCode
+                error.message?.let { errorMessage = it }
+            } else {
+                error.message?.let { errorMessage = it }
+            }
+            return ApiErrorResponse(errorCode, errorMessage)
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
@@ -36,7 +43,7 @@ sealed class ApiResponse<T> {
                 } else {
                     msg
                 }
-                ApiErrorResponse(errorMsg ?: "unknown error")
+                ApiErrorResponse(-1, errorMsg ?: "unknown error")
             }
         }
     }
@@ -92,4 +99,4 @@ data class ApiSuccessResponse<T>(
     }
 }
 
-data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()
+data class ApiErrorResponse<T>(var errorCode: Int, val errorMessage: String) : ApiResponse<T>()

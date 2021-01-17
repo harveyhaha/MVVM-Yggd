@@ -14,10 +14,6 @@ ext {
     ]
     androidx = [
             appCompat              : "androidx.appcompat:appcompat:$versions.appcompatVersion",
-            //lifecycle
-            lifecycle_runtime      : "androidx.lifecycle:lifecycle-runtime:$versions.lifecycleVersion",
-            lifecycle_common_java8 : "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycleVersion",
-            lifecycle_extensions   : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion",
             recyclerview           : "androidx.recyclerview:recyclerview:1.1.0",
             preference             : "androidx.preference:preference:1.1.1",
             design                 : "com.google.android.material:material:$versions.designVersion",
@@ -28,6 +24,9 @@ ext {
             fragment_ktx           : "androidx.fragment:fragment-ktx:$versions.fragmentKtxVersion",
             lifecycle_livedata_ktx : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion",
             lifecycle_viewmodel_ktx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion",
+            lifecycle_runtime_ktx  : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleVersion}",
+            lifecycle_compiler     : "androidx.lifecycle:lifecycle-compiler:${versions.lifecycleVersion}",
+            lifecycle_common_java8 : "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycleVersion",
     ]
     libs = [
             //network

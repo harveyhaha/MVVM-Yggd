@@ -4,6 +4,7 @@ buildscript {
     apply from: "config_yggd.gradle"
     ext {
         kotlin_version = '1.4.10'
+        versions.kotlinVersion = '1.4.21'
     }
     repositories {
         google()

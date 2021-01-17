@@ -1,23 +1,21 @@
 package com.harveyhaha.yggd.base
 
-// import com.harveyhaha.yggd.di.ViewModelFactory
-// import dagger.android.support.AndroidSupportInjection
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.harveyhaha.yggd.base.listeners.IBaseFragmentView
 import com.harveyhaha.yggd.utils.autoCleared
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-
-// import javax.inject.Inject
 
 /**
  *
@@ -29,10 +27,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     IBaseFragmentView {
     open var binding by autoCleared<V>()
     open lateinit var viewModel: VM
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     @Suppress("UNCHECKED_CAST")
     @NonNull
@@ -85,6 +79,16 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun initView(savedInstanceState: Bundle?) {}
 
     override fun initData() {}
+
+    override fun initToolbar(toolbar: Toolbar, popBackCallBack: () -> Unit) {
+        getAppCompatActivity().setSupportActionBar(toolbar)
+        getAppCompatActivity().supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        getAppCompatActivity().supportActionBar!!.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener { v: View? ->
+            popBackCallBack()
+            findNavController().popBackStack()
+        }
+    }
 
     override fun getAppCompatActivity(): AppCompatActivity {
         return requireActivity() as AppCompatActivity
