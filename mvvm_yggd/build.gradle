@@ -39,10 +39,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api androidx.appCompat
     api androidx.recyclerview
-    api androidx.preference
-    api androidx.design
-    api androidx.constraintlayout
-    api androidx.swiperefreshlayout
     api androidx.multidex
     api androidx.core_ktx
     api androidx.lifecycle_livedata_ktx
@@ -50,6 +46,7 @@ dependencies {
     api androidx.lifecycle_runtime_ktx
     api androidx.lifecycle_common_java8
     api androidx.fragment_ktx
+
     api libsApp.navigation_fragment_ktx
     api libsApp.navigation_ui_ktx
 
