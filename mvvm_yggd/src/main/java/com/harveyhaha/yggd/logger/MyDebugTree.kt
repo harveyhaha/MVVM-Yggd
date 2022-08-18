@@ -1,5 +1,6 @@
 package com.harveyhaha.yggd.logger
 
+import android.annotation.SuppressLint
 import android.util.Log
 import timber.log.Timber
 
@@ -11,6 +12,8 @@ import timber.log.Timber
  */
 class MyDebugTree : Timber.DebugTree() {
     private val MAX_LOG_LENGTH = 4000
+
+    @SuppressLint("LogNotTimber")
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         val stackTrace = Thread.currentThread().stackTrace
         val index = 7

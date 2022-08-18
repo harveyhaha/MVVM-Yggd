@@ -14,12 +14,7 @@ interface IBaseFragmentView : IBaseView {
     /**
      * 初始化根布局
      **/
-    fun initContentView(
-        inflater: LayoutInflater?,
-        @Nullable container: ViewGroup?,
-        @Nullable savedInstanceState: Bundle?
-    ): Int
-
-    fun initToolbar(toolbar: Toolbar, popBackCallBack: () -> Unit)
+    fun initContentView(inflater: LayoutInflater?, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): Int
     fun getAppCompatActivity(): AppCompatActivity
+    fun initToolbar(toolbar: Toolbar, popBackCallBack: () -> Unit)
 }

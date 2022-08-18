@@ -56,10 +56,7 @@ import java.lang.reflect.Type
  * @Author:         wutengfei
  * @CreateDate:     2021/1/16 10:38
  */
-class CustomGsonConvertFactory private constructor(
-    var listener: ServerErrorHandleListener,
-    var gson: Gson
-) : Converter.Factory() {
+class CustomGsonConvertFactory private constructor(var listener: ServerErrorHandleListener, var gson: Gson) : Converter.Factory() {
     override fun responseBodyConverter(
         type: Type, annotations: Array<Annotation?>?,
         retrofit: Retrofit?
@@ -71,12 +68,7 @@ class CustomGsonConvertFactory private constructor(
         return GsonResponseBodyConverter(listener, gson, adapter)
     }
 
-    override fun requestBodyConverter(
-        type: Type?,
-        parameterAnnotations: Array<Annotation?>?,
-        methodAnnotations: Array<Annotation?>?,
-        retrofit: Retrofit?
-    ): Converter<*, RequestBody>? {
+    override fun requestBodyConverter(type: Type?, parameterAnnotations: Array<Annotation?>?, methodAnnotations: Array<Annotation?>?, retrofit: Retrofit?): Converter<*, RequestBody>? {
         return null
     }
 
@@ -85,20 +77,13 @@ class CustomGsonConvertFactory private constructor(
             return create(listener, Gson())
         }
 
-        fun create(
-            serverErrorHandleListener: ServerErrorHandleListener? = null,
-            gson: Gson? = Gson()
-        ): CustomGsonConvertFactory {
+        fun create(serverErrorHandleListener: ServerErrorHandleListener? = null, gson: Gson? = Gson()): CustomGsonConvertFactory {
             var listener: ServerErrorHandleListener? = serverErrorHandleListener
             if (gson == null) throw NullPointerException("gson == null")
             if (listener == null) {
                 listener = object : ServerErrorHandleListener {
                     @Throws(JSONException::class)
-                    override fun needThrow(
-                        gson: Gson,
-                        jsonObject: JSONObject?,
-                        body: String?
-                    ): IOException? {
+                    override fun needThrow(gson: Gson, jsonObject: JSONObject?, body: String?): IOException? {
                         return null
                     }
                 }

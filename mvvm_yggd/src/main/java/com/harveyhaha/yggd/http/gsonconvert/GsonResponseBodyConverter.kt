@@ -16,11 +16,7 @@ import java.io.IOException
  * @Author:         wutengfei
  * @CreateDate:     2021/1/16 10:39
  */
-class GsonResponseBodyConverter<T>(
-    var listener: ServerErrorHandleListener,
-    var gson: Gson,
-    var adapter: TypeAdapter<T>
-) : Converter<ResponseBody, T> {
+class GsonResponseBodyConverter<T>(var listener: ServerErrorHandleListener, var gson: Gson, var adapter: TypeAdapter<T>) : Converter<ResponseBody, T> {
 
     @Throws(IOException::class)
     override fun convert(value: ResponseBody): T? {

@@ -16,6 +16,8 @@
 
 package com.harveyhaha.yggd.http
 
+import androidx.annotation.IntDef
+
 /**
  * Status of a resource that is provided to the UI.
  *
@@ -23,8 +25,12 @@ package com.harveyhaha.yggd.http
  * These are usually created by the Repository classes where they return
  * `LiveData<Resource<T>>` to pass back the latest data to the UI with its fetch status.
  */
-enum class Status {
-    SUCCESS,
-    ERROR,
-    LOADING
+@kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+@IntDef(Status.SUCCESS, Status.ERROR, Status.LOADING)
+annotation class Status {
+    companion object {
+        const val SUCCESS = 1
+        const val ERROR = 2
+        const val LOADING = 3
+    }
 }

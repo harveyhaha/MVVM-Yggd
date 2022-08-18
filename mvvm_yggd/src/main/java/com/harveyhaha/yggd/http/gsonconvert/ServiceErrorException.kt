@@ -15,5 +15,5 @@ class ServiceErrorException : IOException {
         this.errorCode = errorCode
     }
 
-    constructor(e: Exception?) : super(e) {}
+    constructor(e: Exception?) : super(e)
 }

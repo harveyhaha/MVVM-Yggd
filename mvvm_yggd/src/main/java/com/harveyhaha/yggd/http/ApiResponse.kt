@@ -2,25 +2,36 @@ package com.harveyhaha.yggd.http
 
 import com.harveyhaha.yggd.http.gsonconvert.ServiceErrorException
 import retrofit2.Response
-import timber.log.Timber
-import java.util.regex.Pattern
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 /**
  * @Description:    ApiResponse
  * @Author:         harveyhaha
  * @CreateDate:     20-1-10 下午5:34
  */
-@Suppress("unused") // T is used in extending classes
 sealed class ApiResponse<T> {
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
+            error.printStackTrace()
             var errorCode = -1
             var errorMessage = "unknown error"
-            if (error is ServiceErrorException) {
-                errorCode = error.errorCode
-                error.message?.let { errorMessage = it }
-            } else {
-                error.message?.let { errorMessage = it }
+            when (error) {
+                is ServiceErrorException -> {
+                    errorCode = error.errorCode
+                    error.message?.let { errorMessage = it }
+                }
+                is SocketTimeoutException -> {
+                    errorCode = 503
+                    errorMessage = "连接超时"
+                }
+                is ConnectException->{
+                    errorCode = 504
+                    errorMessage = "网络连接异常"
+                }
+                else -> {
+                    error.message?.let { errorMessage = it }
+                }
             }
             return ApiErrorResponse(errorCode, errorMessage)
         }
@@ -31,10 +42,7 @@ sealed class ApiResponse<T> {
                 if (body == null || response.code() == 204) {
                     ApiEmptyResponse()
                 } else {
-                    ApiSuccessResponse(
-                        body = body,
-                        linkHeader = response.headers().get("link")
-                    )
+                    ApiSuccessResponse(body)
                 }
             } else {
                 val msg = response.errorBody()?.string()
@@ -54,49 +62,6 @@ sealed class ApiResponse<T> {
  */
 class ApiEmptyResponse<T> : ApiResponse<T>()
 
-data class ApiSuccessResponse<T>(
-    val body: T,
-    val links: Map<String?, String?>
-) : ApiResponse<T>() {
-    constructor(body: T, linkHeader: String?) : this(
-        body = body,
-        links = linkHeader?.extractLinks() ?: emptyMap()
-    )
-
-    val nextPage: Int? by lazy(LazyThreadSafetyMode.NONE) {
-        links[NEXT_LINK]?.let { next ->
-            val matcher = PAGE_PATTERN.matcher(next)
-            if (!matcher.find() || matcher.groupCount() != 1) {
-                null
-            } else {
-                try {
-                    Integer.parseInt(matcher.group(1))
-                } catch (ex: NumberFormatException) {
-                    Timber.w("cannot parse next page from %s", next)
-                    null
-                }
-            }
-        }
-    }
-
-    companion object {
-        private val LINK_PATTERN = Pattern.compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"")
-        private val PAGE_PATTERN = Pattern.compile("\\bpage=(\\d+)")
-        private const val NEXT_LINK = "next"
-
-        private fun String.extractLinks(): Map<String?, String?> {
-            val links = mutableMapOf<String?, String?>()
-            val matcher = LINK_PATTERN.matcher(this)
-
-            while (matcher.find()) {
-                val count = matcher.groupCount()
-                if (count == 2) {
-                    links[matcher.group(2)] = matcher.group(1)
-                }
-            }
-            return links
-        }
-    }
-}
+class ApiSuccessResponse<T>(var body: T) : ApiResponse<T>()
 
 data class ApiErrorResponse<T>(var errorCode: Int, val errorMessage: String) : ApiResponse<T>()

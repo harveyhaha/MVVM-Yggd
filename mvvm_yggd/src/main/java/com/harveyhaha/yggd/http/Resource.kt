@@ -16,26 +16,34 @@
 
 package com.harveyhaha.yggd.http
 
-import com.harveyhaha.yggd.http.Status.ERROR
-import com.harveyhaha.yggd.http.Status.LOADING
-import com.harveyhaha.yggd.http.Status.SUCCESS
+import com.harveyhaha.yggd.http.Status.Companion.ERROR
+import com.harveyhaha.yggd.http.Status.Companion.LOADING
+import com.harveyhaha.yggd.http.Status.Companion.SUCCESS
 
 /**
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+class Resource<out T>(@Status val status: Int, val data: T?, var code: Int? = 0, val message: String?) {
     companion object {
-        fun <T> success(data: T?): Resource<T> {
-            return Resource(SUCCESS, data, null)
+        fun <T> success(data: T? = null): Resource<T> {
+            return Resource(SUCCESS, data, null, null)
         }
 
-        fun <T> error(msg: String?, data: T?): Resource<T> {
-            return Resource(ERROR, data, msg)
+        fun <T> error(msg: String? = null, data: T? = null): Resource<T> {
+            return Resource(ERROR, data, null, msg)
         }
 
-        fun <T> loading(data: T?): Resource<T> {
-            return Resource(LOADING, data, null)
+        fun <T> error(errorCode: Int, msg: String? = null, data: T? = null): Resource<T> {
+            return Resource(ERROR, data, errorCode, msg)
+        }
+
+        fun <T> loading(data: T? = null): Resource<T> {
+            return Resource(LOADING, data, null, null)
+        }
+
+        fun <T> loading(message: String?): Resource<T> {
+            return Resource(LOADING, null, -1, message)
         }
     }
 }

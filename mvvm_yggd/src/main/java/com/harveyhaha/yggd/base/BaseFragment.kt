@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
 import androidx.navigation.fragment.findNavController
 import com.harveyhaha.yggd.base.listeners.IBaseFragmentView
 import com.harveyhaha.yggd.utils.autoCleared
@@ -23,8 +24,7 @@ import java.lang.reflect.Type
  * @Author:         harveyhaha
  * @CreateDate:     20-1-6 下午4:58
  */
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(),
-    IBaseFragmentView {
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(), IBaseFragmentView {
     open var binding by autoCleared<V>()
     open lateinit var viewModel: VM
 
@@ -44,10 +44,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
         val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
         val actualTypeArguments: Array<Type> = type.actualTypeArguments
         val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
-        viewModel = ViewModelProvider(
-            if (isActivityViewModel()) requireActivity().viewModelStore else this.viewModelStore,
-            if (isActivityViewModel()) requireActivity().defaultViewModelProviderFactory else defaultViewModelProviderFactory
-        ).get(modelClass)
+        viewModel = ViewModelProvider(viewModelStore, defaultViewModelProviderFactory).get(modelClass)
         initParam()
         setBindingVariable()
         return binding.root
@@ -84,13 +81,26 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
         getAppCompatActivity().setSupportActionBar(toolbar)
         getAppCompatActivity().supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         getAppCompatActivity().supportActionBar!!.setDisplayShowTitleEnabled(false)
-        toolbar.setNavigationOnClickListener { v: View? ->
+        toolbar.setNavigationOnClickListener {
             popBackCallBack()
             findNavController().popBackStack()
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.unbind()
+    }
+
     override fun getAppCompatActivity(): AppCompatActivity {
         return requireActivity() as AppCompatActivity
+    }
+
+    override fun getViewModelStore(): ViewModelStore {
+        return if (isActivityViewModel()) requireActivity().viewModelStore else super.getViewModelStore()
+    }
+
+    override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory {
+        return if (isActivityViewModel()) requireActivity().defaultViewModelProviderFactory else super.getDefaultViewModelProviderFactory()
     }
 }

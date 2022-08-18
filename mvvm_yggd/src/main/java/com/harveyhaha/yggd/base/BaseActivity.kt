@@ -2,6 +2,7 @@ package com.harveyhaha.yggd.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
@@ -29,6 +30,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
         initParam()
         initView(savedInstanceState)
         initData()
+
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -53,6 +55,15 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
     override fun initView(savedInstanceState: Bundle?) {}
 
     override fun initData() {}
+    override fun initToolbar(toolbar: Toolbar, popBackCallBack: () -> Unit) {
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
+            popBackCallBack()
+            finish()
+        }
+    }
 
     /**
      * binding 绑定 ViewModel 操作

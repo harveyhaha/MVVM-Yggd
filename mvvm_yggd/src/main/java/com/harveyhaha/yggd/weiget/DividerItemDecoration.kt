@@ -20,6 +20,7 @@ import kotlin.math.roundToInt
  */
 class DividerItemDecoration(context: Context, orientation: Int) : ItemDecoration() {
     private var mDivider: Drawable?
+
     /**
      * Current orientation. Either [.HORIZONTAL] or [.VERTICAL].
      */
