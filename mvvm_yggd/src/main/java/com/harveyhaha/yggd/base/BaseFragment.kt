@@ -27,6 +27,7 @@ import java.lang.reflect.Type
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(), IBaseFragmentView {
     open var binding by autoCleared<V>()
     open lateinit var viewModel: VM
+    var toolbarInit = false
 
     @Suppress("UNCHECKED_CAST")
     @NonNull
@@ -90,6 +91,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onDestroyView() {
         super.onDestroyView()
         binding.unbind()
+        if (toolbarInit) {
+            getAppCompatActivity().setSupportActionBar(null)
+        }
     }
 
     override fun getAppCompatActivity(): AppCompatActivity {
