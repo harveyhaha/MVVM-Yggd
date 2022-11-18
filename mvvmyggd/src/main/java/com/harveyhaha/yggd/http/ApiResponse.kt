@@ -25,7 +25,7 @@ sealed class ApiResponse<T> {
                     errorCode = 503
                     errorMessage = "连接超时"
                 }
-                is ConnectException->{
+                is ConnectException -> {
                     errorCode = 504
                     errorMessage = "网络连接异常"
                 }

@@ -3,7 +3,6 @@ package com.wtf.commonlib.viewmodels
 import android.content.Context
 import android.widget.Toast
 import androidx.databinding.ObservableBoolean
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.chad.library.adapter.base.loadmore.LoadMoreStatus
@@ -14,13 +13,16 @@ import com.wtf.commonlib.R
 import com.wtf.commonlib.model.Event
 import com.wtf.commonlib.model.RecycleLoadMoreStatus
 import com.wtf.commonlib.repository.AccountRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * @Description:
  * @Author:         harveyhaha
  * @CreateDate:     20-1-21 上午9:47
  */
-class NewsViewModel @ViewModelInject constructor(
+@HiltViewModel
+class NewsViewModel @Inject constructor(
     var context: Context,
     var accountRepository: AccountRepository
 ) :

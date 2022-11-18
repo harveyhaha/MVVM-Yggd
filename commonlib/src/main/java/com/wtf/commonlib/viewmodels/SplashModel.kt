@@ -1,6 +1,5 @@
 package com.wtf.commonlib.viewmodels
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.harveyhaha.sample.db.entity.UserEntity
@@ -10,13 +9,16 @@ import com.harveyhaha.yggd.http.Status
 import com.harveyhaha.yggd.utils.observeOnce
 import com.wtf.commonlib.entity.AuthTokenEntity
 import com.wtf.commonlib.repository.AccountRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * @Description:
  * @Author:         harveyhaha
  * @CreateDate:     20-1-14 上午11:35
  */
-class SplashModel @ViewModelInject constructor(private var accountRepository: AccountRepository) :
+@HiltViewModel
+class SplashModel @Inject constructor(private var accountRepository: AccountRepository) :
     BaseViewModel() {
     var loginUser: MutableLiveData<UserEntity> = MutableLiveData()
     private lateinit var authTokenEntity: AuthTokenEntity

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.harveyhaha.sample.db.entity.UserEntity
 import com.harveyhaha.yggd.http.ApiResponse
 import com.harveyhaha.yggd.http.NetworkBoundResource
-import com.harveyhaha.yggd.http.NetworkOnlyFetchResource
+import com.harveyhaha.yggd.http.NetworkResource
 import com.harveyhaha.yggd.http.Resource
 import com.harveyhaha.yggd.utils.AppExecutors
 import com.wtf.commonlib.api.HttpServiceApi
@@ -30,7 +30,7 @@ class AccountRepository @Inject constructor(
     private val userDao: UserDao,
     private val httpServiceApi: HttpServiceApi,
     private val loginService: LoginService,
-    private val globalHttpHandler: GlobalHttpHandlerImpl?
+    private val globalHttpHandler: GlobalHttpHandlerImpl?,
 ) {
     fun getLoginToken(): LiveData<AuthTokenEntity> {
         return authTokenDao.getLoginToken()
@@ -83,9 +83,9 @@ class AccountRepository @Inject constructor(
         client_id: String,
         client_secret: String,
         code: String?,
-        state: String?
+        state: String?,
     ): LiveData<Resource<OauthToken>> {
-        return object : NetworkOnlyFetchResource<OauthToken>(appExecutors) {
+        return object : NetworkResource<OauthToken,OauthToken>(appExecutors) {
             override fun createCall(): LiveData<ApiResponse<OauthToken>> {
                 return loginService.getOauth2Token(
                     client_id,
@@ -94,13 +94,21 @@ class AccountRepository @Inject constructor(
                     state
                 )
             }
+
+            override fun convertData(item: OauthToken): OauthToken {
+                return item
+            }
         }.asLiveData()
     }
 
     fun getUserPrivateReceiveEvents(username: String, page: Int): LiveData<Resource<MutableList<Event>>> {
-        return object : NetworkOnlyFetchResource<MutableList<Event>>(appExecutors) {
+        return object : NetworkResource<MutableList<Event>, MutableList<Event>>(appExecutors) {
             override fun createCall(): LiveData<ApiResponse<MutableList<Event>>> {
                 return httpServiceApi.getPrivateReceivedEvents(username, page)
+            }
+
+            override fun convertData(item: MutableList<Event>): MutableList<Event> {
+                return item
             }
         }.asLiveData()
     }

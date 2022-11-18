@@ -26,14 +26,12 @@ import java.util.regex.Matcher
  * @CreateDate:     20-1-20 下午5:33
  */
 class NewsAdapter : BaseQuickAdapter<Event, BaseViewHolder>(R.layout.fragment_new_item_layout), LoadMoreModule {
-
-    override fun convert(helper: BaseViewHolder, item: Event?) {
-        val binding = helper.getBinding<FragmentNewItemLayoutBinding>()
+    override fun convert(holder: BaseViewHolder, item: Event) {
+        val binding: FragmentNewItemLayoutBinding? = DataBindingUtil.getBinding(holder.itemView)
         binding?.let {
-            GlideApp.with(context).load(item?.actor?.avatar_url).into(binding.avatarIv)
-            binding.nameTv.text = item?.actor?.login
-            if (item?.created_at != null)
-                binding.timeAgoTv.text = StringUtils.getNewsTime(context, item.created_at)
+            GlideApp.with(context).load(item.actor.avatar_url).into(binding.avatarIv)
+            binding.nameTv.text = item.actor.login
+            binding.timeAgoTv.text = StringUtils.getNewsTime(context, item.created_at)
             setContentString(binding, item)
         }
     }
@@ -116,4 +114,5 @@ class NewsAdapter : BaseQuickAdapter<Event, BaseViewHolder>(R.layout.fragment_ne
         binding.contentTv.text = span
         return span
     }
+
 }

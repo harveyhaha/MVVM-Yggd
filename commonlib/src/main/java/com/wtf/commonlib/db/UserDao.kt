@@ -11,9 +11,11 @@ import com.harveyhaha.sample.db.entity.UserEntity
  */
 @Dao
 interface UserDao {
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("select * from user inner join auth_token on user.login=auth_token.login and auth_token.isLogin=1")
     fun getLoginUser(): LiveData<UserEntity>
 
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("select * from user inner join auth_token on user.login=auth_token.login and auth_token.isLogin=1  and auth_token.token=:token")
     fun getLoginUser(token: String): LiveData<UserEntity>
 

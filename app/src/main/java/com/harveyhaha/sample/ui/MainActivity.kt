@@ -47,7 +47,8 @@ open class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         super.initParam()
         userEntity = intent.getParcelableExtra("user")
         userEntity?.let {
-            val args = NewsFragmentArgs(it.name)
+//            val args = NewsFragmentArgs(it.name)
+            val args = NewsFragmentArgs.Builder(it.name).build()
             Navigation.findNavController(this, R.id.main_nav_fragment)
                 .setGraph(R.navigation.nav_activity_main, args.toBundle())
             viewModel.loginedUser.value = userEntity

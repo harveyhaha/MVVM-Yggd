@@ -11,13 +11,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
  */
 object BindingAdapters {
 
-    @BindingAdapter("app:isRefreshing")
+    @BindingAdapter("isRefreshing")
     @JvmStatic
     fun swipeRefreshLayoutIsRefreshing(layout: SwipeRefreshLayout, isRefreshing: Boolean) {
         layout.isRefreshing = isRefreshing
     }
 
-    @BindingAdapter("app:isEnable")
+    @BindingAdapter("isEnable")
     @JvmStatic
     fun swipeRefreshLayoutIsEnable(layout: SwipeRefreshLayout, isEnable: Boolean) {
         layout.isEnabled = isEnable

@@ -1,5 +1,7 @@
 # kotlin mvvm 框架
 
+A common Architecture for Android Applications developing based on MVVM
+
 开发中
 
     个人仓库引用

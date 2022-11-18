@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.navigation.fragment.findNavController
 import com.harveyhaha.yggd.base.listeners.IBaseFragmentView
-import com.harveyhaha.yggd.utils.autoCleared
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
@@ -25,7 +24,8 @@ import java.lang.reflect.Type
  * @CreateDate:     20-1-6 下午4:58
  */
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(), IBaseFragmentView {
-    open var binding by autoCleared<V>()
+    private var _binding: V? = null
+    val binding get() = _binding!!
     open lateinit var viewModel: VM
     var toolbarInit = false
 
@@ -34,9 +34,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = DataBindingUtil.inflate(
+        _binding = DataBindingUtil.inflate(
             inflater,
             initContentView(inflater, container, savedInstanceState),
             container,
@@ -79,6 +79,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun initData() {}
 
     override fun initToolbar(toolbar: Toolbar, popBackCallBack: () -> Unit) {
+        toolbarInit = true
         getAppCompatActivity().setSupportActionBar(toolbar)
         getAppCompatActivity().supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         getAppCompatActivity().supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -90,7 +91,8 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.unbind()
+        _binding?.unbind()
+        _binding = null
         if (toolbarInit) {
             getAppCompatActivity().setSupportActionBar(null)
         }

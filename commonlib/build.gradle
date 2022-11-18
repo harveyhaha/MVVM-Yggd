@@ -1,12 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'dagger.hilt.android.plugin'
 android {
     compileSdkVersion androidVersion.compileSdkVersion
-    buildToolsVersion androidVersion.buildToolsVersion
-
     defaultConfig {
         minSdkVersion androidVersion.minSdkVersion
         targetSdkVersion androidVersion.targetSdkVersion
@@ -35,8 +32,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    api project(path: ':mvvm_yggd')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    api project(path: ':mvvmyggd')
+    api libsApp.mvvm_yggd
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     testImplementation 'junit:junit:4.12'
@@ -50,6 +48,11 @@ dependencies {
     api androidx.constraintlayout
     api androidx.swiperefreshlayout
     api libs.gson
+    api libs.retrofit
+    api libs.retrofit_converter_gson
+    api libs.timber
+    api libs.glide
+    kapt libs.glide_compiler
 
     implementation libsApp.logging_interceptor
 
@@ -57,14 +60,7 @@ dependencies {
     implementation libsApp.room_ktx
     kapt libsApp.room_compiler
 
-    api libsApp.hilt_android
-    kapt libsApp.hilt_android_compiler
-    api libsApp.hilt_lifecycle_viewmodel
+    implementation libsApp.hilt_android
     kapt libsApp.hilt_compiler
-
-    androidTestImplementation libsApp.hilt_android_testing
-    kaptAndroidTest libsApp.hilt_android_compiler
-    kaptAndroidTest libsApp.hilt_compiler
-
     implementation libsApp.base_recyclerView_adapter_helper
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.MediatorLiveData
 import com.harveyhaha.yggd.utils.AppExecutors
 
 /**
+ * 只进行网络请求
  * @param ResultType 处理后返回的entity
  * @param RequestType http api 请求返回gson解析的entity
  * @Author:         wutengfei
@@ -65,6 +66,9 @@ abstract class NetworkResource<ResultType, RequestType>
     @WorkerThread
     protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body
 
+    /**
+     * 数据转换
+     */
     @WorkerThread
     protected abstract fun convertData(item: RequestType): ResultType
 

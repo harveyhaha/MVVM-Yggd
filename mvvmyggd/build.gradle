@@ -1,0 +1,91 @@
+import com.vanniktech.maven.publish.SonatypeHost
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.vanniktech.maven.publish'
+
+android {
+    compileSdkVersion androidVersion.compileSdkVersion
+    defaultConfig {
+        minSdkVersion androidVersion.minSdkVersion
+        targetSdkVersion androidVersion.targetSdkVersion
+        versionCode 1
+        versionName versionsApp.mvvm_yggd
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            libraryVariants.all { variant ->
+                variant.outputs.all {
+                    if (variant.name.equalsIgnoreCase('release')) {
+                        outputFileName = "mvvmyggd-${defaultConfig.versionName}.aar"
+                    }
+                }
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libs.navigation_fragment_ktx
+    implementation androidx.app_compat
+    implementation androidx.recyclerview
+    implementation androidx.core_ktx
+    implementation androidx.multidex
+    implementation androidx.lifecycle_viewmodel_ktx
+    implementation androidx.lifecycle_common_java8
+    implementation libs.retrofit
+    implementation libs.retrofit_converter_gson
+    implementation libs.glide
+    kapt libs.glide_compiler
+    implementation libs.timber
+}
+
+group = "io.github.harveyhaha"
+version = "${versionsApp.mvvm_yggd}"
+mavenPublishing {
+    // or when publishing to https://s01.oss.sonatype.org
+    publishToMavenCentral(SonatypeHost.S01)
+    signAllPublications()
+    pom {
+        name.set("MVVM-Yggd")
+        description.set("A common Architecture for Android Applications developing based on MVVM")
+        url.set("https://github.com/harveyhaha/MVVM-Yggd/")
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+        developers {
+            developer {
+                id.set("harveyhaha")
+                name.set("harvey haha")
+                url.set("https://github.com/harveyhaha/")
+            }
+        }
+        scm {
+            url.set("https://github.com/harveyhaha/MVVM-Yggd")
+            connection.set("scm:git:git:github.com/harveyhaha/MVVM-Yggd.git")
+            developerConnection.set("scm:git:ssh://git@github.com/harveyhaha/MVVM-Yggd.git")
+        }
+    }
+}

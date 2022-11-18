@@ -1,10 +1,10 @@
 package com.wtf.commonlib.viewmodels
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -20,8 +20,10 @@ import com.wtf.commonlib.config.OAUTH2_URL
 import com.wtf.commonlib.entity.AuthTokenEntity
 import com.wtf.commonlib.model.OauthToken
 import com.wtf.commonlib.repository.AccountRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 
 /**
  *
@@ -29,8 +31,9 @@ import java.util.*
  * @Author:         harveyhaha
  * @CreateDate:     20-1-7 下午4:18
  */
-open class LoginViewModel @ViewModelInject constructor(
-    private var context: Context,
+@HiltViewModel
+open class LoginViewModel @Inject constructor(
+    @SuppressLint("StaticFieldLeak") private var context: Context,
     private var accountRepository: AccountRepository,
     private var gson: Gson
 ) : BaseViewModel() {

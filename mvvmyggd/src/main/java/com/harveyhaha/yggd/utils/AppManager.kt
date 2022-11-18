@@ -96,7 +96,7 @@ class AppManager private constructor() {
     /**
      * 退出应用程序
      */
-    fun AppExit(context: Context) {
+    fun appExit(context: Context) {
         try {
             finishAllActivity()
             val activityManager =

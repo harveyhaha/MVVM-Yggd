@@ -19,8 +19,8 @@ import com.wtf.commonlib.repository.AccountRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import okhttp3.Dispatcher
 import okhttp3.Interceptor
@@ -40,7 +40,7 @@ import kotlin.coroutines.CoroutineContext
  * @CreateDate:     2020/9/24 17:39/
  */
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object ClientModule {
     @Singleton
     @Provides

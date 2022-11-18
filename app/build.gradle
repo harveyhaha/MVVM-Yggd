@@ -1,16 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion androidVersion.compileSdkVersion
-    buildToolsVersion androidVersion.buildToolsVersion
-
     defaultConfig {
-        applicationId "com.harveyhaha.yggd"
         minSdkVersion androidVersion.minSdkVersion
         targetSdkVersion androidVersion.targetSdkVersion
         versionCode 1
@@ -18,14 +14,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-  }
-    androidExtensions {
-        experimental = true
     }
-    dataBinding {
-        enabled true
+    buildFeatures {
+        dataBinding = true
     }
-
     buildTypes {
         debug {
             buildConfigField("boolean", "LoggingInterceptor", "true")
@@ -73,12 +65,6 @@ dependencies {
     implementation libsApp.material_dialogs
     implementation libsApp.eventbus
 
-    api libsApp.hilt_android
-    kapt libsApp.hilt_android_compiler
-    api libsApp.hilt_lifecycle_viewmodel
+    implementation libsApp.hilt_android
     kapt libsApp.hilt_compiler
-
-    androidTestImplementation libsApp.hilt_android_testing
-    kaptAndroidTest libsApp.hilt_android_compiler
-    kaptAndroidTest libsApp.hilt_compiler
 }

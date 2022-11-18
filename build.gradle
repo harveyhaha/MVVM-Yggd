@@ -3,18 +3,19 @@ buildscript {
     apply from: "config.gradle"
     apply from: "config_yggd.gradle"
     ext {
-        kotlin_version = '1.4.10'
-        versions.kotlinVersion = '1.4.21'
+        versions.kotlinVersion = '1.6.10'
     }
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven { url 'C:\\Users\\wtf\\.m2\\repository' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1"
+        // vanniktech 发布插件
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.22.0'
         classpath "com.google.dagger:hilt-android-gradle-plugin:$versionsApp.hiltVersion"
     }
 }
@@ -26,13 +27,9 @@ plugins {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven {
-            url 'https://jitpack.io'
-        }
-        maven {
-            url "https://dl.bintray.com/harveyhaha/maven"
-        }
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven { url 'C:\\Users\\wtf\\.m2\\repository' }
         apply plugin: 'com.diffplug.gradle.spotless'
         spotless {
             kotlin {
