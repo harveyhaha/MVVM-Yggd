@@ -19,7 +19,8 @@ import java.lang.reflect.Type
  */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
     IBaseActivityView {
-    open lateinit var binding: V
+    private var _binding: V? = null
+    val binding get() = _binding!!
     open lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +36,13 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     @Suppress("UNCHECKED_CAST")
     private fun initViewDataBinding(savedInstanceState: Bundle?) {
-        binding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState))
-        binding.lifecycleOwner = this
+        _binding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState))
+        _binding?.lifecycleOwner = this
         val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
         val actualTypeArguments: Array<Type> = type.actualTypeArguments
         val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
-        viewModel = ViewModelProvider(viewModelStore, defaultViewModelProviderFactory).get(modelClass)
+        viewModel =
+            ViewModelProvider(viewModelStore, defaultViewModelProviderFactory).get(modelClass)
         setBindingVariable()
     }
 
@@ -82,7 +84,8 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.unbind()
+        _binding?.unbind()
+        _binding = null
         AppManager.instance.removeActivity(this)
     }
 }
