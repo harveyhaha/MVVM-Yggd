@@ -53,8 +53,6 @@ dependencies {
     implementation androidx.lifecycle_common_java8
     implementation libs.retrofit
     implementation libs.retrofit_converter_gson
-    implementation libs.glide
-    kapt libs.glide_compiler
     implementation libs.timber
 }
 
