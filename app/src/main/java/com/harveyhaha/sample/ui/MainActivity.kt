@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import com.harveyhaha.sample.R
+import com.harveyhaha.sample.app.GlideApp
 import com.harveyhaha.sample.busevent.DrawerEvent
 import com.harveyhaha.sample.busevent.RecreateEvent
 import com.harveyhaha.sample.databinding.ActivityMainBinding
@@ -18,7 +19,6 @@ import com.harveyhaha.sample.db.entity.UserEntity
 import com.harveyhaha.sample.ui.login.LoginActivity
 import com.harveyhaha.sample.ui.setting.SettingActivity
 import com.harveyhaha.yggd.base.BaseActivity
-import com.harveyhaha.yggd.base.GlideApp
 import com.wtf.commonlib.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView

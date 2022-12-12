@@ -27,7 +27,7 @@ import kotlin.reflect.KProperty
  *
  * Accessing this variable while the fragment's view is destroyed will throw NPE.
  */
-class AutoClearedValue<T : Any>(val fragment: Fragment) : ReadWriteProperty<Fragment, T> {
+class AutoClearedValue<T : Any>(val fragment: Fragment) : ReadWriteProperty<Fragment, T?> {
     private var _value: T? = null
 
     init {
@@ -44,13 +44,14 @@ class AutoClearedValue<T : Any>(val fragment: Fragment) : ReadWriteProperty<Frag
         })
     }
 
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-        return _value ?: throw IllegalStateException(
-            "should never call auto-cleared-value get when it might not be available"
-        )
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): T? {
+        return _value
+//        : throw IllegalStateException(
+//            "should never call auto-cleared-value get when it might not be available"
+//        )
     }
 
-    override fun setValue(thisRef: Fragment, property: KProperty<*>, value: T) {
+    override fun setValue(thisRef: Fragment, property: KProperty<*>, value: T?) {
         _value = value
     }
 }

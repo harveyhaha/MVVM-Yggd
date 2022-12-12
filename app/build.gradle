@@ -64,6 +64,8 @@ dependencies {
     implementation libsApp.base_recyclerView_adapter_helper
     implementation libsApp.material_dialogs
     implementation libsApp.eventbus
+    implementation libs.glide
+    kapt libs.glide_compiler
 
     implementation libsApp.hilt_android
     kapt libsApp.hilt_compiler

@@ -16,6 +16,7 @@ import com.harveyhaha.sample.busevent.DrawerEvent
 import com.harveyhaha.sample.databinding.FragmentNewsBinding
 import com.harveyhaha.sample.ui.adapter.NewsAdapter
 import com.harveyhaha.yggd.base.BaseFragment
+import com.harveyhaha.yggd.utils.autoCleared
 import com.harveyhaha.yggd.weiget.DividerItemDecoration
 import com.wtf.commonlib.viewmodels.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,11 +30,12 @@ import timber.log.Timber
  * @CreateDate:     20-1-8 下午2:15
  */
 @AndroidEntryPoint
-class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRefreshLayout.OnRefreshListener,
+class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(),
+    SwipeRefreshLayout.OnRefreshListener,
     OnLoadMoreListener {
 
     val args: NewsFragmentArgs by navArgs()
-    lateinit var newsAdapter: NewsAdapter
+    private var newsAdapter by autoCleared<NewsAdapter>()
     override fun initContentView(
         inflater: LayoutInflater?,
         container: ViewGroup?,
@@ -77,19 +79,24 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
 
     private fun initEventUi() {
         newsAdapter = NewsAdapter()
-        newsAdapter.loadMoreModule?.setOnLoadMoreListener(this)
-        newsAdapter.adapterAnimation = ScaleInAnimation()
-        newsAdapter.setOnItemClickListener { _, _, position ->
+        newsAdapter!!.loadMoreModule?.setOnLoadMoreListener(this)
+        newsAdapter!!.adapterAnimation = ScaleInAnimation()
+        newsAdapter!!.setOnItemClickListener { _, _, position ->
             Toast.makeText(requireContext(), "position$position", Toast.LENGTH_SHORT).show()
         }
         binding.swipeRefreshLayout.setOnRefreshListener(this)
         binding.swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189))
         binding.recyclerView.adapter = newsAdapter
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
         viewModel.let { viewModel ->
             viewModel.eventDataList.observe(this, Observer {
                 if (it != null) {
-                    newsAdapter.setNewData(it)
+                    newsAdapter?.setNewData(it)
                 }
             })
             viewModel.recycleLoadMoreStatus.observe(this, Observer {
@@ -97,16 +104,16 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(), SwipeRe
                     LoadMoreStatus.Loading -> {
                     }
                     LoadMoreStatus.Complete -> {
-                        newsAdapter.loadMoreModule?.loadMoreComplete()
+                        newsAdapter?.loadMoreModule?.loadMoreComplete()
                     }
                     LoadMoreStatus.End -> {
-                        newsAdapter.loadMoreModule?.loadMoreEnd(it.isEnable)
+                        newsAdapter?.loadMoreModule?.loadMoreEnd(it.isEnable)
                     }
                     LoadMoreStatus.Fail -> {
-                        newsAdapter.loadMoreModule?.loadMoreFail()
+                        newsAdapter?.loadMoreModule?.loadMoreFail()
                     }
                 }
-                newsAdapter.loadMoreModule?.isEnableLoadMore = it.isEnable
+                newsAdapter?.loadMoreModule?.isEnableLoadMore = it.isEnable
             })
             onRefresh()
         }
