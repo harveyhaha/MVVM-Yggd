@@ -62,10 +62,10 @@ class MyDebugTree : Timber.DebugTree() {
         for (i in trace.indices) {
             val e = trace[i]
             val name = e.className
-            if (cla == Timber::class.java && i < trace.size - 1 && (trace[i + 1].className == Timber::class.java.name)) {
+            if (cla == Timber::class.java && i < trace.size - 1 && (trace[i + 1].className.contains(Timber::class.java.name))) {
                 continue
             }
-            if (name == cla.name) {
+            if (name.contains(cla.name)) {
                 return i + 1
             }
         }
