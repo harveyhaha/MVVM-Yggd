@@ -15,9 +15,9 @@ class MyDebugTree : Timber.DebugTree() {
 
     @SuppressLint("LogNotTimber")
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
-       val stackTraceElement =  getCurrentStackTrace()
-        val className = stackTraceElement?.fileName?:""
-        val lineNumber = stackTraceElement?.lineNumber?:""
+        val stackTraceElement = getCurrentStackTrace()
+        val className = stackTraceElement?.fileName ?: ""
+        val lineNumber = stackTraceElement?.lineNumber ?: ""
         val messageBuilder = StringBuilder()
         messageBuilder.append("[($className:$lineNumber)] ")
         messageBuilder.append(message)
@@ -62,7 +62,10 @@ class MyDebugTree : Timber.DebugTree() {
         for (i in trace.indices) {
             val e = trace[i]
             val name = e.className
-            if (cla == Timber::class.java && i < trace.size - 1 && (trace[i + 1].className.contains(Timber::class.java.name))) {
+            if (cla == Timber::class.java && i < trace.size - 1 && (trace[i + 1].className.contains(
+                    Timber::class.java.name
+                ))
+            ) {
                 continue
             }
             if (name.contains(cla.name)) {

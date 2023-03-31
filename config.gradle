@@ -1,6 +1,6 @@
 ext {
     versionsApp = [
-            mvvm_yggd          : "1.0.27",
+            mvvm_yggd          : "1.0.28",
             espressoVersion    : '3.2.0',
             leakCanaryVersion  : "2.4",
             navigationVersion  : '2.3.5',
