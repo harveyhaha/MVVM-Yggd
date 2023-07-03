@@ -24,7 +24,7 @@ import java.lang.reflect.Type
  * @CreateDate:     20-1-6 下午4:58
  */
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(), IBaseFragmentView {
-    private var _binding: V? = null
+    var _binding: V? = null
     val binding get() = _binding!!
     open lateinit var viewModel: VM
     var toolbarInit = false

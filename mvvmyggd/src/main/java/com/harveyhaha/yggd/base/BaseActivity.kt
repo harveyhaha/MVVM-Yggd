@@ -19,7 +19,7 @@ import java.lang.reflect.Type
  */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
     IBaseActivityView {
-    private var _binding: V? = null
+    var _binding: V? = null
     val binding get() = _binding!!
     open lateinit var viewModel: VM
 
