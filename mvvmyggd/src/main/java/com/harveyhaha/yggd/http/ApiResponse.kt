@@ -51,7 +51,7 @@ sealed class ApiResponse<T> {
                 } else {
                     msg
                 }
-                ApiErrorResponse(-1, errorMsg ?: "unknown error")
+                ApiErrorResponse(response.code(), errorMsg ?: "unknown error")
             }
         }
     }
