@@ -41,8 +41,8 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompat
         val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
         val actualTypeArguments: Array<Type> = type.actualTypeArguments
         val modelClass: Class<VM> = actualTypeArguments[1] as Class<VM>
-        viewModel =
-            ViewModelProvider(viewModelStore, defaultViewModelProviderFactory).get(modelClass)
+//        viewModel = ViewModelProvider(viewModelStore, defaultViewModelProviderFactory,defaultViewModelCreationExtras)[modelClass]
+        viewModel = ViewModelProvider(this)[modelClass]
         setBindingVariable()
     }
 

@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.vanniktech.maven.publish'
 
 android {
+    namespace "com.harveyhaha.yggd"
     compileSdkVersion androidVersion.compileSdkVersion
     defaultConfig {
         minSdkVersion androidVersion.minSdkVersion
@@ -18,6 +19,7 @@ android {
 
     buildFeatures {
         dataBinding = true
+        buildConfig = true
     }
 
     buildTypes {

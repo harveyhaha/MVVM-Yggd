@@ -1,12 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
+//apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.dagger.hilt.android'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
+    namespace "com.harveyhaha.sample"
     compileSdkVersion androidVersion.compileSdkVersion
     defaultConfig {
+        applicationId = "com.harveyhaha.sample"
         minSdkVersion androidVersion.minSdkVersion
         targetSdkVersion androidVersion.targetSdkVersion
         versionCode 1
@@ -17,6 +20,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        buildConfig = true
     }
     buildTypes {
         debug {
@@ -45,7 +49,7 @@ dependencies {
     implementation project(path: ':commonlib')
     implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlinVersion"
     debugImplementation libsApp.leak_canary_debug
-
+//    implementation 'androidx.appcompat:appcompat:1.2.1'
     testImplementation libsApp.junit_jupiter_engine
     testImplementation libsApp.junit_jupiter_api
     testImplementation libsApp.junit_platform_runner

@@ -3,19 +3,19 @@ buildscript {
     apply from: "config.gradle"
     apply from: "config_yggd.gradle"
     ext {
-        versions.kotlinVersion = '1.6.10'
+        versions.kotlinVersion = '1.9.22'
     }
     repositories {
-        google()
         mavenCentral()
+        google()
         maven { url 'C:\\Users\\wtf\\.m2\\repository' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:8.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.8.3"
         // vanniktech 发布插件
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.22.0'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.30.0'
         classpath "com.google.dagger:hilt-android-gradle-plugin:$versionsApp.hiltVersion"
     }
 }
@@ -26,17 +26,18 @@ plugins {
 
 allprojects {
     repositories {
-        google()
         mavenCentral()
+        google()
         maven { url "https://jitpack.io" }
         maven { url 'C:\\Users\\wtf\\.m2\\repository' }
-        apply plugin: 'com.diffplug.gradle.spotless'
-        spotless {
-            kotlin {
-                target "**/*.kt"
-                targetExclude ".idea/"
-                ktlint('0.37.2')
-            }
-        }
+        //代码风格化检查
+//        apply plugin: 'com.diffplug.gradle.spotless'
+//        spotless {
+//            kotlin {
+//                target "**/*.kt"
+//                targetExclude ".idea/"
+//                ktlint('0.37.2')
+//            }
+//        }
     }
 }

@@ -112,6 +112,10 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>(),
                     LoadMoreStatus.Fail -> {
                         newsAdapter?.loadMoreModule?.loadMoreFail()
                     }
+
+                    null -> {
+
+                    }
                 }
                 newsAdapter?.loadMoreModule?.isEnableLoadMore = it.isEnable
             })
